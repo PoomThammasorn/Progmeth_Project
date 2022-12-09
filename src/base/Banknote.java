@@ -1,11 +1,11 @@
 package base;
 
 public class Banknote {
-	private int BanknoteValue;
+	private int banknoteValue;
 	private int amount;
 	
-	public Banknote(int BanknoteValue){
-		this.setBanknoteValue(BanknoteValue);
+	public Banknote(int banknoteValue){
+		this.setBanknoteValue(banknoteValue);
 		this.setAmount(1);
 	}
 
@@ -22,11 +22,11 @@ public class Banknote {
 	}
 
 	public int getBanknoteValue() {
-		return BanknoteValue;
+		return banknoteValue;
 	}
 
 	public void setBanknoteValue(int banknoteValue) {
-		BanknoteValue = banknoteValue;
+		this.banknoteValue = banknoteValue;
 	}
 	
 	

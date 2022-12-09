@@ -9,5 +9,4 @@ public class SortByBanknoteValue implements Comparator<Banknote>{
 		// TODO Auto-generated method stub
 		return b2.getBanknoteValue() - b1.getBanknoteValue();
 	}
-
 }

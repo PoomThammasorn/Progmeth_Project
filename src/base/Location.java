@@ -6,6 +6,7 @@ import java.util.Collections;
 public class Location {
 	private ArrayList<Banknote> fund;
 	private ArrayList<Integer> diceInLocation;
+	private CasinoBudget budget;
 	private int amountOfPlayer;
 	
 	public Location(int amountOfPlayer) {
@@ -15,17 +16,17 @@ public class Location {
 		for(int i=0;i<this.getAmountOfPlayer();i++) {
 			diceInLocation.add(0);
 		}
-		/*while( fundValue(fund) < 40000) {
-			fund f = กองการ์ดบนสุด
-			for(Banknote b:fund) {
-				if(b.equals(f)) {
-					b.setAmount(b.getAmount()+1);
+		while( fundValue(fund) < 50000) {
+			Banknote topbank = budget.getBanknoteTypeList().get(0);
+			for(Banknote bank:fund) {
+				if(bank.equals(topbank)) {
+					bank.setAmount(bank.getAmount()+1);
 					break;
 				}
 			}
-			fund.add(new Banknote(f.getBanknoteValue()));
-			Collections.sort(fund,new SortByBanknoteValue()); Cheack sort ว่าถูกไหม
-		}*/
+			fund.add(new Banknote(topbank.getBanknoteValue()));
+			Collections.sort(fund,new SortByBanknoteValue());
+		}
 
 	}
 
@@ -49,7 +50,7 @@ public class Location {
 			}
 			// ปรับจำนวนเงินของ player
 			this.setFund(newfund);
-			//Collections.sort(fund,new SortByBanknoteValue()); Cheack sort ว่าถูกไหม
+			Collections.sort(fund,new SortByBanknoteValue());
 		}
 		return reward;
 	}
@@ -87,5 +88,5 @@ public class Location {
 		this.diceInLocation = diceInLocation;
 	}
 	
-	
+	// เหลือ dic จาก player เกบใน location
 }
