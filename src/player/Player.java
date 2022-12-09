@@ -21,6 +21,10 @@ public class Player {
 			diceInPlayer.add(new Dice(colour));
 		}
 	}
+	
+	public void dropDice() {
+		
+	}
 
 	public String getName() {
 		return name;
