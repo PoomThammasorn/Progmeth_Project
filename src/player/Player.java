@@ -1,7 +1,7 @@
 package player;
 
 import java.util.ArrayList;
-
+import java.util.Collections;
 import base.Dice;
 
 public class Player {
@@ -21,9 +21,19 @@ public class Player {
 			diceInPlayer.add(new Dice(colour));
 		}
 	}
-	
+
+	public void rollDice() {
+		for (Dice dice : diceInPlayer) {
+			dice.rolling();
+		}
+	}
+
+	public void sortDiceInPlayer() {
+		Collections.sort(diceInPlayer, new DiceComparator());
+	}
+
 	public void dropDice() {
-		
+
 	}
 
 	public String getName() {
