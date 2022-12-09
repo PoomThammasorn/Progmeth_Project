@@ -16,7 +16,6 @@ public class Dice {
 	public void rolling() {
 		Random random = new Random();
 		setPoint(random.nextInt(6) + 1);
-		//return "dice" + getPoint();
 	}
 
 	public String getColour() {
