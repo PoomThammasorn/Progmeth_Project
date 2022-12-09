@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.Iterator;
 
 import base.Dice;
+import comparator.DiceComparator;
 
 public class Player {
 
@@ -48,6 +49,7 @@ public class Player {
 
 	}
 
+	//public void getCard()
 	public String getName() {
 		return name;
 	}

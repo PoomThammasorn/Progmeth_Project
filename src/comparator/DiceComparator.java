@@ -1,12 +1,8 @@
-package player;
+package comparator;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
-
-import base.Banknote;
 import base.Dice;
-import base.SortByBanknoteValue;
+
 
 public class DiceComparator implements Comparator<Dice> {
 

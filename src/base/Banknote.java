@@ -26,7 +26,7 @@ public class Banknote {
 	}
 
 	public void setBanknoteValue(int banknoteValue) {
-		banknoteValue = banknoteValue;
+		this.banknoteValue = banknoteValue;
 	}
 	
 	

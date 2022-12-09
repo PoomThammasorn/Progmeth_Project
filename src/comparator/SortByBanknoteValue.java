@@ -1,6 +1,8 @@
-package base;
+package comparator;
 
 import java.util.*;
+
+import base.Banknote;
 
 public class SortByBanknoteValue implements Comparator<Banknote>{
 

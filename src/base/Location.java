@@ -3,6 +3,9 @@ package base;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import comparator.SortByBanknoteValue;
+import player.Player;
+
 public class Location {
 	private ArrayList<Banknote> fund;
 	private ArrayList<Integer> diceInLocation;
@@ -37,8 +40,10 @@ public class Location {
 		}
 		return value;
 	}
-	
-	public int sendReward(){
+	public void addDice(int amount,String Color) {
+		//???
+	}
+	public int sendReward(Player p){
 		int reward = fund.get(0).getBanknoteValue();
 		fund.get(0).setAmount(fund.get(0).getAmount()-1);
 		if(fund.get(0).getAmount() <= 0) {
@@ -48,7 +53,7 @@ public class Location {
 					newfund.add(b);
 				}
 			}
-			// ปรับจำนวนเงินของ player
+			p.setBalance(p.getBalance()+reward);
 			this.setFund(newfund);
 			Collections.sort(fund,new SortByBanknoteValue());
 		}
