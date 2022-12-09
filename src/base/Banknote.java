@@ -3,8 +3,8 @@ package base;
 public class Banknote {
 	private int banknoteValue;
 	private int amount;
-	
-	public Banknote(int banknoteValue){
+
+	public Banknote(int banknoteValue) {
 		this.setBanknoteValue(banknoteValue);
 		this.setAmount(1);
 	}
@@ -14,7 +14,7 @@ public class Banknote {
 	}
 
 	public void setAmount(int amount) {
-		if(amount <0 ) {
+		if (amount < 0) {
 			this.amount = 0;
 			return;
 		}
@@ -28,19 +28,12 @@ public class Banknote {
 	public void setBanknoteValue(int banknoteValue) {
 		this.banknoteValue = banknoteValue;
 	}
-	
-	
+
 	public boolean equals(Banknote obj) {
 		Banknote other = (Banknote) obj;
 		return this.getBanknoteValue() == other.getBanknoteValue();
 	}
-	
-	
-	
-	
-	
-	
-	
-	//setColor
-	//setPng
+
+	// setColor
+	// setPng
 }

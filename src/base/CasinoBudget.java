@@ -5,6 +5,7 @@ import java.util.Collections;
 
 public class CasinoBudget {
 	private ArrayList<Banknote> banknoteTypeList;
+
 	public CasinoBudget() {
 		banknoteTypeList.add(new Banknote(10000));
 		banknoteTypeList.add(new Banknote(20000));
@@ -14,12 +15,12 @@ public class CasinoBudget {
 		banknoteTypeList.add(new Banknote(60000));
 		banknoteTypeList.add(new Banknote(70000));
 		banknoteTypeList.add(new Banknote(80000));
-		
-		
+
 	}
+
 	public ArrayList<Banknote> getBanknoteTypeList() {
 		Collections.shuffle(banknoteTypeList);
 		return banknoteTypeList;
 	}
-	
+
 }

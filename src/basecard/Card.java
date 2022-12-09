@@ -1,6 +1,5 @@
 package basecard;
 
-
 public class Card {
 
 	private String name;

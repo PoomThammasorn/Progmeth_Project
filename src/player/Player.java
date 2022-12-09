@@ -49,7 +49,7 @@ public class Player {
 
 	}
 
-	//public void getCard()
+	// public void getCard()
 	public String getName() {
 		return name;
 	}

@@ -4,7 +4,7 @@ import java.util.*;
 
 import base.Banknote;
 
-public class SortByBanknoteValue implements Comparator<Banknote>{
+public class SortByBanknoteValue implements Comparator<Banknote> {
 
 	@Override
 	public int compare(Banknote b1, Banknote b2) {
