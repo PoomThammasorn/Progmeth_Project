@@ -3,7 +3,6 @@ package comparator;
 import java.util.Comparator;
 import base.Dice;
 
-
 public class DiceComparator implements Comparator<Dice> {
 
 	@Override

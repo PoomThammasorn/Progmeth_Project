@@ -4,6 +4,6 @@ import player.Player;
 
 public interface Stealable {
 
-	void steal(Player act,Player obj);
+	void steal(Player p);
 
 }

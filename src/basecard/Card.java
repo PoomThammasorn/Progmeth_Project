@@ -1,37 +1,31 @@
 package basecard;
 
+
 public class Card {
-	
+
 	private String name;
-	private int effect;
-	private int amount;
-	
-	
-	public Card(String name,int effect,int amount) {
+	private String keyword;
+
+	public Card(String name, String keyword) {
 		// TODO Auto-generated constructor stub
-		this.setName(name);
-		this.setEffect(effect);
-		this.setAmount(amount);
+		setName(name);
+		setKeyword(keyword);
 	}
-	public int getAmount() {
-		return amount;
-	}
-	public void setAmount(int amount) {
-		this.amount = amount;
-	}
+
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
-	public int getEffect() {
-		return effect;
+
+	public String getKeyword() {
+		return keyword;
 	}
-	public void setEffect(int effect) {
-		this.effect = effect;
+
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
 	}
-	
-	
 
 }
