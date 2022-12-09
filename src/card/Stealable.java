@@ -1,0 +1,5 @@
+package card;
+
+interface Stealable {
+
+}

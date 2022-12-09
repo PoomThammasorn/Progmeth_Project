@@ -2,6 +2,8 @@ package player;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
+
 import base.Dice;
 
 public class Player {
@@ -32,7 +34,17 @@ public class Player {
 		Collections.sort(diceInPlayer, new DiceComparator());
 	}
 
-	public void dropDice() {
+	public int dropDice(int point) {
+		int count = 0;
+		Iterator<Dice> itr = diceInPlayer.iterator();
+		while (itr.hasNext()) {
+			Dice dice = itr.next();
+			if (dice.getPoint() == point) {
+				itr.remove();
+				count += 1;
+			}
+		}
+		return count;
 
 	}
 
