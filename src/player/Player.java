@@ -7,6 +7,7 @@ import java.util.Iterator;
 import base.Dice;
 import basecard.Card;
 import card.BonusCard;
+import card.StealCard;
 import card.TaxCard;
 import comparator.DiceComparator;
 
@@ -52,7 +53,7 @@ public class Player {
 
 	}
 	
-	/*public void useCard(Card c) { น่าจะต้องเขียนใน gamelogic
+	public void useCardWithOutObj(Card c) {
 		if(c instanceof BonusCard) {
 			((BonusCard) c).give(this);
 		}
@@ -60,9 +61,14 @@ public class Player {
 			((TaxCard) c).steal(this);
 		}
 	}
+	public void useCardWithObj(Card c,Player obj) {
+		((StealCard) c).give(this);
+		((StealCard) c).steal(obj);
+	}
+	
 	public String getName() {
 		return name;
-	}*/
+	}
 
 	public void setName(String name) {
 		if (name.equals("")) {

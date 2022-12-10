@@ -42,17 +42,32 @@ public class Location {
 			this.getDiceInLocation().set(0, amount);
 		}
 		else if (p.getPlayerColour().equals("Blue")) {
+			
 			this.getDiceInLocation().set(1, amount);
 		}
 		else if (p.getPlayerColour().equals("Red")) {
+			
 			this.getDiceInLocation().set(2, amount);
 		}
 		else if (p.getPlayerColour().equals("Green")) {
+			
 			this.getDiceInLocation().set(3, amount);
 		}
 		else if (p.getPlayerColour().equals("Yellow")) {
+			
 			this.getDiceInLocation().set(4, amount);
 		}
+	}
+	
+	public boolean haveSameElement(int amount) {
+		boolean nothavesame = true;
+		for(int i=0;i<this.getDiceInLocation().size();i++){
+			if(this.getDiceInLocation().get(i) == amount) {
+				nothavesame = false;
+				this.getDiceInLocation().set(i, 0);
+			}
+		}
+		return nothavesame;
 	}
 
 	public int sendReward(Player p) {
