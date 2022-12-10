@@ -9,10 +9,14 @@ import player.Player;
 public class Location {
 	private ArrayList<Banknote> fund;
 	private ArrayList<Integer> diceInLocation;
+	private String name;
 	private CasinoBudget budget;
 	private int amountOfPlayer;
+	private int diceValue;
 
-	public Location(int amountOfPlayer) {
+	public Location(String name,int amountOfPlayer,int diceValue) {
+		this.setDiceValue(diceValue);
+		this.setName(name);
 		this.setAmountOfPlayer(amountOfPlayer);
 		setFund(new ArrayList<Banknote>());
 		setDiceInLocation(new ArrayList<Integer>());
@@ -20,15 +24,7 @@ public class Location {
 			diceInLocation.add(0);
 		}
 		while (fundValue(fund) < 50000) {
-			Banknote topbank = budget.getBanknoteTypeList().get(0);
-			for (Banknote bank : fund) {
-				if (bank.equals(topbank)) {
-					bank.setAmount(bank.getAmount() + 1);
-					break;
-				}
-			}
-			fund.add(new Banknote(topbank.getBanknoteValue()));
-			Collections.sort(fund, new SortByBanknoteValue());
+			this.updateFund();
 		}
 
 	}
@@ -41,8 +37,22 @@ public class Location {
 		return value;
 	}
 
-	public void addDice(int amount, String Color) {
-		// ???
+	public void addDice(Player p,int amount) {
+		if(p.getPlayerColour().equals("White")) {
+			this.getDiceInLocation().set(0, amount);
+		}
+		else if (p.getPlayerColour().equals("Blue")) {
+			this.getDiceInLocation().set(1, amount);
+		}
+		else if (p.getPlayerColour().equals("Red")) {
+			this.getDiceInLocation().set(2, amount);
+		}
+		else if (p.getPlayerColour().equals("Green")) {
+			this.getDiceInLocation().set(3, amount);
+		}
+		else if (p.getPlayerColour().equals("Yellow")) {
+			this.getDiceInLocation().set(4, amount);
+		}
 	}
 
 	public int sendReward(Player p) {
@@ -61,7 +71,20 @@ public class Location {
 		}
 		return reward;
 	}
-
+	
+	public void updateFund() {
+		Banknote topbank = budget.getBanknoteTypeList().get(0);
+		for (Banknote bank : fund) {
+			if (bank.equals(topbank)) {
+				bank.setAmount(bank.getAmount() + 1);
+				break;
+			}
+			else {
+				fund.add(new Banknote(topbank.getBanknoteValue()));
+			}
+		}
+		Collections.sort(fund, new SortByBanknoteValue());
+	}
 	public int getAmountOfPlayer() {
 		return amountOfPlayer;
 	}
@@ -75,7 +98,6 @@ public class Location {
 		}
 		this.amountOfPlayer = amountOfPlayer;
 	}
-
 	public ArrayList<Banknote> getFund() {
 		return fund;
 	}
@@ -91,6 +113,24 @@ public class Location {
 	public void setDiceInLocation(ArrayList<Integer> diceInLocation) {
 		this.diceInLocation = diceInLocation;
 	}
+	public String getName() {
+		return name;
+	}
 
-	// เหลือ dic จาก player เกบใน location
+	public void setName(String name) {
+		if(name.equals("")) {
+			this.name = "Location";
+			return;
+		}
+		this.name = name;
+	}
+
+	public int getDiceValue() {
+		return diceValue;
+	}
+
+	public void setDiceValue(int diceValue) {
+		this.diceValue = diceValue;
+	}
+	
 }

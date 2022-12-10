@@ -4,8 +4,8 @@ import player.Player;
 
 public class SpecialLocation extends Location {
 
-	public SpecialLocation(int amountOfPlayer) {
-		super(amountOfPlayer);
+	public SpecialLocation(String name ,int amountOfPlayer,int dicevalue) {
+		super(name,amountOfPlayer,dicevalue);
 	}
 
 	public int sendReward(Player p) {

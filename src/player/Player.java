@@ -5,6 +5,9 @@ import java.util.Collections;
 import java.util.Iterator;
 
 import base.Dice;
+import basecard.Card;
+import card.BonusCard;
+import card.TaxCard;
 import comparator.DiceComparator;
 
 public class Player {
@@ -48,14 +51,21 @@ public class Player {
 		return count;
 
 	}
-
-	// public void getCard()
+	
+	/*public void useCard(Card c) { น่าจะต้องเขียนใน gamelogic
+		if(c instanceof BonusCard) {
+			((BonusCard) c).give(this);
+		}
+		if(c instanceof TaxCard) {
+			((TaxCard) c).steal(this);
+		}
+	}
 	public String getName() {
 		return name;
-	}
+	}*/
 
 	public void setName(String name) {
-		if (name == "") {
+		if (name.equals("")) {
 			name = "player";
 		}
 		this.name = name;
