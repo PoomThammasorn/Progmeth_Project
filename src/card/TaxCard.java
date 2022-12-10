@@ -20,7 +20,7 @@ public class TaxCard extends Card implements Stealable {
 	@Override
 	public String description() {
 		// TODO Auto-generated method stub
-		return "Bad luck!! It's is the " + getName() + ". " + getKeyword();
+		return "Bad luck!! It's the " + getName() + ". " + getKeyword();
 	}
 
 }
