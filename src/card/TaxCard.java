@@ -17,4 +17,10 @@ public class TaxCard extends Card implements Stealable {
 		p.setBalance((int) (p.getBalance() * 0.90));
 	}
 
+	@Override
+	public String description() {
+		// TODO Auto-generated method stub
+		return "Bad luck!! It's is the " + getName() + ". " + getKeyword();
+	}
+
 }

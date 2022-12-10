@@ -39,4 +39,10 @@ public class StealCard extends Card implements Stealable, Givable {
 		this.stolenMoney = stolenMoney;
 	}
 
+	@Override
+	public String description() {
+		// TODO Auto-generated method stub
+		return "OMG!! It's the " + getName() + ". " + getKeyword();
+	}
+
 }

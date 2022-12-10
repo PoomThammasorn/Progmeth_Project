@@ -18,4 +18,10 @@ public class BonusCard extends Card implements Givable {
 
 	}
 
+	@Override
+	public String description() {
+		// TODO Auto-generated method stub
+		return "It's The " + getName() + "!! " + getKeyword();
+	}
+
 }

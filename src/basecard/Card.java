@@ -1,6 +1,6 @@
 package basecard;
 
-public class Card {
+public abstract class Card {
 
 	private String name;
 	private String keyword;
@@ -10,6 +10,8 @@ public class Card {
 		setName(name);
 		setKeyword(keyword);
 	}
+
+	public abstract String description();
 
 	public String getName() {
 		return name;
