@@ -55,6 +55,7 @@ public class GameLogic {
 			locationList.add(new Location(this.getLocationNameList().get(i), amountOfPlayer, i));
 		}
 		locationList.add(new SpecialLocation(this.getLocationNameList().get(5), amountOfPlayer, 5));
+		this.playGame(playerList);
 	}
 
 	public void playGame(ArrayList<Player> playerList) {

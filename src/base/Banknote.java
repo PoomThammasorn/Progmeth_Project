@@ -29,9 +29,9 @@ public class Banknote {
 		this.banknoteValue = banknoteValue;
 	}
 
-	public boolean equals(Banknote obj) {
-		Banknote other = (Banknote) obj;
-		return this.getBanknoteValue() == other.getBanknoteValue();
+	public boolean equals(Banknote other) {
+		Banknote b = (Banknote) other;
+		return this.getBanknoteValue() == b.getBanknoteValue();
 	}
 
 	// setColor
