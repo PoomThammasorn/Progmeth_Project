@@ -5,9 +5,28 @@ import java.util.Collections;
 
 import base.Location;
 import base.SpecialLocation;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import player.Player;
 
 public class GameLogic {
+
+	@FXML
+	GridPane locationGridPane, diceGridPane, gridDiceL1, gridDiceL2, gridDiceL3, gridDiceL4, gridDiceL5, gridDiceL6;
+	@FXML
+	VBox vBoxL1, vBoxL2, vBoxL3, vBoxL4, vBoxL5, vBoxL6;
+	@FXML
+	StackPane stackLocation1, stackLocation2, stackLocation3, stackLocation4, stackLocation5, stackLocation6;
+	@FXML
+	Text roundText;
+	@FXML
+	Button rollButton;
+
+	private static GameLogic instance = null;
 	private ArrayList<Location> locationList;
 	private ArrayList<String> locationNameList;
 	private ArrayList<Player> playerList;
@@ -15,7 +34,11 @@ public class GameLogic {
 
 	public GameLogic() {
 		// TODO Auto-generated constructor stub
-		// this.newgane();
+		//this.newGame(4);
+	}
+
+	public void rollDice() {
+		playerList.get(0).rollDice();
 	}
 
 	// new game
@@ -34,16 +57,23 @@ public class GameLogic {
 		locationList.add(new SpecialLocation(this.getLocationNameList().get(5), amountOfPlayer, 5));
 	}
 
-	// player เล่นเกม
 	public void playGame(ArrayList<Player> playerList) {
-		/*
-		 * while(!allOutofDice()){ int c = 0;
-		 * if(playerList.get(i).getDiceInPlayer().size() != 0) { p.rollDice();
-		 * ->ให้กดเลือกสถานที่ if(..) Location l
-		 * l.addDice(p,p.dropDice(หน้าลูกเต๋าประจำสถานที่)) } c =
-		 * (c+1)%playerList.size(); } if(this.getRoundCount() != 4){ this.endRound(); }
-		 * else{ this.endgame(); }
-		 */
+		int i = 0;
+		while (!allOutOfDice()) {
+			// int c = 0;
+			Player p = playerList.get(i);
+			if (p.getDiceInPlayer().size() != 0) {
+				p.rollDice();
+				// ->ให้กดเลือกสถานที่ if(..) Location l
+				// l.addDice(p,p.dropDice(หน้าลูกเต๋าประจำสถานที่));
+			}
+			i = (i + 1) % playerList.size();
+		}
+		if (this.getRoundCount() != 4) {
+			this.endRound();
+		} else {
+			this.endgame();
+		}
 
 	}
 
@@ -58,7 +88,7 @@ public class GameLogic {
 						int maxelementindex = sp.getDiceInLocation().indexOf(maxelement);
 						sp.sendReward(playerList.get(maxelementindex));
 						l.getDiceInLocation().set(maxelementindex, 0);
-						//-> เเลือกใช้การ์ด มี medthod แยกให้กรณีใช่การ์ดStealCard กับ Tax+BonusCard
+						// -> เเลือกใช้การ์ด มี medthod แยกให้กรณีใช่การ์ดStealCard กับ Tax+BonusCard
 					}
 				} else {
 					int maxelement = Collections.max(l.getDiceInLocation());
@@ -104,6 +134,13 @@ public class GameLogic {
 
 	public void setRoundCount(int roundCount) {
 		this.roundCount = roundCount;
+	}
+
+	public static GameLogic getInstance() {
+		if (instance == null) {
+			instance = new GameLogic();
+		}
+		return instance;
 	}
 
 }
