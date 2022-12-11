@@ -1,12 +1,17 @@
 package logic;
 
+import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 
 import base.Location;
 import base.SpecialLocation;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -16,16 +21,20 @@ import player.Player;
 public class GameLogic {
 
 	@FXML
-	GridPane locationGridPane, diceGridPane, gridDiceL1, gridDiceL2, gridDiceL3, gridDiceL4, gridDiceL5, gridDiceL6;
+	private GridPane locationGridPane, diceGridPane, gridDiceL1, gridDiceL2, gridDiceL3, gridDiceL4, gridDiceL5,
+			gridDiceL6;
 	@FXML
-	VBox vBoxL1, vBoxL2, vBoxL3, vBoxL4, vBoxL5, vBoxL6;
+	private VBox vBoxL1, vBoxL2, vBoxL3, vBoxL4, vBoxL5, vBoxL6;
 	@FXML
-	StackPane stackLocation1, stackLocation2, stackLocation3, stackLocation4, stackLocation5, stackLocation6;
+	private StackPane stackLocation1, stackLocation2, stackLocation3, stackLocation4, stackLocation5, stackLocation6;
 	@FXML
-	Text roundText;
+	private ImageView diceImg0, diceImg1, diceImg2, diceImg3, diceImg4, diceImg5, diceImg6, diceImg7;
 	@FXML
-	Button rollButton;
+	private Text roundText;
+	@FXML
+	private Button rollButton;
 
+	private ArrayList<ImageView> diceImgList;
 	private static GameLogic instance = null;
 	private ArrayList<Location> locationList;
 	private ArrayList<String> locationNameList;
@@ -34,11 +43,44 @@ public class GameLogic {
 
 	public GameLogic() {
 		// TODO Auto-generated constructor stub
-		//this.newGame(4);
+		// this.newGame(4);
+//		diceImgList = new ArrayList<ImageView>(
+//				Arrays.asList(diceImg0, diceImg1, diceImg2, diceImg3, diceImg4, diceImg5, diceImg6, diceImg7));
+//		rollButton.setDisable(true);
 	}
 
-	public void rollDice() {
-		playerList.get(0).rollDice();
+	@FXML
+	public void roll() {
+		// สองอันนี้ใส่มาก่อน จริงๆควรทำใน NewGame
+		diceImgList = new ArrayList<ImageView>(
+				Arrays.asList(diceImg0, diceImg1, diceImg2, diceImg3, diceImg4, diceImg5, diceImg6, diceImg7));
+		Player player = new Player("player1", "white");
+		//
+		rollButton.setDisable(true);
+		Thread thread = new Thread() {
+			public void run() {
+				try {
+					for (int i = 0; i < 30; i++) {
+						player.rollDice();
+						if (i == 29) {
+							player.sortDiceInPlayer();
+						}
+						for (int k = 0; k < player.getDiceInPlayer().size(); k++) {
+							int dicePoint = player.getDiceInPlayer().get(k).getPoint();
+							String diceColour = player.getDiceInPlayer().get(k).getColour();
+							File file = new File("res/dice" + dicePoint + diceColour + ".png");
+							diceImgList.get(k).setImage(new Image(file.toURI().toString()));
+						}
+						Thread.sleep(50);
+					}
+					rollButton.setDisable(false);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+		};
+		thread.start();
+
 	}
 
 	// new game
