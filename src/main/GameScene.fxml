@@ -65,7 +65,7 @@
                </padding></VBox>
             <StackPane fx:id="stackLocation1" prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="1">
                <children>
-                  <ImageView fitHeight="90.0" fitWidth="143.0">
+                  <ImageView fx:id="locationImg1" fitHeight="90.0" fitWidth="143.0">
                      <image>
                         <Image url="@../../res/location1.png" />
                      </image>
@@ -74,7 +74,7 @@
             </StackPane>
             <StackPane fx:id="stackLocation2" prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <children>
-                  <ImageView fitHeight="90.0" fitWidth="143.0">
+                  <ImageView fx:id="locationImg2" fitHeight="90.0" fitWidth="143.0">
                      <image>
                         <Image url="@../../res/location2.png" />
                      </image>
@@ -83,7 +83,7 @@
             </StackPane>
             <StackPane fx:id="stackLocation3" prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
                <children>
-                  <ImageView fitHeight="90.0" fitWidth="143.0">
+                  <ImageView fx:id="locationImg3" fitHeight="90.0" fitWidth="143.0">
                      <image>
                         <Image url="@../../res/location3.png" />
                      </image>
@@ -92,7 +92,7 @@
             </StackPane>
             <StackPane fx:id="stackLocation4" prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
                <children>
-                  <ImageView fitHeight="90.0" fitWidth="143.0">
+                  <ImageView fx:id="locationImg4" fitHeight="90.0" fitWidth="143.0">
                      <image>
                         <Image url="@../../res/location4.png" />
                      </image>
@@ -101,7 +101,7 @@
             </StackPane>
             <StackPane fx:id="stackLocation5" prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="1">
                <children>
-                  <ImageView fitHeight="90.0" fitWidth="143.0">
+                  <ImageView fx:id="locationImg5" fitHeight="90.0" fitWidth="143.0">
                      <image>
                         <Image url="@../../res/location5.png" />
                      </image>
@@ -110,7 +110,7 @@
             </StackPane>
             <StackPane fx:id="stackLocation6" prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="1">
                <children>
-                  <ImageView fitHeight="90.0" fitWidth="143.0">
+                  <ImageView fx:id="locationImg6" fitHeight="90.0" fitWidth="143.0">
                      <image>
                         <Image url="@../../res/location6.png" />
                      </image>
@@ -272,5 +272,6 @@
             <Font name="Bell MT Bold" size="24.0" />
          </font>
       </Button>
+      <Button fx:id="newGameBtn" layoutX="1056.0" layoutY="416.0" mnemonicParsing="false" onMouseClicked="#testGame" text="Test Game" />
    </children>
 </AnchorPane>

@@ -10,7 +10,7 @@ public class Location {
 	private ArrayList<Banknote> fund;
 	private ArrayList<Integer> diceInLocation;
 	private String name;
-	private CasinoBudget budget;
+	private CasinoBudget budget = new CasinoBudget();
 	private int amountOfPlayer;
 	private int diceValue;
 

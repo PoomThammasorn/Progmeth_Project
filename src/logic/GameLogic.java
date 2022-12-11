@@ -4,10 +4,10 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Random;
 
 import base.Location;
 import base.SpecialLocation;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
@@ -16,6 +16,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.util.Pair;
 import player.Player;
 
 public class GameLogic {
@@ -28,25 +29,30 @@ public class GameLogic {
 	@FXML
 	private StackPane stackLocation1, stackLocation2, stackLocation3, stackLocation4, stackLocation5, stackLocation6;
 	@FXML
-	private ImageView diceImg0, diceImg1, diceImg2, diceImg3, diceImg4, diceImg5, diceImg6, diceImg7;
+	private ImageView diceImg0, diceImg1, diceImg2, diceImg3, diceImg4, diceImg5, diceImg6, diceImg7, locationImg1,
+			locationImg2, locationImg3, locationImg4, locationImg5, locationImg6;
 	@FXML
 	private Text roundText;
 	@FXML
-	private Button rollButton;
+	private Button rollButton, newGameBtn;
 
-	private ArrayList<ImageView> diceImgList;
+	private ArrayList<ImageView> diceImgList, locationImgList;
 	private static GameLogic instance = null;
-	private ArrayList<Location> locationList;
-	private ArrayList<String> locationNameList;
-	private ArrayList<Player> playerList;
-	private int roundCount;
+	private ArrayList<Location> locationList = new ArrayList<>();
+	private ArrayList<String> locationNameList = new ArrayList<>();
+	private ArrayList<Player> playerList = new ArrayList<>();
+	private int roundCount, lastSpecialLocation = 0;
 
 	public GameLogic() {
 		// TODO Auto-generated constructor stub
-		// this.newGame(4);
 //		diceImgList = new ArrayList<ImageView>(
 //				Arrays.asList(diceImg0, diceImg1, diceImg2, diceImg3, diceImg4, diceImg5, diceImg6, diceImg7));
-//		rollButton.setDisable(true);
+		// this.newGame(4);
+	}
+
+	@FXML
+	public void testGame() {
+		newGame(4);
 	}
 
 	@FXML
@@ -86,19 +92,52 @@ public class GameLogic {
 	// new game
 	public void newGame(int amountOfPlayer) {
 		this.setRoundCount(0);
-		//->ค้างสร้าง player
+		diceImgList = new ArrayList<ImageView>(
+				Arrays.asList(diceImg0, diceImg1, diceImg2, diceImg3, diceImg4, diceImg5, diceImg6, diceImg7));
+		locationImgList = new ArrayList<ImageView>(
+				Arrays.asList(locationImg1, locationImg2, locationImg3, locationImg4, locationImg5, locationImg6));
+
+		// ->ค้างสร้าง player
+//		for (int k = 0; k < amountOfPlayer; k++) {
+//			
+//		}
+		
+		/*
+		 * ตรง Location โปรแกรมมันค้างตรง locationList.add(new XXX); ตลอดเลย [บรรทัด
+		 * 123,125] ผมเปลี่ยนให้มันเปลี่ยนแค่ special location แล้ว
+		 * เพราะลืมไปว่าไม่ได้ทำรูปเผื่อสลับตำแหน่ง Location ลองกด RUN ละกดปุ่ม test
+		 * game ดู
+		 */
+		
 		locationNameList.add("Gold Tower Casino");
 		locationNameList.add("Riverside Casino");
 		locationNameList.add("The Royal Casino");
 		locationNameList.add("Luckey 7's Casino");
 		locationNameList.add("The Edge Casino");
 		locationNameList.add("Blackbird Casino");
-		Collections.shuffle(locationNameList);
-		for (int i = 0; i < 5; i++) {
-			locationList.add(new Location(this.getLocationNameList().get(i), amountOfPlayer, i));
-		}
-		locationList.add(new SpecialLocation(this.getLocationNameList().get(5), amountOfPlayer, 5));
-		this.playGame(playerList);
+//		Collections.shuffle(locationNameList);
+//		locationList.add(new Location("Gold Tower Casino", amountOfPlayer, 0));
+//		locationList.add(new Location("Riverside Casino", amountOfPlayer, 0));
+//		locationList.add(new Location("The Royal Casino", amountOfPlayer, 0));
+//		locationList.add(new Location("Luckey 7's Casino", amountOfPlayer, 0));
+//		locationList.add(new Location("The Edge Casino", amountOfPlayer, 0));
+//		locationList.add(new Location("Blackbird Casino", amountOfPlayer, 0));
+//		for (int i = 0; i < 5; i++) {
+//			locationList.add(new Location(this.getLocationNameList().get(i), amountOfPlayer, i));
+//		}
+		// locationList.add(new
+		// SpecialLocation(this.getLocationNameList().get(5).getValue(), amountOfPlayer,
+		// 5));
+		// เราสามารถ .set(index,ข้อมูลใหม่) เพื่อแทนข้อมูลใหม่ใน ArrayList ได้เลย
+		// locationList.set(randomNumber, new SpecialLocation(this.getLocationNameList().get(randomNumber), amountOfPlayer, randomNumber + 1));
+		int randomNumber = 	(new Random()).nextInt(6);
+		int locationCode = randomNumber + 1;
+		File file1 = new File("res/location" + (lastSpecialLocation + 1) + ".png");
+		locationImgList.get(lastSpecialLocation).setImage(new Image(file1.toURI().toString()));
+		File file = new File("res/location" + locationCode + "Special.png");
+		locationImgList.get(randomNumber).setImage(new Image(file.toURI().toString()));
+		lastSpecialLocation = randomNumber;
+		// this.playGame(playerList);
 	}
 
 	public void playGame(ArrayList<Player> playerList) {
@@ -112,7 +151,7 @@ public class GameLogic {
 			}
 			i = (i + 1) % playerList.size();
 		}
-		this.setRoundCount(this.getRoundCount()+1);
+		this.setRoundCount(this.getRoundCount() + 1);
 		if (this.getRoundCount() != 4) {
 			this.endRound();
 		} else {

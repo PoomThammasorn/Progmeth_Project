@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class CasinoBudget {
-	private ArrayList<Banknote> banknoteTypeList;
+	private ArrayList<Banknote> banknoteTypeList = new ArrayList<>();
 
 	public CasinoBudget() {
 		banknoteTypeList.add(new Banknote(10000));
