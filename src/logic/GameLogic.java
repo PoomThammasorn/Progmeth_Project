@@ -44,12 +44,13 @@ public class GameLogic {
 	// new game
 	public void newGame(int amountOfPlayer) {
 		this.setRoundCount(0);
-		locationNameList.add(null);
-		locationNameList.add(null);
-		locationNameList.add(null);
-		locationNameList.add(null);
-		locationNameList.add(null);
-		locationNameList.add(null);
+		//->ค้างสร้าง player
+		locationNameList.add("Gold Tower Casino");
+		locationNameList.add("Riverside Casino");
+		locationNameList.add("The Royal Casino");
+		locationNameList.add("Luckey 7's Casino");
+		locationNameList.add("The Edge Casino");
+		locationNameList.add("Blackbird Casino");
 		Collections.shuffle(locationNameList);
 		for (int i = 0; i < 5; i++) {
 			locationList.add(new Location(this.getLocationNameList().get(i), amountOfPlayer, i));
@@ -61,7 +62,6 @@ public class GameLogic {
 	public void playGame(ArrayList<Player> playerList) {
 		int i = 0;
 		while (!allOutOfDice()) {
-			// int c = 0;
 			Player p = playerList.get(i);
 			if (p.getDiceInPlayer().size() != 0) {
 				p.rollDice();
@@ -70,6 +70,7 @@ public class GameLogic {
 			}
 			i = (i + 1) % playerList.size();
 		}
+		this.setRoundCount(this.getRoundCount()+1);
 		if (this.getRoundCount() != 4) {
 			this.endRound();
 		} else {
