@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -15,7 +16,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="logic.GameLogic">
    <children>
-      <GridPane fx:id="locationGridPane" hgap="5.0" layoutX="14.0" layoutY="14.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="898.0" vgap="5.0">
+      <GridPane fx:id="locationGridPane" hgap="5.0" layoutX="14.0" layoutY="14.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="658.0" prefWidth="898.0" vgap="5.0">
         <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -25,9 +26,9 @@
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
         <rowConstraints>
-            <RowConstraints maxHeight="410.4000183105469" minHeight="10.0" prefHeight="312.5999755859375" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="211.99999389648437" minHeight="0.0" prefHeight="83.80002441406253" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="329.5999877929687" minHeight="0.0" prefHeight="236.60000000000002" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="410.4000183105469" minHeight="10.0" prefHeight="305.00001220703126" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="211.99999389648437" minHeight="0.0" prefHeight="81.79999389648441" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="329.5999877929687" minHeight="0.0" prefHeight="259.4000061035157" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
             <VBox fx:id="vBoxL1" prefHeight="200.0" prefWidth="100.0" spacing="4.0" style="-fx-background-color: #3a161a;">
@@ -133,16 +134,48 @@
                   <Insets left="2.0" />
                </padding>
                <children>
-                  <ImageView fitHeight="45.0" fitWidth="45.0">
+                  <ImageView fitHeight="45.0" fitWidth="45.0" GridPane.rowIndex="1">
                      <image>
-                        <Image url="@../../res/dice1white.png" />
+                        <Image url="@../../res/dice1Visible.png" />
                      </image>
                   </ImageView>
+                  <ImageView fitHeight="45.0" fitWidth="45.0">
+                     <image>
+                        <Image url="@../../res/dice1Visible.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="45.0" fitWidth="45.0" GridPane.rowIndex="2">
+                     <image>
+                        <Image url="@../../res/dice1Visible.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="45.0" fitWidth="45.0" GridPane.rowIndex="3">
+                     <image>
+                        <Image url="@../../res/dice1Visible.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="45.0" fitWidth="45.0" GridPane.rowIndex="4">
+                     <image>
+                        <Image url="@../../res/dice1Visible.png" />
+                     </image>
+                  </ImageView>
+                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1">
+                     <children>
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER">
+                           <font>
+                              <Font name="System Bold" size="37.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </StackPane>
+                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                </children>
             </GridPane>
-            <GridPane fx:id="gridDiceL2" style="-fx-background-color: #2d102e;" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <GridPane fx:id="gridDiceL2" style="-fx-background-color: #2d102e;" vgap="5.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
               <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="54.20001220703125" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="54.20001220703125" />
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
               </columnConstraints>
@@ -153,8 +186,43 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
+               <padding>
+                  <Insets left="2.0" />
+               </padding>
+               <children>
+                  <ImageView fitHeight="45.0" fitWidth="45.0">
+                     <image>
+                        <Image url="@../../res/dice2Visible.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="45.0" fitWidth="45.0" layoutX="12.0" layoutY="12.0" GridPane.rowIndex="1">
+                     <image>
+                        <Image url="@../../res/dice2Visible.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="45.0" fitWidth="45.0" layoutX="12.0" layoutY="65.0" GridPane.rowIndex="2">
+                     <image>
+                        <Image url="@../../res/dice2Visible.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="45.0" fitWidth="45.0" layoutX="12.0" layoutY="118.0" GridPane.rowIndex="3">
+                     <image>
+                        <Image url="@../../res/dice2Visible.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="45.0" fitWidth="45.0" layoutX="12.0" layoutY="172.0" GridPane.rowIndex="4">
+                     <image>
+                        <Image url="@../../res/dice2Visible.png" />
+                     </image>
+                  </ImageView>
+                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" />
+                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+               </children>
             </GridPane>
-            <GridPane fx:id="gridDiceL3" style="-fx-background-color: #956803;" GridPane.columnIndex="2" GridPane.rowIndex="2">
+            <GridPane fx:id="gridDiceL3" style="-fx-background-color: #956803;" vgap="5.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="54.20001220703125" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -166,8 +234,43 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
+               <children>
+                  <ImageView fitHeight="45.0" fitWidth="45.0">
+                     <image>
+                        <Image url="@../../res/dice3Visible.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="45.0" fitWidth="45.0" GridPane.rowIndex="1">
+                     <image>
+                        <Image url="@../../res/dice3Visible.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="45.0" fitWidth="45.0" GridPane.rowIndex="2">
+                     <image>
+                        <Image url="@../../res/dice3Visible.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="45.0" fitWidth="45.0" GridPane.rowIndex="3">
+                     <image>
+                        <Image url="@../../res/dice3Visible.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="45.0" fitWidth="45.0" GridPane.rowIndex="4">
+                     <image>
+                        <Image url="@../../res/dice3Visible.png" />
+                     </image>
+                  </ImageView>
+                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" />
+                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+               </children>
+               <padding>
+                  <Insets left="2.0" />
+               </padding>
             </GridPane>
-            <GridPane fx:id="gridDiceL4" style="-fx-background-color: #158474;" GridPane.columnIndex="3" GridPane.rowIndex="2">
+            <GridPane fx:id="gridDiceL4" style="-fx-background-color: #158474;" vgap="5.0" GridPane.columnIndex="3" GridPane.rowIndex="2">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="54.20001220703125" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -175,10 +278,47 @@
               <rowConstraints>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
+                <children>
+                  <ImageView fitHeight="45.0" fitWidth="45.0">
+                     <image>
+                        <Image url="@../../res/dice4Visible.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="45.0" fitWidth="45.0" GridPane.rowIndex="1">
+                     <image>
+                        <Image url="@../../res/dice4Visible.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="45.0" fitWidth="45.0" GridPane.rowIndex="2">
+                     <image>
+                        <Image url="@../../res/dice4Visible.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="45.0" fitWidth="45.0" GridPane.rowIndex="3">
+                     <image>
+                        <Image url="@../../res/dice4Visible.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="45.0" fitWidth="45.0" GridPane.rowIndex="4">
+                     <image>
+                        <Image url="@../../res/dice4Visible.png" />
+                     </image>
+                  </ImageView>
+                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" />
+                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+               </children>
+               <padding>
+                  <Insets left="2.0" />
+               </padding>
             </GridPane>
-            <GridPane fx:id="gridDiceL5" style="-fx-background-color: #33c1c2;" GridPane.columnIndex="4" GridPane.rowIndex="2">
+            <GridPane fx:id="gridDiceL5" style="-fx-background-color: #33c1c2;" vgap="5.0" GridPane.columnIndex="4" GridPane.rowIndex="2">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="54.20001220703125" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -186,10 +326,47 @@
               <rowConstraints>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
+                             <children>
+                  <ImageView fitHeight="45.0" fitWidth="45.0">
+                     <image>
+                        <Image url="@../../res/dice5Visible.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="45.0" fitWidth="45.0" GridPane.rowIndex="1">
+                     <image>
+                        <Image url="@../../res/dice5Visible.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="45.0" fitWidth="45.0" GridPane.rowIndex="2">
+                     <image>
+                        <Image url="@../../res/dice5Visible.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="45.0" fitWidth="45.0" GridPane.rowIndex="3">
+                     <image>
+                        <Image url="@../../res/dice5Visible.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="45.0" fitWidth="45.0" GridPane.rowIndex="4">
+                     <image>
+                        <Image url="@../../res/dice5Visible.png" />
+                     </image>
+                  </ImageView>
+                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" />
+                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+               </children>
+               <padding>
+                  <Insets left="2.0" />
+               </padding>
             </GridPane>
-            <GridPane fx:id="gridDiceL6" style="-fx-background-color: #000000;" GridPane.columnIndex="5" GridPane.rowIndex="2">
+            <GridPane fx:id="gridDiceL6" style="-fx-background-color: #000000;" vgap="5.0" GridPane.columnIndex="5" GridPane.rowIndex="2">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="54.20001220703125" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -197,8 +374,45 @@
               <rowConstraints>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
+                             <children>
+                  <ImageView fitHeight="45.0" fitWidth="45.0">
+                     <image>
+                        <Image url="@../../res/dice6Visible.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="45.0" fitWidth="45.0" GridPane.rowIndex="1">
+                     <image>
+                        <Image url="@../../res/dice6Visible.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="45.0" fitWidth="45.0" GridPane.rowIndex="2">
+                     <image>
+                        <Image url="@../../res/dice6Visible.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="45.0" fitWidth="45.0" GridPane.rowIndex="3">
+                     <image>
+                        <Image url="@../../res/dice6Visible.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="45.0" fitWidth="45.0" GridPane.rowIndex="4">
+                     <image>
+                        <Image url="@../../res/dice6Visible.png" />
+                     </image>
+                  </ImageView>
+                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" />
+                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+               </children>
+               <padding>
+                  <Insets left="2.0" />
+               </padding>
             </GridPane>
          </children>
       </GridPane>
@@ -217,42 +431,42 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <ImageView fx:id="diceImg0" fitHeight="66.0" fitWidth="66.0">
+            <ImageView fx:id="diceImg0" fitHeight="66.0" fitWidth="66.0" onMouseClicked="#selectDice">
                <image>
                   <Image url="@../../res/nullDice.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="diceImg1" fitHeight="66.0" fitWidth="66.0" GridPane.columnIndex="1">
+            <ImageView fx:id="diceImg1" fitHeight="66.0" fitWidth="66.0" onMouseClicked="#selectDice" GridPane.columnIndex="1">
                <image>
                   <Image url="@../../res/nullDice.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="diceImg2" fitHeight="66.0" fitWidth="66.0" GridPane.columnIndex="2">
+            <ImageView fx:id="diceImg2" fitHeight="66.0" fitWidth="66.0" onMouseClicked="#selectDice" GridPane.columnIndex="2">
                <image>
                   <Image url="@../../res/nullDice.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="diceImg3" fitHeight="66.0" fitWidth="66.0" GridPane.columnIndex="3">
+            <ImageView fx:id="diceImg3" fitHeight="66.0" fitWidth="66.0" onMouseClicked="#selectDice" GridPane.columnIndex="3">
                <image>
                   <Image url="@../../res/nullDice.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="diceImg4" fitHeight="66.0" fitWidth="66.0" GridPane.columnIndex="4">
+            <ImageView fx:id="diceImg4" fitHeight="66.0" fitWidth="66.0" onMouseClicked="#selectDice" GridPane.columnIndex="4">
                <image>
                   <Image url="@../../res/nullDice.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="diceImg5" fitHeight="66.0" fitWidth="66.0" GridPane.columnIndex="5">
+            <ImageView fx:id="diceImg5" fitHeight="66.0" fitWidth="66.0" onMouseClicked="#selectDice" GridPane.columnIndex="5">
                <image>
                   <Image url="@../../res/nullDice.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="diceImg6" fitHeight="66.0" fitWidth="66.0" GridPane.columnIndex="6">
+            <ImageView fx:id="diceImg6" fitHeight="66.0" fitWidth="66.0" onMouseClicked="#selectDice" GridPane.columnIndex="6">
                <image>
                   <Image url="@../../res/nullDice.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="diceImg7" fitHeight="66.0" fitWidth="66.0" GridPane.columnIndex="7">
+            <ImageView fx:id="diceImg7" fitHeight="66.0" fitWidth="66.0" onMouseClicked="#selectDice" GridPane.columnIndex="7">
                <image>
                   <Image url="@../../res/nullDice.png" />
                </image>
@@ -262,7 +476,7 @@
             <Insets bottom="2.0" left="5.0" right="5.0" top="2.0" />
          </padding>
       </GridPane>
-      <Text fx:id="roundText" layoutX="976.0" layoutY="259.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Round 1 of 4" textAlignment="CENTER" wrappingWidth="159.9999999999999">
+      <Text fx:id="roundText" layoutX="978.0" layoutY="280.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Round 1 of 4" textAlignment="CENTER" wrappingWidth="159.9999999999999">
          <font>
             <Font name="Berlin Sans FB Demi Bold" size="25.0" />
          </font>
@@ -272,6 +486,91 @@
             <Font name="Bell MT Bold" size="24.0" />
          </font>
       </Button>
-      <Button fx:id="newGameBtn" layoutX="1056.0" layoutY="416.0" mnemonicParsing="false" onMouseClicked="#testGame" text="Test Game" />
+      <Button fx:id="newGameBtn" layoutX="912.0" layoutY="744.0" mnemonicParsing="false" onMouseClicked="#testGame" text="Test Game" />
+      <ScrollPane layoutX="958.0" layoutY="550.0" prefHeight="157.0" prefWidth="200.0" style="-fx-background-color: Black; -fx-border-color: Green;">
+         <content>
+            <VBox fx:id="vBoxGameStatus" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="55.0" prefWidth="174.0">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets left="5.0" />
+               </padding>
+            </VBox>
+         </content>
+      </ScrollPane>
+      <Text layoutX="995.0" layoutY="544.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Game Status" textAlignment="CENTER" wrappingWidth="124.4844970703125">
+         <font>
+            <Font name="System Bold" size="21.0" />
+         </font>
+      </Text>
+      <GridPane hgap="2.0" layoutX="931.0" layoutY="29.0" prefHeight="219.0" prefWidth="254.0" style="-fx-border-color: Black; -fx-border-width: 3;" vgap="2.0">
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="111.20009765625" minWidth="10.0" prefWidth="111.20009765625" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="101.39997558593751" minWidth="10.0" prefWidth="83.19990234375001" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="151.2000732421875" minWidth="10.0" prefWidth="50.20002441406251" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="27.599996948242186" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="35.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="35.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="35.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="35.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="35.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <StackPane prefHeight="150.0" prefWidth="200.0" style="-fx-background-color: Black;">
+               <children>
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Player" wrappingWidth="44.1495361328125">
+                     <font>
+                        <Font name="Corbel Bold" size="15.0" />
+                     </font>
+                  </Text>
+               </children>
+            </StackPane>
+            <StackPane prefHeight="150.0" prefWidth="200.0" style="-fx-background-color: #A30000;" GridPane.columnIndex="1">
+               <children>
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Balance" textAlignment="CENTER" wrappingWidth="62.641477942466736">
+                     <font>
+                        <Font name="Corbel Bold" size="16.0" />
+                     </font>
+                  </Text>
+               </children>
+            </StackPane>
+            <StackPane prefHeight="28.0" prefWidth="40.0" style="-fx-background-color: yellow;" GridPane.columnIndex="2">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Dices">
+                     <font>
+                        <Font name="Corbel Bold" size="16.0" />
+                     </font>
+                  </Text>
+               </children>
+            </StackPane>
+            <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="1" />
+            <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="2" />
+            <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="3" />
+            <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="4" />
+            <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="5" />
+            <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+            <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+            <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+         </children>
+      </GridPane>
+      <StackPane layoutX="995.0" layoutY="307.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="151.0" prefWidth="124.0">
+         <children>
+            <ImageView fx:id="cardImg" fitHeight="161.0" fitWidth="133.0">
+               <image>
+                  <Image url="@../../res/cardBack.png" />
+               </image>
+            </ImageView>
+         </children>
+      </StackPane>
    </children>
 </AnchorPane>
