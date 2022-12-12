@@ -116,12 +116,12 @@ public class GameLogic {
 		locationNameList.add("The Edge Casino");
 		locationNameList.add("Blackbird Casino");
 //		Collections.shuffle(locationNameList);
-//		locationList.add(new Location("Gold Tower Casino", amountOfPlayer, 0));
-//		locationList.add(new Location("Riverside Casino", amountOfPlayer, 0));
-//		locationList.add(new Location("The Royal Casino", amountOfPlayer, 0));
-//		locationList.add(new Location("Luckey 7's Casino", amountOfPlayer, 0));
-//		locationList.add(new Location("The Edge Casino", amountOfPlayer, 0));
-//		locationList.add(new Location("Blackbird Casino", amountOfPlayer, 0));
+		locationList.add(new Location("Gold Tower Casino", amountOfPlayer, 0));
+		locationList.add(new Location("Riverside Casino", amountOfPlayer, 0));
+		locationList.add(new Location("The Royal Casino", amountOfPlayer, 0));
+		locationList.add(new Location("Luckey 7's Casino", amountOfPlayer, 0));
+		locationList.add(new Location("The Edge Casino", amountOfPlayer, 0));
+		locationList.add(new Location("Blackbird Casino", amountOfPlayer, 0));
 //		for (int i = 0; i < 5; i++) {
 //			locationList.add(new Location(this.getLocationNameList().get(i), amountOfPlayer, i));
 //		}

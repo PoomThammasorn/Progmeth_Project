@@ -7,6 +7,7 @@ public class CasinoBudget {
 	private ArrayList<Banknote> banknoteTypeList = new ArrayList<>();
 
 	public CasinoBudget() {
+		
 		banknoteTypeList.add(new Banknote(10000));
 		banknoteTypeList.add(new Banknote(20000));
 		banknoteTypeList.add(new Banknote(30000));

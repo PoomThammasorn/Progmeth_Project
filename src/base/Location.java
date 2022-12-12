@@ -98,6 +98,7 @@ public class Location {
 				fund.add(new Banknote(topbank.getBanknoteValue()));
 			}
 		}
+		if(fund.size() == 0) fund.add(new Banknote(topbank.getBanknoteValue()));
 		Collections.sort(fund, new SortByBanknoteValue());
 	}
 	public int getAmountOfPlayer() {
