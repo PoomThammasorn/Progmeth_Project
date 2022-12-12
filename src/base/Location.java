@@ -7,8 +7,8 @@ import comparator.SortByBanknoteValue;
 import player.Player;
 
 public class Location {
-	private ArrayList<Banknote> fund;
-	private ArrayList<Integer> diceInLocation;
+	private ArrayList<Banknote> fund = new ArrayList<>();
+	private ArrayList<Integer> diceInLocation = new ArrayList<>(); 
 	private String name;
 	private CasinoBudget budget = new CasinoBudget();
 	private int amountOfPlayer;
