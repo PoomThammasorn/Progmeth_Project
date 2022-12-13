@@ -69,23 +69,24 @@ public class Location {
 	}
 
 	public int sendReward(Player p) {
-		int reward = fund.get(0).getBanknoteValue();
-		fund.get(0).setAmount(fund.get(0).getAmount() - 1);
-		if (fund.get(0).getAmount() <= 0) {
+		int reward = this.getFund().get(0).getBanknoteValue();
+		this.getFund().get(0).setAmount(this.getFund().get(0).getAmount() - 1);
+		if (this.getFund().get(0).getAmount() <= 0) {
 			ArrayList<Banknote> newfund = new ArrayList<Banknote>();
-			for (Banknote b : fund) {
+			for (Banknote b : this.getFund()) {
 				if (b.getAmount() > 0) {
 					newfund.add(b);
 				}
 			}
-			p.setBalance(p.getBalance() + reward);
 			this.setFund(newfund);
-			Collections.sort(fund, new SortByBanknoteValue());
+			Collections.sort(this.getFund(), new SortByBanknoteValue());
 		}
+		p.setBalance(p.getBalance() + reward);
 		return reward;
 	}
 
 	public void updateFund() {
+		boolean found = false;
 		Banknote topbank = budget.getBanknoteTypeList().get(0);
 		if (fund.size() == 0) {
 			fund.add(new Banknote(topbank.getBanknoteValue()));
@@ -93,11 +94,12 @@ public class Location {
 			for (Banknote bank : fund) {
 				if (bank.equals(topbank)) {
 					bank.setAmount(bank.getAmount() + 1);
-					break;
-				} else {
-					fund.add(new Banknote(topbank.getBanknoteValue()));
+					found = true;
 					break;
 				}
+			}
+			if(!found) {
+				fund.add(new Banknote(topbank.getBanknoteValue()));
 			}
 		}
 		Collections.sort(fund, new SortByBanknoteValue());
