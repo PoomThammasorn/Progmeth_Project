@@ -69,20 +69,23 @@ public class Location {
 	}
 
 	public int sendReward(Player p) {
-		int reward = this.getFund().get(0).getBanknoteValue();
-		this.getFund().get(0).setAmount(this.getFund().get(0).getAmount() - 1);
-		if (this.getFund().get(0).getAmount() <= 0) {
-			ArrayList<Banknote> newfund = new ArrayList<Banknote>();
-			for (Banknote b : this.getFund()) {
-				if (b.getAmount() > 0) {
-					newfund.add(b);
+		if (this.getFund().size() != 0) {
+			int reward = this.getFund().get(0).getBanknoteValue();
+			this.getFund().get(0).setAmount(this.getFund().get(0).getAmount() - 1);
+			if (this.getFund().get(0).getAmount() <= 0) {
+				ArrayList<Banknote> newfund = new ArrayList<Banknote>();
+				for (Banknote b : this.getFund()) {
+					if (b.getAmount() > 0) {
+						newfund.add(b);
+					}
 				}
+				this.setFund(newfund);
+				Collections.sort(this.getFund(), new SortByBanknoteValue());
 			}
-			this.setFund(newfund);
-			Collections.sort(this.getFund(), new SortByBanknoteValue());
+			p.setBalance(p.getBalance() + reward);
+			return reward;
 		}
-		p.setBalance(p.getBalance() + reward);
-		return reward;
+		return 0;
 	}
 
 	public void updateFund() {
