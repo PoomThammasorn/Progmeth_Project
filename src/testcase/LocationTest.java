@@ -22,7 +22,7 @@ public class LocationTest {
 		//assertEquals(0,l.getFund().get(0).getAmount()-1);
 		l.sendReward(p);
 		//assertEquals(0,l.getFund().get(0).getAmount());
-		//assertEquals(0,p.getBalance());
+		assertEquals(0,p.getBalance());
 		assertEquals(0,l.fundValue(l.getFund()));
 	}
 
