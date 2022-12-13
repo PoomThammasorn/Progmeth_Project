@@ -23,11 +23,9 @@ public class LocationTest {
 		l.sendReward(p);
 		//assertEquals(0,l.getFund().get(0).getAmount());
 		assertEquals(0,p.getBalance());
-<<<<<<< HEAD
 		//assertEquals(0,l.fundValue(l.getFund()));
-=======
+
 		assertEquals(0,l.fundValue(l.getFund()));
->>>>>>> c16fef7a8b9b35696063374f90ceb06de1f47cba
 	}
 
 }
