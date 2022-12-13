@@ -72,7 +72,6 @@ public class Player {
 	public void useCardWithObj(Card c, Player obj) {
 		StealCard sc = (StealCard) c;
 		sc.steal(obj);
-		System.out.println(sc.getStolenMoney());
 		sc.give(this);
 	}
 

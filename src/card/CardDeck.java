@@ -13,12 +13,12 @@ public class CardDeck {
 		deck.add(new StealCard());
 		deck.add(new StealCard());
 		deck.add(new StealCard());
-		//deck.add(new TaxCard());
-		//deck.add(new TaxCard());
-		//deck.add(new TaxCard());
-		//deck.add(new BonusCard());
-		//deck.add(new BonusCard());
-		//deck.add(new NoneCard());
+		deck.add(new TaxCard());
+		deck.add(new TaxCard());
+		deck.add(new TaxCard());
+		deck.add(new BonusCard());
+		deck.add(new BonusCard());
+		deck.add(new NoneCard());
 	}
 
 	public Card giveTopCardTo() {

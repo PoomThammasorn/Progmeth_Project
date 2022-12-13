@@ -5,8 +5,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Random;
 
-import javax.swing.plaf.ColorUIResource;
-
 import java.io.File;
 
 import base.Banknote;
@@ -14,11 +12,8 @@ import base.Dice;
 import base.Location;
 import base.SpecialLocation;
 import basecard.Card;
-import basecard.Givable;
-import basecard.Stealable;
 import card.BonusCard;
 import card.CardDeck;
-import card.NoneCard;
 import card.StealCard;
 import card.TaxCard;
 import javafx.fxml.FXML;
@@ -78,6 +73,7 @@ public class GameLogic {
 	private Player currentPlayer, playerWinSpecial = null;
 	private int curretntDiceSelect, amountOfPlayer;
 	private CardDeck cardDeck;
+	private ArrayList<Integer> oldBalanceList = new ArrayList<>();
 
 	public GameLogic() {
 		// TODO Auto-generated constructor stub
@@ -143,7 +139,7 @@ public class GameLogic {
 		locationNameList.add("Lucky 7's Casino");
 		locationNameList.add("The Edge Casino");
 		locationNameList.add("Blackbird Casino");
-		newGame(5);
+		newGame(3);
 	}
 
 	public void updateGameStatus(String string, Color color) {
@@ -192,6 +188,17 @@ public class GameLogic {
 			playerScoreBoard.get(i).getChildren().add(nameText);
 			balanceScoreBoard.get(i).getChildren().add(balanceText);
 			diceScoreBoard.get(i).getChildren().add(diceText);
+		}
+	}
+
+	public void updateBalanceStatus() {
+		for (int i = 0; i < amountOfPlayer; i++) {
+			Color color = Color.web("#00A300"); // green;
+			int oldBalance = oldBalanceList.get(i);
+			if (oldBalance > playerList.get(i).getBalance()) {
+				color = Color.web("#D2042D"); // red
+			}
+			updateGameStatus(playerList.get(i).getName() + "'s balace : " + playerList.get(i).getBalance(), color);
 		}
 	}
 
@@ -253,13 +260,16 @@ public class GameLogic {
 		updateGameStatus("Start New Game!!", Color.web("#FF8C00"));
 		this.amountOfPlayer = amount;
 		this.setRoundCount(1);
+		for (int i = 0; i < amountOfPlayer; i++) {
+			oldBalanceList.add(0);
+		}
 		// ->ค้างสร้าง player
 		// ลองสร้างไว้ทดสอบเฉยๆ
 		playerList.add(new Player("Poom", "white"));
 		playerList.add(new Player("Tungmay", "blue"));
 		playerList.add(new Player("Fifa", "red"));
-		playerList.add(new Player("Night", "green"));
-		playerList.add(new Player("Toe", "yellow"));
+		// playerList.add(new Player("Night", "green"));
+		// playerList.add(new Player("Toe", "yellow"));
 		vBoxLocationList = new ArrayList<>(Arrays.asList(vBoxL1, vBoxL2, vBoxL3, vBoxL4, vBoxL5, vBoxL6));
 		diceImgList = new ArrayList<ImageView>(
 				Arrays.asList(diceImg0, diceImg1, diceImg2, diceImg3, diceImg4, diceImg5, diceImg6, diceImg7));
@@ -272,14 +282,15 @@ public class GameLogic {
 	}
 
 	public void playGame(ArrayList<Player> playerList) {
+		rollButton.setDisable(false);
 		indexPlayer = indexPlayer % playerList.size();
 		selected = false;
 		isRoll = false;
 		curretntDiceSelect = -1;
+		updateScoreBoard();
 		if (!allOutOfDice()) {
 			Player p = playerList.get(indexPlayer);
 			currentPlayer = p;
-			updateScoreBoard();
 			if (p.getDiceInPlayer().size() > 0) {
 				updateDice(p);
 				updateGameStatus(p.getName() + "'s turn!!", Color.web("#4D34A0"));
@@ -290,19 +301,12 @@ public class GameLogic {
 		} else {
 			updateGameStatus("==== End Round " + getRoundCount() + " ====", Color.BLACK);
 			setRoundCount(getRoundCount() + 1);
-			if (this.getRoundCount() != 4) {
-				this.endRound();
-			} else {
-				roundText.setText("Round " + getRoundCount() + " of 4");
-				this.endgame();
-			}
+			this.endRound();
 		}
 	}
 
 	// อัพเดตเงินในแต่ละสถานที่+แจกเงิน
 	public void endRound() {
-		updateGameStatus("End Round " + getRoundCount(), Color.BLACK);
-		roundText.setText("Round " + getRoundCount() + " of 4");
 		for (Location l : locationList) {
 			// for (int i = 0; i < l.getDiceInLocation().size(); i++) {
 			if (l instanceof SpecialLocation) {
@@ -312,7 +316,9 @@ public class GameLogic {
 				if (maxelement != 0 && sp.notHaveSameElement(maxelement, maxelementindex)) {
 					sp.sendReward(playerList.get(maxelementindex));
 					l.getDiceInLocation().set(maxelementindex, 0);
-					// -> เเลือกใช้การ์ด มี medthod แยกให้กรณีใช่การ์ดStealCard กับ Tax+BonusCard
+					if (playerWinSpecial == null) {
+						playerWinSpecial = playerList.get(maxelementindex);
+					}
 				}
 			} else {
 				int maxelement = Collections.max(l.getDiceInLocation());
@@ -323,24 +329,43 @@ public class GameLogic {
 				}
 			}
 		}
+		updateScoreBoard();
+		rollButton.setDisable(true);
+		if (playerWinSpecial == null) {
+			checkGameEnd();
+		} else {
+			cardImg.setImage(new Image(new File("res/cardBack.png").toURI().toString()));
+			cardSeal = false;
+			updateGameStatus(playerWinSpecial.getName() + " win the special location!", Color.web("#4B0082"));
+			updateGameStatus(playerWinSpecial.getName() + " must draw a card!", Color.web("#4B0082"));
+		}
+
+	}
+
+	public void checkGameEnd() {
+		updateBalanceStatus();
+		updateScoreBoard();
+		if (roundCount <= 4) {
+			nextRoundBtn.setDisable(false);
+		} else {
+			endgame();
+		}
+	}
+
+	@FXML
+	public void clickNextRound(MouseEvent event) {
+		for (int i = 0; i < amountOfPlayer; i++) {
+			oldBalanceList.set(i, playerList.get(i).getBalance());
+		}
+		roundText.setText("Round " + getRoundCount() + " of 4");
 		resetBoard(playerList.size());
 		updateGameStatus("==== Round " + getRoundCount() + " Start!! ====", Color.BLACK);
 		playGame(playerList);
-//		if (playerWinSpecial.equals(null)) {
-//			resetBoard(playerList.size());
-//			updateGameStatus("==== Round " + getRoundCount() + " Start!! ====", Color.BLACK);
-//			playGame(playerList);
-//		}
-//		cardImg.setImage(new Image(new File("res/cardBack.png").toURI().toString()));
-//		cardSeal = false;
-//		playerWinSpecial = playerList.get(maxelementindex);
-//		updateGameStatus(playerWinSpecial.getName() + " win the special location!", Color.web("#4B0082"));
-//		updateGameStatus(playerWinSpecial.getName() + " must draw a card.!", Color.web("#4B0082"));
 	}
 
 	public void resetBoard(int amountOfPlayer) {
 		playerWinSpecial = null;
-		nextRoundBtn.setVisible(false);
+		nextRoundBtn.setDisable(true);
 		setNewSpecialLocation();
 		updateScoreBoard();
 		isRoll = false;
@@ -406,9 +431,7 @@ public class GameLogic {
 			updateGameStatus("Now " + name + "'balance is " + playerWinSpecial.getBalance() + "$.",
 					Color.web("#FF6347"));
 		}
-		resetBoard(playerList.size());
-		updateGameStatus("==== Round " + getRoundCount() + " Start!! ====", Color.BLACK);
-		playGame(playerList);
+		checkGameEnd();
 	}
 
 	public void setNewSpecialLocation() {

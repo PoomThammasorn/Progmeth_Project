@@ -22,7 +22,6 @@ public class StealCard extends Card implements Stealable, Givable {
 			setStolenMoney(p.getBalance());
 		}
 		p.setBalance(p.getBalance() - stolenMoney);
-		System.out.println(stolenMoney);
 	}
 
 	@Override
