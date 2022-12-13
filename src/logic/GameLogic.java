@@ -12,6 +12,7 @@ import base.Location;
 import base.SpecialLocation;
 import basecard.Card;
 import card.CardDeck;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
@@ -156,6 +157,17 @@ public class GameLogic {
 		text = new Text("-------------------");
 		text.setFont(new Font(12));
 		vBoxGameStatus.getChildren().add(0, text);
+
+		Thread thread = new Thread() {
+			public void run() {
+				try {
+					Thread.sleep(100000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+		};
+		thread.start();
 	}
 
 	public void initialScoreBoard() {
