@@ -291,20 +291,20 @@ public class GameLogic {
 		updateGameStatus("End Round " + getRoundCount(), Color.BLACK);
 		roundText.setText("Round " + getRoundCount() + " of 4");
 		for (Location l : locationList) {
-			for (int i = 0; i < l.getDiceInLocation().size(); i++) {
+			//for (int i = 0; i < l.getDiceInLocation().size(); i++) {
 				if (l instanceof SpecialLocation) {
 					SpecialLocation sp = (SpecialLocation) l;
 					int maxelement = Collections.max(sp.getDiceInLocation());
-					if (maxelement != 0 && sp.haveSameElement(maxelement)) {
-						int maxelementindex = sp.getDiceInLocation().indexOf(maxelement);
+					int maxelementindex = sp.getDiceInLocation().indexOf(maxelement);
+					if (maxelement != 0 && sp.haveSameElement(maxelement,maxelementindex)) {
 						sp.sendReward(playerList.get(maxelementindex));
 						l.getDiceInLocation().set(maxelementindex, 0);
 						// -> เเลือกใช้การ์ด มี medthod แยกให้กรณีใช่การ์ดStealCard กับ Tax+BonusCard
 					}
 				} else {
 					int maxelement = Collections.max(l.getDiceInLocation());
-					if (maxelement != 0 && l.haveSameElement(maxelement)) {
-						int maxelementindex = l.getDiceInLocation().indexOf(maxelement);
+					int maxelementindex = l.getDiceInLocation().indexOf(maxelement);
+					if (maxelement != 0 && l.haveSameElement(maxelement,maxelementindex)) {
 						l.sendReward(playerList.get(maxelementindex));
 						l.getDiceInLocation().set(maxelementindex, 0);
 					}
@@ -315,7 +315,7 @@ public class GameLogic {
 //			while (l.fundValue(l.getFund()) < 50000) {
 //				l.updateFund();
 //			}
-		}
+		//}
 		// updateScoreBoard();
 		this.setRoundCount(this.getRoundCount() + 1);
 		resetBoard(playerList.size());

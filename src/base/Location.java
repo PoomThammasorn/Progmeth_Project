@@ -57,10 +57,10 @@ public class Location {
 		return amount;
 	}
 
-	public boolean haveSameElement(int amount) {
+	public boolean haveSameElement(int amount,int index) {
 		boolean nothavesame = true;
 		for (int i = 0; i < this.getDiceInLocation().size(); i++) {
-			if (this.getDiceInLocation().get(i) == amount) {
+			if (this.getDiceInLocation().get(i) == amount && i != index) {
 				nothavesame = false;
 				this.getDiceInLocation().set(i, 0);
 			}
