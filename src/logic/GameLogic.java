@@ -64,10 +64,10 @@ public class GameLogic {
 	private ArrayList<Location> locationList = new ArrayList<>();
 	private ArrayList<String> locationNameList = new ArrayList<>();
 	private ArrayList<Player> playerList = new ArrayList<>();
-	private int roundCount, lastSpecialLocation = 0, indexPlayer = 0;
-	private boolean isRoll = false, selected = false;
+	private int roundCount, indexPlayer = 0;
+	private boolean isRoll = false, selected = false, cardSeal = true;
 	private Player currentPlayer = new Player("Poom", "white");
-	private int curretntDiceSelect;
+	private int curretntDiceSelect, amountOfPlayer;
 	private CardDeck cardDeck;
 
 	public GameLogic() {
@@ -127,6 +127,7 @@ public class GameLogic {
 		textOfAmountInLocation5List = new ArrayList<>(Arrays.asList(textP1L5, textP2L5, textP3L5, textP4L5, textP5L5));
 		textOfAmountInLocation6List = new ArrayList<>(Arrays.asList(textP1L6, textP2L6, textP3L6, textP4L6, textP5L6));
 		// add location name
+
 		locationNameList.add("Gold Tower Casino");
 		locationNameList.add("Riverside Casino");
 		locationNameList.add("The Royal Casino");
@@ -136,7 +137,7 @@ public class GameLogic {
 		newGame(2);
 	}
 
-	public void updateGameStatus(String string) {
+	public void updateGameStatus(String string, Color color) {
 		if (string.length() > 70) {
 			String newString = string.substring(0, 35);
 			newString += "\n" + string.substring(35, 70);
@@ -150,6 +151,7 @@ public class GameLogic {
 		}
 		Text text = new Text(string);
 		text.setFont(new Font(12));
+		text.setFill(color);
 		vBoxGameStatus.getChildren().add(0, text);
 		text = new Text("-------------------");
 		text.setFont(new Font(12));
@@ -229,15 +231,16 @@ public class GameLogic {
 			};
 			thread.start();
 		} else if (player.getDiceInPlayer().size() > 0) {
-			updateGameStatus("You already rolled the dice!!");
+			updateGameStatus("You already rolled the dice!!", Color.RED);
 		} else if (player.getDiceInPlayer().size() <= 0) {
-			updateGameStatus("ํou don't have dice!!");
+			updateGameStatus("ํou don't have dice!!", Color.RED);
 		}
 	}
 
 	// new game
-	public void newGame(int amountOfPlayer) {
-		updateGameStatus("Start New Game!!");
+	public void newGame(int amount) {
+		updateGameStatus("Start New Game!!", Color.web("#FF8C00"));
+		this.amountOfPlayer = amount;
 		this.setRoundCount(0);
 		// ->ค้างสร้าง player
 		// ลองสร้างไว้ทดสอบเฉยๆ
@@ -246,12 +249,11 @@ public class GameLogic {
 		// playerList.add(new Player("Muay", "red"));
 		// playerList.add(new Player("Night", "green"));
 		// playerList.add(new Player("Toe", "yellow"));
-		locationList.add(new Location("Gold Tower Casino", amountOfPlayer, 1));
-		locationList.add(new Location("Riverside Casino", amountOfPlayer, 2));
-		locationList.add(new Location("The Royal Casino", amountOfPlayer, 3));
-		locationList.add(new Location("Luckey 7's Casino", amountOfPlayer, 4));
-		locationList.add(new Location("The Edge Casino", amountOfPlayer, 5));
-		locationList.add(new Location("Blackbird Casino", amountOfPlayer, 6));
+		vBoxLocationList = new ArrayList<>(Arrays.asList(vBoxL1, vBoxL2, vBoxL3, vBoxL4, vBoxL5, vBoxL6));
+		diceImgList = new ArrayList<ImageView>(
+				Arrays.asList(diceImg0, diceImg1, diceImg2, diceImg3, diceImg4, diceImg5, diceImg6, diceImg7));
+		locationImgList = new ArrayList<ImageView>(
+				Arrays.asList(locationImg1, locationImg2, locationImg3, locationImg4, locationImg5, locationImg6));
 		initialScoreBoard();
 		resetBoard(amountOfPlayer);
 		this.playGame(playerList);
@@ -268,7 +270,7 @@ public class GameLogic {
 			updateScoreBoard();
 			if (p.getDiceInPlayer().size() > 0) {
 				updateDice(p);
-				updateGameStatus(p.getName() + "'s turn!!");
+				updateGameStatus(p.getName() + "'s turn!!", Color.GREEN);
 			} else {
 				indexPlayer += 1;
 				playGame(playerList);
@@ -286,7 +288,7 @@ public class GameLogic {
 
 	// อัพเดตเงินในแต่ละสถานที่+แจกเงิน
 	public void endRound() {
-		updateGameStatus("End Round " + getRoundCount());
+		updateGameStatus("End Round " + getRoundCount(), Color.BLACK);
 		roundText.setText("Round " + getRoundCount() + " of 4");
 		for (Location l : locationList) {
 			for (int i = 0; i < l.getDiceInLocation().size(); i++) {
@@ -314,27 +316,24 @@ public class GameLogic {
 //				l.updateFund();
 //			}
 		}
+		// updateScoreBoard();
 		this.setRoundCount(this.getRoundCount() + 1);
 		resetBoard(playerList.size());
 		playGame(playerList);
 	}
 
 	public void resetBoard(int amountOfPlayer) {
+		setNewSpecialLocation();
+		updateScoreBoard();
 		isRoll = false;
 		selected = false;
 		indexPlayer = 0;
 		curretntDiceSelect = -1;
-		vBoxLocationList = new ArrayList<>(Arrays.asList(vBoxL1, vBoxL2, vBoxL3, vBoxL4, vBoxL5, vBoxL6));
-		diceImgList = new ArrayList<ImageView>(
-				Arrays.asList(diceImg0, diceImg1, diceImg2, diceImg3, diceImg4, diceImg5, diceImg6, diceImg7));
-		locationImgList = new ArrayList<ImageView>(
-				Arrays.asList(locationImg1, locationImg2, locationImg3, locationImg4, locationImg5, locationImg6));
 		resetCard();
 		resetPlayerDice();
 		resetTextInLocation();
 		clearBankNoteInLocation();
 		addBankNoteToLocation();
-		updateScoreBoard();
 		setNewSpecialLocation();
 	}
 
@@ -360,21 +359,47 @@ public class GameLogic {
 
 	@FXML
 	public void openCard(MouseEvent event) {
-		Card card = cardDeck.giveTopCardTo();
-		File file = new File("res/" + card.getName() + ".png");
-		cardImg.setImage(new Image(file.toURI().toString()));
-		updateGameStatus(card.description());
+		if (!cardSeal) {
+			Card card = cardDeck.giveTopCardTo();
+			File file = new File("res/" + card.getName() + ".png");
+			cardImg.setImage(new Image(file.toURI().toString()));
+			updateGameStatus(card.description(), Color.BLUE);
+		} else {
+			updateGameStatus("You can't open card at this time.", Color.RED);
+		}
 	}
 
 	public void setNewSpecialLocation() {
 		int randomNumber = (new Random()).nextInt(6);
 		int locationCode = randomNumber + 1;
-		File fileLastSL = new File("res/location" + (lastSpecialLocation + 1) + ".png");
-		locationImgList.get(lastSpecialLocation).setImage(new Image(fileLastSL.toURI().toString()));
-		File fileSL = new File("res/location" + locationCode + "Special.png");
-		locationImgList.get(randomNumber).setImage(new Image(fileSL.toURI().toString()));
-		lastSpecialLocation = randomNumber;
-		updateGameStatus("Special Location is " + locationNameList.get(randomNumber));
+		setNewLocationList(locationCode);
+		for (int i = 0; i < locationNameList.size(); i++) {
+			String s;
+			if (i == randomNumber) {
+				s = "res/location" + (i + 1) + "Special.png";
+			} else {
+				s = "res/location" + (i + 1) + ".png";
+			}
+			locationImgList.get(i).setImage(new Image((new File(s)).toURI().toString()));
+		}
+		updateGameStatus("Special Location is " + locationNameList.get(randomNumber), Color.GREEN);
+	}
+
+	public void initialLocationList(int amount) {
+		locationList = new ArrayList<>();
+		locationList.add(new Location("Gold Tower Casino", amount, 1));
+		locationList.add(new Location("Riverside Casino", amount, 2));
+		locationList.add(new Location("The Royal Casino", amount, 3));
+		locationList.add(new Location("Luckey 7's Casino", amount, 4));
+		locationList.add(new Location("The Edge Casino", amount, 5));
+		locationList.add(new Location("Blackbird Casino", amount, 6));
+	}
+
+	public void setNewLocationList(int locationCode) {
+		initialLocationList(amountOfPlayer);
+		int index = locationCode - 1;
+		String name = locationNameList.get(index);
+		locationList.set(index, new SpecialLocation(name, amountOfPlayer, locationCode));
 	}
 
 	public void resetLocation() {
@@ -445,7 +470,7 @@ public class GameLogic {
 				dropDiceInLocation(5, currentPlayer, textOfAmountInLocation6List);
 			}
 		} else {
-			updateGameStatus("You must choose a dice first!!");
+			updateGameStatus("You must choose a dice first!!", Color.RED);
 		}
 	}
 
@@ -457,7 +482,7 @@ public class GameLogic {
 		} else {
 			s = player.getName() + " drop " + amount + " dices in " + locationNameList.get(numberLocation);
 		}
-		updateGameStatus(s);
+		updateGameStatus(s, Color.GREEN);
 		amount = locationList.get(numberLocation).addDice(player, amount);
 		System.out.println(numberLocation);
 		System.out.println(locationList.get(numberLocation).getDiceInLocation());
@@ -494,10 +519,10 @@ public class GameLogic {
 			} else if (sourceImg.equals(diceImg7) && size > 7) {
 				editSelectDice(currentPlayer.getDiceInPlayer().get(7).getPoint(), currentPlayer);
 			} else {
-				updateGameStatus("Please select the correct dice.");
+				updateGameStatus("Please select the correct dice.", Color.RED);
 			}
 		} else {
-			updateGameStatus("You must roll dices before selecting it.");
+			updateGameStatus("You must roll dices before selecting it.", Color.RED);
 		}
 	}
 
@@ -513,12 +538,12 @@ public class GameLogic {
 				}
 			}
 		} else {
-			updateGameStatus("You must roll dices before selecting it.");
+			updateGameStatus("You must roll dices before selecting it.", Color.RED);
 		}
 	}
 
 	public void endgame() {
-		updateGameStatus("GAME END!!");
+		updateGameStatus("GAME END!!", Color.MEDIUMPURPLE);
 		// ->เขียนยังไงดี
 	}
 
