@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import basecard.Card;
-import player.Player;
 
 public class CardDeck {
 	private ArrayList<Card> deck = new ArrayList<>();
@@ -14,12 +13,12 @@ public class CardDeck {
 		deck.add(new StealCard());
 		deck.add(new StealCard());
 		deck.add(new StealCard());
-		deck.add(new TaxCard());
-		deck.add(new TaxCard());
-		deck.add(new TaxCard());
-		deck.add(new BonusCard());
-		deck.add(new BonusCard());
-		deck.add(new NoneCard());
+		//deck.add(new TaxCard());
+		//deck.add(new TaxCard());
+		//deck.add(new TaxCard());
+		//deck.add(new BonusCard());
+		//deck.add(new BonusCard());
+		//deck.add(new NoneCard());
 	}
 
 	public Card giveTopCardTo() {

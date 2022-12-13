@@ -70,12 +70,28 @@ public class Player {
 	}
 
 	public void useCardWithObj(Card c, Player obj) {
-		((StealCard) c).give(this);
-		((StealCard) c).steal(obj);
+		StealCard sc = (StealCard) c;
+		sc.steal(obj);
+		System.out.println(sc.getStolenMoney());
+		sc.give(this);
 	}
 
 	public String getName() {
 		return name;
+	}
+
+	public int playerNumber() {
+		if (playerColour == "white") {
+			return 5;
+		} else if (playerColour == "blue") {
+			return 4;
+		} else if (playerColour == "red") {
+			return 3;
+		} else if (playerColour == "green") {
+			return 2;
+		} else {
+			return 1;
+		}
 	}
 
 	public void setName(String name) {

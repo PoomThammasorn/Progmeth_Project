@@ -14,7 +14,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="logic.GameLogic">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="logic.GameLogic">
    <children>
       <GridPane fx:id="locationGridPane" hgap="2.0" layoutX="14.0" layoutY="14.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="677.0" prefWidth="898.0" vgap="5.0">
         <columnConstraints>
@@ -678,7 +678,7 @@
             <Insets bottom="2.0" left="5.0" right="5.0" top="2.0" />
          </padding>
       </GridPane>
-      <Text fx:id="roundText" layoutX="978.0" layoutY="295.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Round 1 of 4" textAlignment="CENTER" wrappingWidth="159.9999999999999">
+      <Text fx:id="roundText" layoutX="1025.0" layoutY="295.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Round 1 of 4" textAlignment="CENTER" wrappingWidth="159.9999999999999">
          <font>
             <Font name="Berlin Sans FB Demi Bold" size="25.0" />
          </font>
@@ -688,8 +688,8 @@
             <Font name="Bell MT Bold" size="24.0" />
          </font>
       </Button>
-      <Button fx:id="newGameBtn" layoutX="912.0" layoutY="744.0" mnemonicParsing="false" onMouseClicked="#testGame" text="Test Game" />
-      <ScrollPane layoutX="938.0" layoutY="549.0" prefHeight="158.0" prefWidth="246.0" style="-fx-background-color: Black; -fx-border-color: Green;">
+      <Button fx:id="newGameBtn" layoutX="872.0" layoutY="711.0" mnemonicParsing="false" onMouseClicked="#testGame" text="Test Game" />
+      <ScrollPane layoutX="982.0" layoutY="537.0" prefHeight="158.0" prefWidth="246.0" style="-fx-background-color: Black; -fx-border-color: Green;">
          <content>
             <VBox fx:id="vBoxGameStatus" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="55.0" prefWidth="216.0">
                <opaqueInsets>
@@ -701,12 +701,12 @@
             </VBox>
          </content>
       </ScrollPane>
-      <Text layoutX="996.0" layoutY="543.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Game Status" textAlignment="CENTER" wrappingWidth="124.4844970703125">
+      <Text layoutX="1040.0" layoutY="531.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Game Status" textAlignment="CENTER" wrappingWidth="124.4844970703125">
          <font>
             <Font name="System Bold" size="21.0" />
          </font>
       </Text>
-      <StackPane layoutX="996.0" layoutY="324.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="151.0" prefWidth="124.0">
+      <StackPane layoutX="1043.0" layoutY="324.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="151.0" prefWidth="124.0">
          <children>
             <ImageView fx:id="cardImg" fitHeight="161.0" fitWidth="133.0" onMouseClicked="#openCard">
                <image>
@@ -715,7 +715,7 @@
             </ImageView>
          </children>
       </StackPane>
-      <GridPane layoutX="938.0" layoutY="14.0" prefHeight="243.0" prefWidth="246.0" style="-fx-background-color: Black;" vgap="1.0">
+      <GridPane layoutX="976.0" layoutY="14.0" prefHeight="243.0" prefWidth="258.0" style="-fx-background-color: Black;" vgap="1.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="134.6000732421875" minWidth="10.0" prefWidth="118.6000732421875" />
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="92.79999999999998" minWidth="10.0" prefWidth="80.00002441406251" />
@@ -809,5 +809,10 @@
             </GridPane>
          </children>
       </GridPane>
+      <Button fx:id="nextRoundBtn" layoutX="1043.0" layoutY="729.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="123.0" style="-fx-background-color: green;" text="Next Round" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font name="Bell MT Bold" size="17.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

@@ -11,17 +11,18 @@ public class StealCard extends Card implements Stealable, Givable {
 
 	public StealCard() {
 		// TODO Auto-generated constructor stub
-		super("stealCard", "Steal $20,000 from player's money to another player.");
+		super("stealCard", "You can steal $20,000 from the richest players!!");
 		setStolenMoney(20000);
 	}
 
 	@Override
 	public void steal(Player p) {
 		// TODO Auto-generated method stub
-		int balanceBeforeSteal = p.getBalance();
+		if (p.getBalance() < getStolenMoney()) {
+			setStolenMoney(p.getBalance());
+		}
 		p.setBalance(p.getBalance() - stolenMoney);
-		setStolenMoney(balanceBeforeSteal - p.getBalance());
-
+		System.out.println(stolenMoney);
 	}
 
 	@Override

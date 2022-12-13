@@ -8,7 +8,7 @@ import player.Player;
 
 public class Location {
 	private ArrayList<Banknote> fund = new ArrayList<>();
-	private ArrayList<Integer> diceInLocation = new ArrayList<>(); 
+	private ArrayList<Integer> diceInLocation = new ArrayList<>();
 	private String name;
 	private CasinoBudget budget = new CasinoBudget();
 	private int amountOfPlayer;
@@ -57,7 +57,7 @@ public class Location {
 		return amount;
 	}
 
-	public boolean haveSameElement(int amount,int index) {
+	public boolean notHaveSameElement(int amount, int index) {
 		boolean nothavesame = true;
 		for (int i = 0; i < this.getDiceInLocation().size(); i++) {
 			if (this.getDiceInLocation().get(i) == amount && i != index) {
@@ -98,13 +98,13 @@ public class Location {
 					break;
 				}
 			}
-			if(!found) {
+			if (!found) {
 				fund.add(new Banknote(topbank.getBanknoteValue()));
 			}
 		}
 		Collections.sort(fund, new SortByBanknoteValue());
 	}
-	
+
 	public void resetDiceInLocation() {
 		for (int i = 0; i < getDiceInLocation().size(); i++) {
 			this.diceInLocation.set(i, 0);
