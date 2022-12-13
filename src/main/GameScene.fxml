@@ -16,9 +16,9 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="logic.GameLogic">
    <children>
-      <GridPane fx:id="locationGridPane" hgap="5.0" layoutX="14.0" layoutY="14.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="658.0" prefWidth="898.0" vgap="5.0">
+      <GridPane fx:id="locationGridPane" hgap="2.0" layoutX="14.0" layoutY="14.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="677.0" prefWidth="898.0" vgap="5.0">
         <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="-Infinity" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -26,22 +26,21 @@
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
         <rowConstraints>
-            <RowConstraints maxHeight="410.4000183105469" minHeight="10.0" prefHeight="305.00001220703126" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="211.99999389648437" minHeight="0.0" prefHeight="81.79999389648441" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="329.5999877929687" minHeight="0.0" prefHeight="259.4000061035157" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="410.4000183105469" minHeight="10.0" prefHeight="325.5999755859375" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="211.99999389648437" minHeight="0.0" prefHeight="84.40001831054684" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="329.5999877929687" minHeight="0.0" prefHeight="256.3999816894531" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <VBox fx:id="vBoxL1" prefHeight="200.0" prefWidth="100.0" spacing="4.0" style="-fx-background-color: #3a161a;">
-               <children>
-                  <ImageView fitHeight="59.0" fitWidth="141.0">
-                     <image>
-                        <Image url="@../../res/bankNote10000.png" />
-                     </image>
-                  </ImageView>
-               </children>
+            <VBox fx:id="vBoxL1" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="4.0" style="-fx-background-color: #3a161a;">
                <padding>
-                  <Insets bottom="1.0" left="2.0" right="1.0" top="1.0" />
+                  <Insets bottom="1.0" left="2.0" right="1.0" top="5.0" />
                </padding>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
             </VBox>
             <VBox fx:id="vBoxL2" prefHeight="200.0" prefWidth="100.0" spacing="4.0" style="-fx-background-color: #2d102e;" GridPane.columnIndex="1">
                <padding>
@@ -64,61 +63,7 @@
                <padding>
                   <Insets bottom="1.0" left="2.0" right="1.0" top="1.0" />
                </padding></VBox>
-            <StackPane fx:id="stackLocation1" prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="1">
-               <children>
-                  <ImageView fx:id="locationImg1" fitHeight="90.0" fitWidth="143.0">
-                     <image>
-                        <Image url="@../../res/location1.png" />
-                     </image>
-                  </ImageView>
-               </children>
-            </StackPane>
-            <StackPane fx:id="stackLocation2" prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
-               <children>
-                  <ImageView fx:id="locationImg2" fitHeight="90.0" fitWidth="143.0">
-                     <image>
-                        <Image url="@../../res/location2.png" />
-                     </image>
-                  </ImageView>
-               </children>
-            </StackPane>
-            <StackPane fx:id="stackLocation3" prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
-               <children>
-                  <ImageView fx:id="locationImg3" fitHeight="90.0" fitWidth="143.0">
-                     <image>
-                        <Image url="@../../res/location3.png" />
-                     </image>
-                  </ImageView>
-               </children>
-            </StackPane>
-            <StackPane fx:id="stackLocation4" prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
-               <children>
-                  <ImageView fx:id="locationImg4" fitHeight="90.0" fitWidth="143.0">
-                     <image>
-                        <Image url="@../../res/location4.png" />
-                     </image>
-                  </ImageView>
-               </children>
-            </StackPane>
-            <StackPane fx:id="stackLocation5" prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="1">
-               <children>
-                  <ImageView fx:id="locationImg5" fitHeight="90.0" fitWidth="143.0">
-                     <image>
-                        <Image url="@../../res/location5.png" />
-                     </image>
-                  </ImageView>
-               </children>
-            </StackPane>
-            <StackPane fx:id="stackLocation6" prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="1">
-               <children>
-                  <ImageView fx:id="locationImg6" fitHeight="90.0" fitWidth="143.0">
-                     <image>
-                        <Image url="@../../res/location6.png" />
-                     </image>
-                  </ImageView>
-               </children>
-            </StackPane>
-            <GridPane fx:id="gridDiceL1" prefWidth="138.0" style="-fx-background-color: #3a161a;" vgap="5.0" GridPane.rowIndex="2">
+            <GridPane prefWidth="138.0" style="-fx-background-color: #3a161a;" vgap="5.0" GridPane.rowIndex="2">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="54.20001220703125" />
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="87.79998779296875" minWidth="10.0" prefWidth="87.79998779296875" />
@@ -134,47 +79,75 @@
                   <Insets left="2.0" />
                </padding>
                <children>
-                  <ImageView fitHeight="45.0" fitWidth="45.0" GridPane.rowIndex="1">
+                  <ImageView fx:id="diceP2L1Img" fitHeight="45.0" fitWidth="45.0" GridPane.rowIndex="1">
                      <image>
                         <Image url="@../../res/dice1Visible.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="45.0" fitWidth="45.0">
+                  <ImageView fx:id="diceP1L1Img" fitHeight="45.0" fitWidth="45.0">
                      <image>
                         <Image url="@../../res/dice1Visible.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="45.0" fitWidth="45.0" GridPane.rowIndex="2">
+                  <ImageView fx:id="diceP3L1Img" fitHeight="45.0" fitWidth="45.0" GridPane.rowIndex="2">
                      <image>
                         <Image url="@../../res/dice1Visible.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="45.0" fitWidth="45.0" GridPane.rowIndex="3">
+                  <ImageView fx:id="diceP4L1Img" fitHeight="45.0" fitWidth="45.0" GridPane.rowIndex="3">
                      <image>
                         <Image url="@../../res/dice1Visible.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="45.0" fitWidth="45.0" GridPane.rowIndex="4">
+                  <ImageView fx:id="diceP5L1Img" fitHeight="45.0" fitWidth="45.0" GridPane.rowIndex="4">
                      <image>
                         <Image url="@../../res/dice1Visible.png" />
                      </image>
                   </ImageView>
                   <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1">
                      <children>
-                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER">
+                        <Text fx:id="textP1L1" fill="#3a161a" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER">
                            <font>
-                              <Font name="System Bold" size="37.0" />
+                              <Font name="Bell MT Bold" size="37.0" />
                            </font>
                         </Text>
                      </children>
                   </StackPane>
-                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <children>
+                        <Text fx:id="textP2L1" fill="#3a161a" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER">
+                           <font>
+                              <Font name="Bell MT Bold" size="37.0" />
+                           </font>
+                        </Text>
+                     </children></StackPane>
+                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <children>
+                        <Text fx:id="textP3L1" fill="#3a161a" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER">
+                           <font>
+                              <Font name="Bell MT Bold" size="37.0" />
+                           </font>
+                        </Text>
+                     </children></StackPane>
+                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                     <children>
+                        <Text fx:id="textP4L1" fill="#3a161a" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER">
+                           <font>
+                              <Font name="Bell MT Bold" size="37.0" />
+                           </font>
+                        </Text>
+                     </children></StackPane>
+                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                     <children>
+                        <Text fx:id="textP5L1" fill="#3a161a" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER">
+                           <font>
+                              <Font name="Bell MT Bold" size="37.0" />
+                           </font>
+                        </Text>
+                     </children></StackPane>
                </children>
             </GridPane>
-            <GridPane fx:id="gridDiceL2" style="-fx-background-color: #2d102e;" vgap="5.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <GridPane style="-fx-background-color: #2d102e;" vgap="5.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="54.20001220703125" />
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -190,39 +163,74 @@
                   <Insets left="2.0" />
                </padding>
                <children>
-                  <ImageView fitHeight="45.0" fitWidth="45.0">
+                  <ImageView fx:id="diceP1L2Img" fitHeight="45.0" fitWidth="45.0">
                      <image>
                         <Image url="@../../res/dice2Visible.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="45.0" fitWidth="45.0" layoutX="12.0" layoutY="12.0" GridPane.rowIndex="1">
+                  <ImageView fx:id="diceP2L2Img" fitHeight="45.0" fitWidth="45.0" layoutX="12.0" layoutY="12.0" GridPane.rowIndex="1">
                      <image>
                         <Image url="@../../res/dice2Visible.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="45.0" fitWidth="45.0" layoutX="12.0" layoutY="65.0" GridPane.rowIndex="2">
+                  <ImageView fx:id="diceP3L2Img" fitHeight="45.0" fitWidth="45.0" layoutX="12.0" layoutY="65.0" GridPane.rowIndex="2">
                      <image>
                         <Image url="@../../res/dice2Visible.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="45.0" fitWidth="45.0" layoutX="12.0" layoutY="118.0" GridPane.rowIndex="3">
+                  <ImageView fx:id="diceP4L2Img" fitHeight="45.0" fitWidth="45.0" layoutX="12.0" layoutY="118.0" GridPane.rowIndex="3">
                      <image>
                         <Image url="@../../res/dice2Visible.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="45.0" fitWidth="45.0" layoutX="12.0" layoutY="172.0" GridPane.rowIndex="4">
+                  <ImageView fx:id="diceP5L2Img" fitHeight="45.0" fitWidth="45.0" layoutX="12.0" layoutY="172.0" GridPane.rowIndex="4">
                      <image>
                         <Image url="@../../res/dice2Visible.png" />
                      </image>
                   </ImageView>
-                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" />
-                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1">
+                     <children>
+                        <Text fx:id="textP1L2" fill="#2d102e" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER">
+                           <font>
+                              <Font name="Bell MT Bold" size="37.0" />
+                           </font>
+                        </Text>
+                     </children></StackPane>
+                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <children>
+                        <Text fx:id="textP2L2" fill="#2d102e" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER">
+                           <font>
+                              <Font name="Bell MT Bold" size="37.0" />
+                           </font>
+                        </Text>
+                     </children></StackPane>
+                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <children>
+                        <Text fx:id="textP3L2" fill="#2d102e" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER">
+                           <font>
+                              <Font name="Bell MT Bold" size="37.0" />
+                           </font>
+                        </Text>
+                     </children></StackPane>
+                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                     <children>
+                        <Text fx:id="textP5L2" fill="#2d102e" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER">
+                           <font>
+                              <Font name="Bell MT Bold" size="37.0" />
+                           </font>
+                        </Text>
+                     </children></StackPane>
+                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                     <children>
+                        <Text fx:id="textP4L2" fill="#2d102e" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER">
+                           <font>
+                              <Font name="Bell MT Bold" size="37.0" />
+                           </font>
+                        </Text>
+                     </children></StackPane>
                </children>
             </GridPane>
-            <GridPane fx:id="gridDiceL3" style="-fx-background-color: #956803;" vgap="5.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
+            <GridPane style="-fx-background-color: #956803;" vgap="5.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="54.20001220703125" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -235,42 +243,77 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <ImageView fitHeight="45.0" fitWidth="45.0">
+                  <ImageView fx:id="diceP1L3Img" fitHeight="45.0" fitWidth="45.0">
                      <image>
                         <Image url="@../../res/dice3Visible.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="45.0" fitWidth="45.0" GridPane.rowIndex="1">
+                  <ImageView fx:id="diceP2L3Img" fitHeight="45.0" fitWidth="45.0" GridPane.rowIndex="1">
                      <image>
                         <Image url="@../../res/dice3Visible.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="45.0" fitWidth="45.0" GridPane.rowIndex="2">
+                  <ImageView fx:id="diceP3L3Img" fitHeight="45.0" fitWidth="45.0" GridPane.rowIndex="2">
                      <image>
                         <Image url="@../../res/dice3Visible.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="45.0" fitWidth="45.0" GridPane.rowIndex="3">
+                  <ImageView fx:id="diceP4L3Img" fitHeight="45.0" fitWidth="45.0" GridPane.rowIndex="3">
                      <image>
                         <Image url="@../../res/dice3Visible.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="45.0" fitWidth="45.0" GridPane.rowIndex="4">
+                  <ImageView fx:id="diceP5L3Img" fitHeight="45.0" fitWidth="45.0" GridPane.rowIndex="4">
                      <image>
                         <Image url="@../../res/dice3Visible.png" />
                      </image>
                   </ImageView>
-                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" />
-                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1">
+                     <children>
+                        <Text fx:id="textP1L3" fill="#956803" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER">
+                           <font>
+                              <Font name="Bell MT Bold" size="37.0" />
+                           </font>
+                        </Text>
+                     </children></StackPane>
+                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <children>
+                        <Text fx:id="textP2L3" fill="#956803" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER">
+                           <font>
+                              <Font name="Bell MT Bold" size="37.0" />
+                           </font>
+                        </Text>
+                     </children></StackPane>
+                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <children>
+                        <Text fx:id="textP3L3" fill="#956803" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER">
+                           <font>
+                              <Font name="Bell MT Bold" size="37.0" />
+                           </font>
+                        </Text>
+                     </children></StackPane>
+                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                     <children>
+                        <Text fx:id="textP4L3" fill="#956803" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER">
+                           <font>
+                              <Font name="Bell MT Bold" size="37.0" />
+                           </font>
+                        </Text>
+                     </children></StackPane>
+                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                     <children>
+                        <Text fx:id="textP5L3" fill="#956803" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER">
+                           <font>
+                              <Font name="Bell MT Bold" size="37.0" />
+                           </font>
+                        </Text>
+                     </children></StackPane>
                </children>
                <padding>
                   <Insets left="2.0" />
                </padding>
             </GridPane>
-            <GridPane fx:id="gridDiceL4" style="-fx-background-color: #158474;" vgap="5.0" GridPane.columnIndex="3" GridPane.rowIndex="2">
+            <GridPane style="-fx-background-color: #158474;" vgap="5.0" GridPane.columnIndex="3" GridPane.rowIndex="2">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="54.20001220703125" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -283,42 +326,77 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                 <children>
-                  <ImageView fitHeight="45.0" fitWidth="45.0">
+                  <ImageView fx:id="diceP1L4Img" fitHeight="45.0" fitWidth="45.0">
                      <image>
                         <Image url="@../../res/dice4Visible.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="45.0" fitWidth="45.0" GridPane.rowIndex="1">
+                  <ImageView fx:id="diceP2L4Img" fitHeight="45.0" fitWidth="45.0" GridPane.rowIndex="1">
                      <image>
                         <Image url="@../../res/dice4Visible.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="45.0" fitWidth="45.0" GridPane.rowIndex="2">
+                  <ImageView fx:id="diceP3L4Img" fitHeight="45.0" fitWidth="45.0" GridPane.rowIndex="2">
                      <image>
                         <Image url="@../../res/dice4Visible.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="45.0" fitWidth="45.0" GridPane.rowIndex="3">
+                  <ImageView fx:id="diceP4L4Img" fitHeight="45.0" fitWidth="45.0" GridPane.rowIndex="3">
                      <image>
                         <Image url="@../../res/dice4Visible.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="45.0" fitWidth="45.0" GridPane.rowIndex="4">
+                  <ImageView fx:id="diceP5L4Img" fitHeight="45.0" fitWidth="45.0" GridPane.rowIndex="4">
                      <image>
                         <Image url="@../../res/dice4Visible.png" />
                      </image>
                   </ImageView>
-                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" />
-                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1">
+                     <children>
+                        <Text fx:id="textP1L4" fill="#158474" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER">
+                           <font>
+                              <Font name="Bell MT Bold" size="37.0" />
+                           </font>
+                        </Text>
+                     </children></StackPane>
+                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <children>
+                        <Text fx:id="textP2L4" fill="#158474" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER">
+                           <font>
+                              <Font name="Bell MT Bold" size="37.0" />
+                           </font>
+                        </Text>
+                     </children></StackPane>
+                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <children>
+                        <Text fx:id="textP3L4" fill="#158474" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER">
+                           <font>
+                              <Font name="Bell MT Bold" size="37.0" />
+                           </font>
+                        </Text>
+                     </children></StackPane>
+                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                     <children>
+                        <Text fx:id="textP4L4" fill="#158474" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER">
+                           <font>
+                              <Font name="Bell MT Bold" size="37.0" />
+                           </font>
+                        </Text>
+                     </children></StackPane>
+                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                     <children>
+                        <Text fx:id="textP5L4" fill="#158474" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER">
+                           <font>
+                              <Font name="Bell MT Bold" size="37.0" />
+                           </font>
+                        </Text>
+                     </children></StackPane>
                </children>
                <padding>
                   <Insets left="2.0" />
                </padding>
             </GridPane>
-            <GridPane fx:id="gridDiceL5" style="-fx-background-color: #33c1c2;" vgap="5.0" GridPane.columnIndex="4" GridPane.rowIndex="2">
+            <GridPane style="-fx-background-color: #33c1c2;" vgap="5.0" GridPane.columnIndex="4" GridPane.rowIndex="2">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="54.20001220703125" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -331,42 +409,77 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                              <children>
-                  <ImageView fitHeight="45.0" fitWidth="45.0">
+                  <ImageView fx:id="diceP1L5Img" fitHeight="45.0" fitWidth="45.0">
                      <image>
                         <Image url="@../../res/dice5Visible.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="45.0" fitWidth="45.0" GridPane.rowIndex="1">
+                  <ImageView fx:id="diceP2L5Img" fitHeight="45.0" fitWidth="45.0" GridPane.rowIndex="1">
                      <image>
                         <Image url="@../../res/dice5Visible.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="45.0" fitWidth="45.0" GridPane.rowIndex="2">
+                  <ImageView fx:id="diceP3L5Img" fitHeight="45.0" fitWidth="45.0" GridPane.rowIndex="2">
                      <image>
                         <Image url="@../../res/dice5Visible.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="45.0" fitWidth="45.0" GridPane.rowIndex="3">
+                  <ImageView fx:id="diceP4L5Img" fitHeight="45.0" fitWidth="45.0" GridPane.rowIndex="3">
                      <image>
                         <Image url="@../../res/dice5Visible.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="45.0" fitWidth="45.0" GridPane.rowIndex="4">
+                  <ImageView fx:id="diceP5L5Img" fitHeight="45.0" fitWidth="45.0" GridPane.rowIndex="4">
                      <image>
                         <Image url="@../../res/dice5Visible.png" />
                      </image>
                   </ImageView>
-                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" />
-                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1">
+                     <children>
+                        <Text fx:id="textP1L5" fill="#33c1c2" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER">
+                           <font>
+                              <Font name="Bell MT Bold" size="37.0" />
+                           </font>
+                        </Text>
+                     </children></StackPane>
+                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <children>
+                        <Text fx:id="textP2L5" fill="#33c1c2" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER">
+                           <font>
+                              <Font name="Bell MT Bold" size="37.0" />
+                           </font>
+                        </Text>
+                     </children></StackPane>
+                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <children>
+                        <Text fx:id="textP3L5" fill="#33c1c2" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER">
+                           <font>
+                              <Font name="Bell MT Bold" size="37.0" />
+                           </font>
+                        </Text>
+                     </children></StackPane>
+                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                     <children>
+                        <Text fx:id="textP4L5" fill="#33c1c2" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER">
+                           <font>
+                              <Font name="Bell MT Bold" size="37.0" />
+                           </font>
+                        </Text>
+                     </children></StackPane>
+                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                     <children>
+                        <Text fx:id="textP5L5" fill="#33c1c2" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER">
+                           <font>
+                              <Font name="Bell MT Bold" size="37.0" />
+                           </font>
+                        </Text>
+                     </children></StackPane>
                </children>
                <padding>
                   <Insets left="2.0" />
                </padding>
             </GridPane>
-            <GridPane fx:id="gridDiceL6" style="-fx-background-color: #000000;" vgap="5.0" GridPane.columnIndex="5" GridPane.rowIndex="2">
+            <GridPane style="-fx-background-color: #000000;" vgap="5.0" GridPane.columnIndex="5" GridPane.rowIndex="2">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="54.20001220703125" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -379,41 +492,130 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                              <children>
-                  <ImageView fitHeight="45.0" fitWidth="45.0">
+                  <ImageView fx:id="diceP1L6Img" fitHeight="45.0" fitWidth="45.0">
                      <image>
                         <Image url="@../../res/dice6Visible.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="45.0" fitWidth="45.0" GridPane.rowIndex="1">
+                  <ImageView fx:id="diceP2L6Img" fitHeight="45.0" fitWidth="45.0" GridPane.rowIndex="1">
                      <image>
                         <Image url="@../../res/dice6Visible.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="45.0" fitWidth="45.0" GridPane.rowIndex="2">
+                  <ImageView fx:id="diceP3L6Img" fitHeight="45.0" fitWidth="45.0" GridPane.rowIndex="2">
                      <image>
                         <Image url="@../../res/dice6Visible.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="45.0" fitWidth="45.0" GridPane.rowIndex="3">
+                  <ImageView fx:id="diceP4L6Img" fitHeight="45.0" fitWidth="45.0" GridPane.rowIndex="3">
                      <image>
                         <Image url="@../../res/dice6Visible.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="45.0" fitWidth="45.0" GridPane.rowIndex="4">
+                  <ImageView fx:id="diceP5L6Img" fitHeight="45.0" fitWidth="45.0" GridPane.rowIndex="4">
                      <image>
                         <Image url="@../../res/dice6Visible.png" />
                      </image>
                   </ImageView>
-                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" />
-                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1">
+                     <children>
+                        <Text fx:id="textP1L6" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER">
+                           <font>
+                              <Font name="Bell MT Bold" size="37.0" />
+                           </font>
+                        </Text>
+                     </children></StackPane>
+                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <children>
+                        <Text fx:id="textP2L6" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER">
+                           <font>
+                              <Font name="Bell MT Bold" size="37.0" />
+                           </font>
+                        </Text>
+                     </children></StackPane>
+                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <children>
+                        <Text fx:id="textP3L6" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER">
+                           <font>
+                              <Font name="Bell MT Bold" size="37.0" />
+                           </font>
+                        </Text>
+                     </children></StackPane>
+                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                     <children>
+                        <Text fx:id="textP4L6" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER">
+                           <font>
+                              <Font name="Bell MT Bold" size="37.0" />
+                           </font>
+                        </Text>
+                     </children></StackPane>
+                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                     <children>
+                        <Text fx:id="textP5L6" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER">
+                           <font>
+                              <Font name="Bell MT Bold" size="37.0" />
+                           </font>
+                        </Text>
+                     </children></StackPane>
                </children>
                <padding>
                   <Insets left="2.0" />
                </padding>
             </GridPane>
+            <StackPane prefHeight="150.0" prefWidth="200.0" style="-fx-background-color: #3a161a;" GridPane.rowIndex="1">
+               <children>
+                  <ImageView fx:id="locationImg1" fitHeight="90.0" fitWidth="143.0" onMouseClicked="#selectLocation">
+                     <image>
+                        <Image url="@../../res/location1.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </StackPane>
+            <StackPane prefHeight="150.0" prefWidth="200.0" style="-fx-background-color: #2d102e;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <children>
+                  <ImageView fx:id="locationImg2" fitHeight="90.0" fitWidth="143.0" onMouseClicked="#selectLocation">
+                     <image>
+                        <Image url="@../../res/location2.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </StackPane>
+            <StackPane prefHeight="150.0" prefWidth="200.0" style="-fx-background-color: #956803;" GridPane.columnIndex="2" GridPane.rowIndex="1">
+               <children>
+                  <ImageView fx:id="locationImg3" fitHeight="90.0" fitWidth="143.0" onMouseClicked="#selectLocation">
+                     <image>
+                        <Image url="@../../res/location3.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </StackPane>
+            <StackPane prefHeight="150.0" prefWidth="200.0" style="-fx-background-color: #158474;" GridPane.columnIndex="3" GridPane.rowIndex="1">
+               <children>
+                  <ImageView fx:id="locationImg4" fitHeight="90.0" fitWidth="143.0" onMouseClicked="#selectLocation">
+                     <image>
+                        <Image url="@../../res/location4.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </StackPane>
+            <StackPane prefHeight="150.0" prefWidth="200.0" style="-fx-background-color: #33c1c2;" GridPane.columnIndex="4" GridPane.rowIndex="1">
+               <children>
+                  <ImageView fx:id="locationImg5" fitHeight="90.0" fitWidth="143.0" onMouseClicked="#selectLocation">
+                     <image>
+                        <Image url="@../../res/location5.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </StackPane>
+            <StackPane prefHeight="150.0" prefWidth="200.0" style="-fx-background-color: #000000;" GridPane.columnIndex="5" GridPane.rowIndex="1">
+               <children>
+                  <ImageView fx:id="locationImg6" fitHeight="90.0" fitWidth="143.0" onMouseClicked="#selectLocation">
+                     <image>
+                        <Image url="@../../res/location6.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </StackPane>
          </children>
       </GridPane>
       <GridPane fx:id="diceGridPane" hgap="5.0" layoutX="85.0" layoutY="696.0" prefHeight="76.0" prefWidth="607.0" style="-fx-background-color: #000000;" vgap="5.0">
@@ -476,7 +678,7 @@
             <Insets bottom="2.0" left="5.0" right="5.0" top="2.0" />
          </padding>
       </GridPane>
-      <Text fx:id="roundText" layoutX="978.0" layoutY="280.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Round 1 of 4" textAlignment="CENTER" wrappingWidth="159.9999999999999">
+      <Text fx:id="roundText" layoutX="978.0" layoutY="295.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Round 1 of 4" textAlignment="CENTER" wrappingWidth="159.9999999999999">
          <font>
             <Font name="Berlin Sans FB Demi Bold" size="25.0" />
          </font>
@@ -487,9 +689,9 @@
          </font>
       </Button>
       <Button fx:id="newGameBtn" layoutX="912.0" layoutY="744.0" mnemonicParsing="false" onMouseClicked="#testGame" text="Test Game" />
-      <ScrollPane layoutX="958.0" layoutY="550.0" prefHeight="157.0" prefWidth="200.0" style="-fx-background-color: Black; -fx-border-color: Green;">
+      <ScrollPane layoutX="938.0" layoutY="549.0" prefHeight="158.0" prefWidth="246.0" style="-fx-background-color: Black; -fx-border-color: Green;">
          <content>
-            <VBox fx:id="vBoxGameStatus" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="55.0" prefWidth="174.0">
+            <VBox fx:id="vBoxGameStatus" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="55.0" prefWidth="216.0">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
@@ -499,78 +701,113 @@
             </VBox>
          </content>
       </ScrollPane>
-      <Text layoutX="995.0" layoutY="544.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Game Status" textAlignment="CENTER" wrappingWidth="124.4844970703125">
+      <Text layoutX="996.0" layoutY="543.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Game Status" textAlignment="CENTER" wrappingWidth="124.4844970703125">
          <font>
             <Font name="System Bold" size="21.0" />
          </font>
       </Text>
-      <GridPane hgap="2.0" layoutX="931.0" layoutY="29.0" prefHeight="219.0" prefWidth="254.0" style="-fx-border-color: Black; -fx-border-width: 3;" vgap="2.0">
-        <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="111.20009765625" minWidth="10.0" prefWidth="111.20009765625" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="101.39997558593751" minWidth="10.0" prefWidth="83.19990234375001" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="151.2000732421875" minWidth="10.0" prefWidth="50.20002441406251" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="27.599996948242186" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="35.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="35.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="35.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="35.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="35.0" vgrow="SOMETIMES" />
-        </rowConstraints>
+      <StackPane layoutX="996.0" layoutY="324.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="151.0" prefWidth="124.0">
          <children>
-            <StackPane prefHeight="150.0" prefWidth="200.0" style="-fx-background-color: Black;">
-               <children>
-                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Player" wrappingWidth="44.1495361328125">
-                     <font>
-                        <Font name="Corbel Bold" size="15.0" />
-                     </font>
-                  </Text>
-               </children>
-            </StackPane>
-            <StackPane prefHeight="150.0" prefWidth="200.0" style="-fx-background-color: #A30000;" GridPane.columnIndex="1">
-               <children>
-                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Balance" textAlignment="CENTER" wrappingWidth="62.641477942466736">
-                     <font>
-                        <Font name="Corbel Bold" size="16.0" />
-                     </font>
-                  </Text>
-               </children>
-            </StackPane>
-            <StackPane prefHeight="28.0" prefWidth="40.0" style="-fx-background-color: yellow;" GridPane.columnIndex="2">
-               <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Dices">
-                     <font>
-                        <Font name="Corbel Bold" size="16.0" />
-                     </font>
-                  </Text>
-               </children>
-            </StackPane>
-            <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="1" />
-            <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="2" />
-            <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="3" />
-            <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="4" />
-            <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="5" />
-            <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-            <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-            <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-            <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-            <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-            <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="5" />
-         </children>
-      </GridPane>
-      <StackPane layoutX="995.0" layoutY="307.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="151.0" prefWidth="124.0">
-         <children>
-            <ImageView fx:id="cardImg" fitHeight="161.0" fitWidth="133.0">
+            <ImageView fx:id="cardImg" fitHeight="161.0" fitWidth="133.0" onMouseClicked="#openCard">
                <image>
                   <Image url="@../../res/cardBack.png" />
                </image>
             </ImageView>
          </children>
       </StackPane>
+      <GridPane layoutX="938.0" layoutY="14.0" prefHeight="243.0" prefWidth="246.0" style="-fx-background-color: Black;" vgap="1.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="134.6000732421875" minWidth="10.0" prefWidth="118.6000732421875" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="92.79999999999998" minWidth="10.0" prefWidth="80.00002441406251" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="87.199951171875" minWidth="10.0" prefWidth="43.999975585937506" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="70.5999969482422" minHeight="10.0" prefHeight="34.39999694824219" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="208.0000030517578" minHeight="10.0" prefHeight="208.0000030517578" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <StackPane prefHeight="150.0" prefWidth="200.0" style="-fx-background-color: #A30000;">
+               <children>
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Player">
+                     <font>
+                        <Font name="Bernard MT Condensed" size="20.0" />
+                     </font>
+                  </Text>
+               </children></StackPane>
+            <StackPane prefHeight="150.0" prefWidth="200.0" style="-fx-background-color: #004369;" GridPane.columnIndex="1">
+               <children>
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Balance">
+                     <font>
+                        <Font name="Bernard MT Condensed" size="17.0" />
+                     </font>
+                  </Text>
+               </children></StackPane>
+            <StackPane prefHeight="34.0" prefWidth="38.0" style="-fx-background-color: #523A28;" GridPane.columnIndex="2">
+               <children>
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Dice">
+                     <font>
+                        <Font name="Bernard MT Condensed" size="18.0" />
+                     </font>
+                  </Text>
+               </children></StackPane>
+            <GridPane style="-fx-border-color: black;" GridPane.rowIndex="1">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <StackPane fx:id="playerBoardPane1" prefHeight="150.0" prefWidth="200.0" style="-fx-background-color: #E4D4C8;" />
+                  <StackPane fx:id="playerBoardPane2" prefHeight="150.0" prefWidth="200.0" style="-fx-background-color: #D0B49F;" GridPane.rowIndex="1" />
+                  <StackPane fx:id="playerBoardPane3" prefHeight="150.0" prefWidth="200.0" style="-fx-background-color: #E4D4C8;" GridPane.rowIndex="2" />
+                  <StackPane fx:id="playerBoardPane4" prefHeight="150.0" prefWidth="200.0" style="-fx-background-color: #D0B49F;" GridPane.rowIndex="3" />
+                  <StackPane fx:id="playerBoardPane5" prefHeight="20.0" prefWidth="116.0" style="-fx-background-color: #E4D4C8;" GridPane.rowIndex="4" />
+               </children>
+            </GridPane>
+            <GridPane style="-fx-border-color: black;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <StackPane fx:id="balanceBoardPane1" prefHeight="150.0" prefWidth="200.0" style="-fx-background-color: #E4D4C8;" />
+                  <StackPane fx:id="balanceBoardPane2" prefHeight="150.0" prefWidth="200.0" style="-fx-background-color: #D0B49F;" GridPane.rowIndex="1" />
+                  <StackPane fx:id="balanceBoardPane3" prefHeight="150.0" prefWidth="200.0" style="-fx-background-color: #E4D4C8;" GridPane.rowIndex="2" />
+                  <StackPane fx:id="balanceBoardPane4" prefHeight="150.0" prefWidth="200.0" style="-fx-background-color: #D0B49F;" GridPane.rowIndex="3" />
+                  <StackPane fx:id="balanceBoardPane5" prefHeight="13.0" prefWidth="68.0" style="-fx-background-color: #E4D4C8;" GridPane.rowIndex="4" />
+               </children>
+            </GridPane>
+            <GridPane style="-fx-border-color: black;" GridPane.columnIndex="2" GridPane.rowIndex="1">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <StackPane fx:id="diceBoardPane1" prefHeight="150.0" prefWidth="200.0" style="-fx-background-color: #E4D4C8;" />
+                  <StackPane fx:id="diceBoardPane2" prefHeight="150.0" prefWidth="200.0" style="-fx-background-color: #D0B49F;" GridPane.rowIndex="1" />
+                  <StackPane fx:id="diceBoardPane3" prefHeight="150.0" prefWidth="200.0" style="-fx-background-color: #E4D4C8;" GridPane.rowIndex="2" />
+                  <StackPane fx:id="diceBoardPane4" prefHeight="150.0" prefWidth="200.0" style="-fx-background-color: #D0B49F;" GridPane.rowIndex="3" />
+                  <StackPane fx:id="diceBoardPane5" prefHeight="150.0" prefWidth="200.0" style="-fx-background-color: #E4D4C8;" GridPane.rowIndex="4" />
+               </children>
+            </GridPane>
+         </children>
+      </GridPane>
    </children>
 </AnchorPane>

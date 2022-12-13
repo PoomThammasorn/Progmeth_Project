@@ -20,7 +20,7 @@ public class Location {
 		this.setAmountOfPlayer(amountOfPlayer);
 		setFund(new ArrayList<Banknote>());
 		setDiceInLocation(new ArrayList<Integer>());
-		for (int i = 0; i < this.getAmountOfPlayer(); i++) {
+		for (int i = 0; i < amountOfPlayer; i++) {
 			diceInLocation.add(0);
 		}
 		while (fundValue(fund) < 50000) {
@@ -37,22 +37,24 @@ public class Location {
 		return value;
 	}
 
-	public void addDice(Player p, int amount) {
-		if (p.getPlayerColour().equals("White")) {
+	public int addDice(Player p, int amount) {
+		if (p.getPlayerColour().equals("white")) {
+			amount += this.getDiceInLocation().get(0);
 			this.getDiceInLocation().set(0, amount);
-		} else if (p.getPlayerColour().equals("Blue")) {
-
+		} else if (p.getPlayerColour().equals("blue")) {
+			amount += this.getDiceInLocation().get(1);
 			this.getDiceInLocation().set(1, amount);
-		} else if (p.getPlayerColour().equals("Red")) {
-
+		} else if (p.getPlayerColour().equals("red")) {
+			amount += this.getDiceInLocation().get(2);
 			this.getDiceInLocation().set(2, amount);
-		} else if (p.getPlayerColour().equals("Green")) {
-
+		} else if (p.getPlayerColour().equals("green")) {
+			amount += this.getDiceInLocation().get(3);
 			this.getDiceInLocation().set(3, amount);
-		} else if (p.getPlayerColour().equals("Yellow")) {
-
+		} else if (p.getPlayerColour().equals("yellow")) {
+			amount += this.getDiceInLocation().get(4);
 			this.getDiceInLocation().set(4, amount);
 		}
+		return amount;
 	}
 
 	public boolean haveSameElement(int amount) {
@@ -99,6 +101,12 @@ public class Location {
 			}
 		}
 		Collections.sort(fund, new SortByBanknoteValue());
+	}
+	
+	public void resetDiceInLocation() {
+		for (int i = 0; i < getDiceInLocation().size(); i++) {
+			this.diceInLocation.set(i, 0);
+		}
 	}
 
 	public int getAmountOfPlayer() {

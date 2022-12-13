@@ -6,10 +6,11 @@ import player.Player;
 
 public class BonusCard extends Card implements Givable {
 
-	public BonusCard(String name, String keyword) {
-		super("Bonus Card", "Congratulations!!, you got 10,000$ for free.");
+	public BonusCard() {
 		// TODO Auto-generated constructor stub
+		super("bonusCard", "Congratulations!!, you got 10,000$ for free.");
 	}
+	
 
 	@Override
 	public void give(Player p) {
@@ -23,5 +24,8 @@ public class BonusCard extends Card implements Givable {
 		// TODO Auto-generated method stub
 		return "It's The " + getName() + "!! " + getKeyword();
 	}
+
+
+	
 
 }

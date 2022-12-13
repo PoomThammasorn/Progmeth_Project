@@ -29,6 +29,13 @@ public class Player {
 		}
 	}
 
+	public void resetDice() {
+		diceInPlayer.clear();
+		for (int i = 0; i < 8; i++) {
+			diceInPlayer.add(new Dice(playerColour));
+		}
+	}
+
 	public void rollDice() {
 		for (Dice dice : diceInPlayer) {
 			dice.rolling();
@@ -52,20 +59,21 @@ public class Player {
 		return count;
 
 	}
-	
+
 	public void useCardWithOutObj(Card c) {
-		if(c instanceof BonusCard) {
+		if (c instanceof BonusCard) {
 			((BonusCard) c).give(this);
 		}
-		if(c instanceof TaxCard) {
+		if (c instanceof TaxCard) {
 			((TaxCard) c).steal(this);
 		}
 	}
-	public void useCardWithObj(Card c,Player obj) {
+
+	public void useCardWithObj(Card c, Player obj) {
 		((StealCard) c).give(this);
 		((StealCard) c).steal(obj);
 	}
-	
+
 	public String getName() {
 		return name;
 	}

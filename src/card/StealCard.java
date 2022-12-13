@@ -9,10 +9,10 @@ public class StealCard extends Card implements Stealable, Givable {
 
 	private int stolenMoney;
 
-	public StealCard(String name, String keyword) {
-		super("Stealing Card", "Steal $20,000 from player's money to another player.");
-		setStolenMoney(20000);
+	public StealCard() {
 		// TODO Auto-generated constructor stub
+		super("stealCard", "Steal $20,000 from player's money to another player.");
+		setStolenMoney(20000);
 	}
 
 	@Override

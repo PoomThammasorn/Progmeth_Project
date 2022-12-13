@@ -6,9 +6,9 @@ import player.Player;
 
 public class TaxCard extends Card implements Stealable {
 
-	public TaxCard(String name, String keyword) {
-		super("Tax Card", "Meet The Revenue Department!! Must pay 10% tax.");
+	public TaxCard() {
 		// TODO Auto-generated constructor stub
+		super("taxCard", "Meet The Revenue Department!! Must pay 10% tax.");
 	}
 
 	@Override
