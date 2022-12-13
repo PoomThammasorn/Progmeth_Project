@@ -18,14 +18,9 @@ import basecard.Givable;
 import basecard.Stealable;
 import card.BonusCard;
 import card.CardDeck;
-<<<<<<< HEAD
 import card.NoneCard;
 import card.StealCard;
 import card.TaxCard;
-||||||| e7d6ddf
-import javafx.application.Platform;
-=======
->>>>>>> 0ab15580b64d66c8553cc4b0a281e662ec46e08e
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
@@ -79,16 +74,8 @@ public class GameLogic {
 	private ArrayList<String> locationNameList = new ArrayList<>();
 	private ArrayList<Player> playerList = new ArrayList<>();
 	private int roundCount, indexPlayer = 0;
-<<<<<<< HEAD
 	private boolean isRoll = false, selected = false, cardSeal = true, waiting = false;
 	private Player currentPlayer, playerWinSpecial = null;
-||||||| e7d6ddf
-	private boolean isRoll = false, selected = false, cardSeal = true, waiting = false;
-	private Player currentPlayer = new Player("Poom", "white");
-=======
-	private boolean isRoll = false, selected = false, cardSeal = true;
-	private Player currentPlayer = new Player("Poom", "white");
->>>>>>> 0ab15580b64d66c8553cc4b0a281e662ec46e08e
 	private int curretntDiceSelect, amountOfPlayer;
 	private CardDeck cardDeck;
 
@@ -160,18 +147,17 @@ public class GameLogic {
 	}
 
 	public void updateGameStatus(String string, Color color) {
-		if (string.length() > 70) {
-			String newString = string.substring(0, 35);
-			newString += "\n" + string.substring(35, 70);
-			newString += "\n" + string.substring(70, string.length());
+		if (string.length() > 72) {
+			String newString = string.substring(0, 36);
+			newString += "\n" + string.substring(36, 72);
+			newString += "\n" + string.substring(72, string.length());
 			string = newString;
-		} else if (string.length() > 35) {
-			String newString = string.substring(0, 35);
+		} else if (string.length() > 36) {
+			String newString = string.substring(0, 36);
 			newString += "\n";
-			newString += string.substring(35, string.length());
+			newString += string.substring(36, string.length());
 			string = newString;
 		}
-<<<<<<< HEAD
 		Text text1 = new Text("-------------------");
 		text1.setFont(new Font(12));
 		vBoxGameStatus.getChildren().add(0, text1);
@@ -179,35 +165,6 @@ public class GameLogic {
 		text2.setFont(new Font(12));
 		text2.setFill(color);
 		vBoxGameStatus.getChildren().add(0, text2);
-||||||| e7d6ddf
-		Text text1 = new Text("-------------------");
-		text1.setFont(new Font(12));
-		vBoxGameStatus.getChildren().add(0, text1);
-		Text text2 = new Text(string);
-		text2.setFont(new Font(12));
-		text2.setFill(color);
-		vBoxGameStatus.getChildren().add(0, text2);
-		waiting = true;
-		Thread thread = new Thread() {
-			public void run() {
-				try {
-					Thread.sleep(100000);
-					waiting = false;
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-			}
-		};
-		thread.start();
-=======
-		Text text = new Text(string);
-		text.setFont(new Font(12));
-		text.setFill(color);
-		vBoxGameStatus.getChildren().add(0, text);
-		text = new Text("-------------------");
-		text.setFont(new Font(12));
-		vBoxGameStatus.getChildren().add(0, text);
->>>>>>> 0ab15580b64d66c8553cc4b0a281e662ec46e08e
 	}
 
 	public void initialScoreBoard() {
@@ -262,6 +219,7 @@ public class GameLogic {
 				public void run() {
 					try {
 						for (int i = 0; i < 30; i++) {
+							waiting = true;
 							player.rollDice();
 							if (i == 29) {
 								player.sortDiceInPlayer();
@@ -275,6 +233,7 @@ public class GameLogic {
 							Thread.sleep(40);
 						}
 						isRoll = true;
+						waiting = false;
 						rollButton.setDisable(false);
 					} catch (InterruptedException e) {
 						e.printStackTrace();
@@ -285,7 +244,7 @@ public class GameLogic {
 		} else if (player.getDiceInPlayer().size() > 0) {
 			updateGameStatus("You already rolled the dice!!", Color.RED);
 		} else if (player.getDiceInPlayer().size() <= 0) {
-			updateGameStatus("ํou don't have dice!!", Color.RED);
+			updateGameStatus("You don't have dice!!", Color.RED);
 		}
 	}
 
@@ -323,7 +282,7 @@ public class GameLogic {
 			updateScoreBoard();
 			if (p.getDiceInPlayer().size() > 0) {
 				updateDice(p);
-				updateGameStatus(p.getName() + "'s turn!!", Color.GREEN);
+				updateGameStatus(p.getName() + "'s turn!!", Color.web("#4D34A0"));
 			} else {
 				indexPlayer += 1;
 				playGame(playerList);
@@ -342,78 +301,28 @@ public class GameLogic {
 
 	// อัพเดตเงินในแต่ละสถานที่+แจกเงิน
 	public void endRound() {
-		// System.out.println(getRoundCount());
+		updateGameStatus("End Round " + getRoundCount(), Color.BLACK);
 		roundText.setText("Round " + getRoundCount() + " of 4");
 		for (Location l : locationList) {
-			for (int i = 0; i < l.getDiceInLocation().size(); i++) {
-				if (l instanceof SpecialLocation) {
-					SpecialLocation sp = (SpecialLocation) l;
-					int maxelement = Collections.max(sp.getDiceInLocation());
-					int maxelementindex = sp.getDiceInLocation().indexOf(maxelement);
-<<<<<<< HEAD
-					if (maxelement != 0 && sp.notHaveSameElement(maxelement, maxelementindex)) {
-						if (playerWinSpecial.equals(null)) {
-							playerWinSpecial = playerList.get(maxelementindex);
-						}
-||||||| e7d6ddf
-					if (maxelement != 0 && sp.haveSameElement(maxelement,maxelementindex)) {
-=======
-					if (maxelement != 0 && sp.haveSameElement(maxelement)) {
-						System.out.println(sp.getDiceInLocation());
-						int maxelementindex = sp.getDiceInLocation().indexOf(maxelement);
->>>>>>> c16fef7a8b9b35696063374f90ceb06de1f47cba
-=======
-					if (maxelement != 0 && sp.haveSameElement(maxelement,maxelementindex)) {
->>>>>>> 0ab15580b64d66c8553cc4b0a281e662ec46e08e
-						sp.sendReward(playerList.get(maxelementindex));
-						l.getDiceInLocation().set(maxelementindex, 0);
-					}
-				} else {
-					int maxelement = Collections.max(l.getDiceInLocation());
-					int maxelementindex = l.getDiceInLocation().indexOf(maxelement);
-<<<<<<< HEAD
-					if (maxelement != 0 && l.notHaveSameElement(maxelement, maxelementindex)) {
-||||||| e7d6ddf
-					if (maxelement != 0 && l.haveSameElement(maxelement,maxelementindex)) {
-=======
-					if (maxelement != 0 && l.haveSameElement(maxelement)) {
-						System.out.println(l.getDiceInLocation());
-						int maxelementindex = l.getDiceInLocation().indexOf(maxelement);
->>>>>>> c16fef7a8b9b35696063374f90ceb06de1f47cba
-=======
-					if (maxelement != 0 && l.haveSameElement(maxelement,maxelementindex)) {
->>>>>>> 0ab15580b64d66c8553cc4b0a281e662ec46e08e
-						l.sendReward(playerList.get(maxelementindex));
-						l.getDiceInLocation().set(maxelementindex, 0);
-					}
+			// for (int i = 0; i < l.getDiceInLocation().size(); i++) {
+			if (l instanceof SpecialLocation) {
+				SpecialLocation sp = (SpecialLocation) l;
+				int maxelement = Collections.max(sp.getDiceInLocation());
+				int maxelementindex = sp.getDiceInLocation().indexOf(maxelement);
+				if (maxelement != 0 && sp.notHaveSameElement(maxelement, maxelementindex)) {
+					sp.sendReward(playerList.get(maxelementindex));
+					l.getDiceInLocation().set(maxelementindex, 0);
+					// -> เเลือกใช้การ์ด มี medthod แยกให้กรณีใช่การ์ดStealCard กับ Tax+BonusCard
+				}
+			} else {
+				int maxelement = Collections.max(l.getDiceInLocation());
+				int maxelementindex = l.getDiceInLocation().indexOf(maxelement);
+				if (maxelement != 0 && l.notHaveSameElement(maxelement, maxelementindex)) {
+					l.sendReward(playerList.get(maxelementindex));
+					l.getDiceInLocation().set(maxelementindex, 0);
 				}
 			}
-<<<<<<< HEAD
 		}
-||||||| e7d6ddf
-<<<<<<< HEAD
-			// reset ช่องเงิน
-//			l.getFund().clear();
-//			while (l.fundValue(l.getFund()) < 50000) {
-//				l.updateFund();
-//			}
-		//}
-		// updateScoreBoard();
-=======
-		}
-		updateScoreBoard();
->>>>>>> c16fef7a8b9b35696063374f90ceb06de1f47cba
-		this.setRoundCount(this.getRoundCount() + 1);
-=======
-			// reset ช่องเงิน
-//			l.getFund().clear();
-//			while (l.fundValue(l.getFund()) < 50000) {
-//				l.updateFund();
-//			}
-		//}
-		// updateScoreBoard();
-		this.setRoundCount(this.getRoundCount() + 1);
->>>>>>> 0ab15580b64d66c8553cc4b0a281e662ec46e08e
 		resetBoard(playerList.size());
 		updateGameStatus("==== Round " + getRoundCount() + " Start!! ====", Color.BLACK);
 		playGame(playerList);
@@ -440,17 +349,10 @@ public class GameLogic {
 		curretntDiceSelect = -1;
 		resetCard();
 		resetPlayerDice();
-<<<<<<< HEAD
 		resetAmountOfDiceInLocation();
 		resetDiceImgInLocation();
-||||||| e7d6ddf
-		resetAmountOfDiceInLocation();
-=======
-		resetTextInLocation();
->>>>>>> 0ab15580b64d66c8553cc4b0a281e662ec46e08e
 		clearBankNoteInLocation();
 		addBankNoteToLocation();
-		setNewSpecialLocation();
 	}
 
 	public void addBankNoteToLocation() {
@@ -522,7 +424,7 @@ public class GameLogic {
 			}
 			locationImgList.get(i).setImage(new Image((new File(s)).toURI().toString()));
 		}
-		updateGameStatus("Special Location is " + locationNameList.get(randomNumber), Color.GREEN);
+		updateGameStatus("Special Location is " + locationNameList.get(randomNumber), Color.web("#2879C0"));
 	}
 
 	public void initialLocationList(int amount) {
@@ -561,7 +463,7 @@ public class GameLogic {
 		}
 	}
 
-	public void resetTextInLocation() {
+	public void resetAmountOfDiceInLocation() {
 		for (Text text : textOfAmountInLocation1List) {
 			text.setFill(Color.web("#3a161a"));
 		}
@@ -604,7 +506,9 @@ public class GameLogic {
 	@FXML
 	public void selectLocation(MouseEvent event) {
 		ImageView locaitonImg = (ImageView) event.getSource();
-		if (selected) {
+		if (waiting) {
+			;
+		} else if (selected) {
 			if (locaitonImg.equals(locationImg1) && curretntDiceSelect == 1) {
 				dropDiceInLocation(0, currentPlayer, textOfAmountInLocation1List);
 			} else if (locaitonImg.equals(locationImg2) && curretntDiceSelect == 2) {
@@ -633,8 +537,6 @@ public class GameLogic {
 		}
 		updateGameStatus(s, Color.GREEN);
 		amount = locationList.get(numberLocation).addDice(player, amount);
-		System.out.println(numberLocation);
-		System.out.println(locationList.get(numberLocation).getDiceInLocation());
 		int playerIndex = playerList.indexOf(player);
 		textList.get(playerIndex).setText(amount + "");
 		textList.get(playerIndex).setFill(Color.WHEAT);
@@ -648,7 +550,9 @@ public class GameLogic {
 	@FXML
 	public void selectDice(MouseEvent event) {
 		ImageView sourceImg = (ImageView) event.getSource();
-		if (isRoll) {
+		if (waiting) {
+			;
+		} else if (isRoll) {
 			updateDice(currentPlayer);
 			int size = currentPlayer.getDiceInPlayer().size();
 			if (sourceImg.equals(diceImg0) && size > 0) {
@@ -693,18 +597,14 @@ public class GameLogic {
 	}
 
 	public void editSelectDice(int dicePoint, Player player) {
-		if (isRoll) {
-			selected = true;
-			curretntDiceSelect = dicePoint;
-			for (int i = 0; i < player.getDiceInPlayer().size(); i++) {
-				Dice dice = player.getDiceInPlayer().get(i);
-				if (dice.getPoint() != dicePoint) {
-					File file = new File("res/dice" + dice.getPoint() + "Visible" + ".png");
-					diceImgList.get(i).setImage(new Image(file.toURI().toString()));
-				}
+		selected = true;
+		curretntDiceSelect = dicePoint;
+		for (int i = 0; i < player.getDiceInPlayer().size(); i++) {
+			Dice dice = player.getDiceInPlayer().get(i);
+			if (dice.getPoint() != dicePoint) {
+				File file = new File("res/dice" + dice.getPoint() + "Visible" + ".png");
+				diceImgList.get(i).setImage(new Image(file.toURI().toString()));
 			}
-		} else {
-			updateGameStatus("You must roll dices before selecting it.", Color.RED);
 		}
 	}
 

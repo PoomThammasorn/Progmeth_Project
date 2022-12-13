@@ -8,19 +8,18 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-image: url('file:res/main_bg.png');" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-image: url('file:res/main_bg.png');" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <left>
       <VBox prefHeight="200.0" prefWidth="100.0" spacing="30.0" BorderPane.alignment="CENTER">
          <children>
             <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../Project/res/new-game-button.png" />
+                  <Image url="@../../res/new-game-button.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../Project/res/exit_game.png" />
+                  <Image url="@../../res/exit_game.png" />
                </image>
             </ImageView>
          </children>
