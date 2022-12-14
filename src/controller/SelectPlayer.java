@@ -10,10 +10,15 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
+import logic.GameLogic;
 
 public class SelectPlayer implements Initializable {
 
@@ -28,9 +33,9 @@ public class SelectPlayer implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		// TODO Auto-generated method stub
 		textFieldList = new ArrayList<>(Arrays.asList(player1TextField, player2TextField, player3TextField,
 				player4TextField, player5TextField));
-		// TODO Auto-generated method stub
 		player3TextField.setDisable(true);
 		player4TextField.setDisable(true);
 		player5TextField.setDisable(true);
@@ -47,6 +52,23 @@ public class SelectPlayer implements Initializable {
 		int amount = choiceBox.getValue();
 		for (int i = 2; i < amount; i++) {
 			textFieldList.get(i).setDisable(false);
+		}
+	}
+
+	public void openSecondFxml() {
+		try {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("second.fxml"));
+			Parent root = loader.load();
+
+			GameLogic controller = loader.getController();
+			controller.setVariable(textField.getText());
+
+			Scene scene = new Scene(root);
+			Stage stage = new Stage();
+			stage.setScene(scene);
+			stage.show();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 

@@ -3,6 +3,7 @@ package logic;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 import java.util.Random;
 
 import java.io.File;
@@ -77,7 +78,6 @@ public class GameLogic {
 
 	public GameLogic() {
 		// TODO Auto-generated constructor stub
-		// add dice Image in diceImgList
 		diceImgList = new ArrayList<ImageView>(
 				Arrays.asList(diceImg0, diceImg1, diceImg2, diceImg3, diceImg4, diceImg5, diceImg6, diceImg7));
 		// add dice Image in each location to each List
@@ -103,7 +103,6 @@ public class GameLogic {
 		textOfAmountInLocation4List = new ArrayList<>(Arrays.asList(textP1L4, textP2L4, textP3L4, textP4L4, textP5L4));
 		textOfAmountInLocation5List = new ArrayList<>(Arrays.asList(textP1L5, textP2L5, textP3L5, textP4L5, textP5L5));
 		textOfAmountInLocation6List = new ArrayList<>(Arrays.asList(textP1L6, textP2L6, textP3L6, textP4L6, textP5L6));
-		// this.newGame(4);
 		// add location name
 		diceImgScoreBoard = new ArrayList<>(Arrays.asList(diceImgP1, diceImgP2, diceImgP3, diceImgP4, diceImgP5));
 
@@ -111,53 +110,21 @@ public class GameLogic {
 				"Lucky 7's Casino", "The Edge Casino", "Blackbird Casino"));
 	}
 
+	public void setVariable(String s) {
+
+	}
+
 	@FXML
 	public void testGame() {
-		// add dice Image in diceImgList
-		diceImgList = new ArrayList<ImageView>(
-				Arrays.asList(diceImg0, diceImg1, diceImg2, diceImg3, diceImg4, diceImg5, diceImg6, diceImg7));
-		// add dice Image in each location to each List
-		diceLocation1ImgList = new ArrayList<>(
-				Arrays.asList(diceP1L1Img, diceP2L1Img, diceP3L1Img, diceP4L1Img, diceP5L1Img));
-		diceLocation2ImgList = new ArrayList<>(
-				Arrays.asList(diceP1L2Img, diceP2L2Img, diceP3L2Img, diceP4L2Img, diceP5L2Img));
-		diceLocation3ImgList = new ArrayList<>(
-				Arrays.asList(diceP1L3Img, diceP2L3Img, diceP3L3Img, diceP4L3Img, diceP5L3Img));
-		diceLocation4ImgList = new ArrayList<>(
-				Arrays.asList(diceP1L4Img, diceP2L4Img, diceP3L4Img, diceP4L4Img, diceP5L4Img));
-		diceLocation5ImgList = new ArrayList<>(
-				Arrays.asList(diceP1L5Img, diceP2L5Img, diceP3L5Img, diceP4L5Img, diceP5L5Img));
-		diceLocation6ImgList = new ArrayList<>(
-				Arrays.asList(diceP1L6Img, diceP2L6Img, diceP3L6Img, diceP4L6Img, diceP5L6Img));
-		// add all diceLocationImagelist in Sumlist
-		diceInLocationImgList = new ArrayList<>(Arrays.asList(diceLocation1ImgList, diceLocation2ImgList,
-				diceLocation3ImgList, diceLocation4ImgList, diceLocation5ImgList, diceLocation6ImgList));
-
-		textOfAmountInLocation1List = new ArrayList<>(Arrays.asList(textP1L1, textP2L1, textP3L1, textP4L1, textP5L1));
-		textOfAmountInLocation2List = new ArrayList<>(Arrays.asList(textP1L2, textP2L2, textP3L2, textP4L2, textP5L2));
-		textOfAmountInLocation3List = new ArrayList<>(Arrays.asList(textP1L3, textP2L3, textP3L3, textP4L3, textP5L3));
-		textOfAmountInLocation4List = new ArrayList<>(Arrays.asList(textP1L4, textP2L4, textP3L4, textP4L4, textP5L4));
-		textOfAmountInLocation5List = new ArrayList<>(Arrays.asList(textP1L5, textP2L5, textP3L5, textP4L5, textP5L5));
-		textOfAmountInLocation6List = new ArrayList<>(Arrays.asList(textP1L6, textP2L6, textP3L6, textP4L6, textP5L6));
-		// add location name
-		diceImgScoreBoard = new ArrayList<>(Arrays.asList(diceImgP1, diceImgP2, diceImgP3, diceImgP4, diceImgP5));
-
-		locationNameList = new ArrayList<>(Arrays.asList("Gold Tower Casino", "Riverside Casino", "The Royal Casino",
-				"Lucky 7's Casino", "The Edge Casino", "Blackbird Casino"));
 		newGame(3);
 	}
 
 	public void updateGameStatus(String string, Color color) {
 		if (string.length() > 72) {
-			String newString = string.substring(0, 36);
-			newString += "\n" + string.substring(36, 72);
-			newString += "\n" + string.substring(72, string.length());
-			string = newString;
+			string = string.substring(0, 36) + "\n" + string.substring(36, 72) + "\n"
+					+ string.substring(72, string.length());
 		} else if (string.length() > 36) {
-			String newString = string.substring(0, 36);
-			newString += "\n";
-			newString += string.substring(36, string.length());
-			string = newString;
+			string = string.substring(0, 36) + "\n" + string.substring(36, string.length());
 		}
 		Text text1 = new Text("-------------------");
 		text1.setFont(new Font(12));
@@ -175,106 +142,123 @@ public class GameLogic {
 				balanceBoardPane4, balanceBoardPane5));
 		diceScoreBoard = new ArrayList<>(
 				Arrays.asList(diceBoardPane1, diceBoardPane2, diceBoardPane3, diceBoardPane4, diceBoardPane5));
+
 		for (int i = amountOfPlayer; i < diceImgScoreBoard.size(); i++) {
 			diceImgScoreBoard.get(i).setVisible(false);
 		}
+
 		updateScoreBoard();
 	}
 
 	public void updateScoreBoard() {
+		Font font = new Font("Book Antiqua Bold", 22.0);
 		for (int i = 0; i < playerList.size(); i++) {
 			playerScoreBoard.get(i).getChildren().clear();
 			balanceScoreBoard.get(i).getChildren().clear();
 			diceScoreBoard.get(i).getChildren().clear();
-			Font font = new Font("Book Antiqua Bold", 22.0);
+
 			Text nameText = new Text(playerList.get(i).getName());
-			Text balanceText = new Text(playerList.get(i).getBalance() + "");
-			Text diceText = new Text(playerList.get(i).getDiceInPlayer().size() + "");
 			nameText.setFont(font);
-			balanceText.setFont(font);
-			diceText.setFont(font);
 			playerScoreBoard.get(i).getChildren().add(nameText);
+
+			Text balanceText = new Text(playerList.get(i).getBalance() + "");
+			balanceText.setFont(font);
 			balanceScoreBoard.get(i).getChildren().add(balanceText);
+
+			Text diceText = new Text(playerList.get(i).getDiceInPlayer().size() + "");
+			diceText.setFont(font);
 			diceScoreBoard.get(i).getChildren().add(diceText);
 		}
 	}
 
 	public void updateTurnSB() {
 		for (int i = 0; i < amountOfPlayer; i++) {
-			File file1 = new File("res/dice" + (i + 1) + "Visible.png");
-			diceImgScoreBoard.get(i).setImage(new Image(file1.toURI().toString()));
+			diceImgScoreBoard.get(i).setImage(new Image("res/dice" + (i + 1) + "Visible.png"));
 		}
+
 		int index = currentPlayer.playerNumber();
-		File file2 = new File("res/dice" + index + currentPlayer.getPlayerColour() + ".png");
-		diceImgScoreBoard.get(index - 1).setImage(new Image(file2.toURI().toString()));
+		diceImgScoreBoard.get(index - 1)
+				.setImage(new Image("res/dice" + index + currentPlayer.getPlayerColour() + ".png"));
 	}
 
 	public void updateBalanceStatus() {
-		String pref = "+";
+		// Iterate over the players
 		for (int i = 0; i < amountOfPlayer; i++) {
+			// Initialize variables
+			String pref = "+";
 			Color color = Color.web("#00A300"); // green;
 			int oldBalance = oldBalanceList.get(i);
+
+			// Check if the player's balance has decreased
 			if (oldBalance > playerList.get(i).getBalance()) {
 				color = Color.web("#D2042D"); // red
 				pref = "";
 			}
-			String s = playerList.get(i).getName() + "'s balace : " + playerList.get(i).getBalance();
+
+			// Create the string to update the game status
+			String s = playerList.get(i).getName() + "'s balance: " + playerList.get(i).getBalance();
 			s += " (" + pref + (playerList.get(i).getBalance() - oldBalance) + ")";
+
 			updateGameStatus(s, color);
 		}
 	}
 
 	public void updateDice(Player player) {
-		for (int k = 0; k < player.getDiceInPlayer().size(); k++) {
-			int dicePoint = player.getDiceInPlayer().get(k).getPoint();
-			String diceColour = player.getDiceInPlayer().get(k).getColour();
-			File file = new File("res/dice" + dicePoint + diceColour + ".png");
-			diceImgList.get(k).setImage(new Image(file.toURI().toString()));
-		}
-		if (player.getDiceInPlayer().size() < 8) {
-			for (int k = player.getDiceInPlayer().size(); k < 8; k++) {
+		List<Dice> diceList = player.getDiceInPlayer();
+		for (int i = 0; i < 8; i++) {
+			if (i >= diceList.size()) {
 				File file = new File("res/nullDice.png");
-				diceImgList.get(k).setImage(new Image(file.toURI().toString()));
+				diceImgList.get(i).setImage(new Image(file.toURI().toString()));
+				continue;
 			}
+
+			int dicePoint = diceList.get(i).getPoint();
+			String diceColour = diceList.get(i).getColour();
+			File file = new File("res/dice" + dicePoint + diceColour + ".png");
+			diceImgList.get(i).setImage(new Image(file.toURI().toString()));
 		}
 	}
 
 	@FXML
 	public void roll() {
 		Player player = currentPlayer;
-		if (!isRoll && player.getDiceInPlayer().size() > 0) {
-			rollButton.setDisable(true);
-			Thread thread = new Thread() {
-				public void run() {
-					try {
-						for (int i = 0; i < 30; i++) {
-							waiting = true;
-							player.rollDice();
-							if (i == 29) {
-								player.sortDiceInPlayer();
-							}
-							for (int k = 0; k < player.getDiceInPlayer().size(); k++) {
-								int dicePoint = player.getDiceInPlayer().get(k).getPoint();
-								String diceColour = player.getDiceInPlayer().get(k).getColour();
-								File file = new File("res/dice" + dicePoint + diceColour + ".png");
-								diceImgList.get(k).setImage(new Image(file.toURI().toString()));
-							}
-							Thread.sleep(40);
-						}
-						isRoll = true;
-						waiting = false;
-						rollButton.setDisable(false);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-				}
-			};
-			thread.start();
-		} else if (player.getDiceInPlayer().size() > 0) {
-			updateGameStatus("You already rolled the dice!!", Color.RED);
-		} else if (player.getDiceInPlayer().size() <= 0) {
+		if (player.getDiceInPlayer().size() <= 0) {
 			updateGameStatus("You don't have dice!!", Color.RED);
+			return;
 		}
+		if (isRoll) {
+			updateGameStatus("You already rolled the dice!!", Color.RED);
+			return;
+		}
+
+		rollButton.setDisable(true);
+		isRoll = true;
+		waiting = true;
+
+		Thread thread = new Thread() {
+			public void run() {
+				try {
+					for (int i = 0; i < 30; i++) {
+						player.rollDice();
+						if (i == 29) {
+							player.sortDiceInPlayer();
+						}
+						for (int k = 0; k < player.getDiceInPlayer().size(); k++) {
+							int dicePoint = player.getDiceInPlayer().get(k).getPoint();
+							String diceColour = player.getDiceInPlayer().get(k).getColour();
+							File file = new File("res/dice" + dicePoint + diceColour + ".png");
+							diceImgList.get(k).setImage(new Image(file.toURI().toString()));
+						}
+						Thread.sleep(40);
+					}
+					waiting = false;
+					rollButton.setDisable(false);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+		};
+		thread.start();
 	}
 
 	// new game
@@ -310,46 +294,48 @@ public class GameLogic {
 		isRoll = false;
 		curretntDiceSelect = -1;
 		updateScoreBoard();
-		if (!allOutOfDice()) {
-			Player p = playerList.get(indexPlayer);
-			currentPlayer = p;
-			updateTurnSB();
-			if (p.getDiceInPlayer().size() > 0) {
-				updateDice(p);
-				updateGameStatus(p.getName() + "'s turn!!", Color.web("#4D34A0"));
-			} else {
-				indexPlayer += 1;
-				playGame(playerList);
-			}
-		} else {
+
+		if (allOutOfDice()) {
 			updateGameStatus("==== End Round " + getRoundCount() + " ====", Color.BLACK);
 			setRoundCount(getRoundCount() + 1);
 			this.endRound();
+			return;
 		}
+
+		Player p = playerList.get(indexPlayer);
+		currentPlayer = p;
+		updateTurnSB();
+
+		if (p.getDiceInPlayer().size() == 0) {
+			indexPlayer += 1;
+			playGame(playerList);
+			return;
+		}
+
+		updateDice(p);
+		updateGameStatus(p.getName() + "'s turn!!", Color.web("#4D34A0"));
 	}
 
 	// อัพเดตเงินในแต่ละสถานที่+แจกเงิน
 	public void endRound() {
 		for (Location l : locationList) {
-			// for (int i = 0; i < l.getDiceInLocation().size(); i++) {
+			int maxElement = Collections.max(l.getDiceInLocation());
+			int maxElementIndex = l.getDiceInLocation().indexOf(maxElement);
+			Player winner = playerList.get(maxElementIndex);
+			if (maxElement == 0 || l.notHaveSameElement(maxElement, maxElementIndex)) {
+				continue;
+			}
 			if (l instanceof SpecialLocation) {
 				SpecialLocation sp = (SpecialLocation) l;
-				int maxelement = Collections.max(sp.getDiceInLocation());
-				int maxelementindex = sp.getDiceInLocation().indexOf(maxelement);
-				if (maxelement != 0 && sp.notHaveSameElement(maxelement, maxelementindex)) {
-					sp.sendReward(playerList.get(maxelementindex));
-					l.getDiceInLocation().set(maxelementindex, 0);
-					if (playerWinSpecial == null) {
-						playerWinSpecial = playerList.get(maxelementindex);
-					}
+				sp.sendReward(winner);
+				l.getDiceInLocation().set(maxElementIndex, 0);
+
+				if (playerWinSpecial == null) {
+					playerWinSpecial = winner;
 				}
 			} else {
-				int maxelement = Collections.max(l.getDiceInLocation());
-				int maxelementindex = l.getDiceInLocation().indexOf(maxelement);
-				if (maxelement != 0 && l.notHaveSameElement(maxelement, maxelementindex)) {
-					l.sendReward(playerList.get(maxelementindex));
-					l.getDiceInLocation().set(maxelementindex, 0);
-				}
+				l.sendReward(winner);
+				l.getDiceInLocation().set(maxElementIndex, 0);
 			}
 		}
 		updateScoreBoard();
@@ -362,7 +348,6 @@ public class GameLogic {
 			updateGameStatus(playerWinSpecial.getName() + " win the special location!", Color.web("#4B0082"));
 			updateGameStatus(playerWinSpecial.getName() + " must draw a card!", Color.web("#4B0082"));
 		}
-
 	}
 
 	public void checkGameEnd() {
@@ -409,13 +394,11 @@ public class GameLogic {
 				location.updateFund();
 			}
 			for (Banknote banknote : location.getFund()) {
-				for (int i = 0; i < banknote.getAmount(); i++) {
-					File file = new File("res/bankNote" + banknote.getBanknoteValue() + ".png");
-					ImageView img = new ImageView(file.toURI().toString());
-					img.setFitHeight(60);
-					img.setFitWidth(140);
-					vBoxLocationList.get(location.getDiceValue() - 1).getChildren().add(img);
-				}
+				String filePath = "res/bankNote" + banknote.getBanknoteValue() + ".png";
+				ImageView img = new ImageView(filePath);
+				img.setFitHeight(60);
+				img.setFitWidth(140);
+				vBoxLocationList.get(location.getDiceValue() - 1).getChildren().add(img);
 			}
 		}
 	}
