@@ -6,6 +6,8 @@ import java.util.Collections;
 import java.util.Random;
 import java.util.ResourceBundle;
 import java.io.File;
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.net.URL;
 
 import base.Banknote;
@@ -17,8 +19,13 @@ import card.BonusCard;
 import card.CardDeck;
 import card.StealCard;
 import card.TaxCard;
+import controller.EndScene;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -26,9 +33,16 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.AudioClip;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaException;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
+import javafx.stage.Window;
 import player.Player;
 
 public class GameLogic implements Initializable {
@@ -57,7 +71,7 @@ public class GameLogic implements Initializable {
 			textP5L4, textP1L5, textP2L5, textP3L5, textP4L5, textP5L5, textP1L6, textP2L6, textP3L6, textP4L6,
 			textP5L6;
 	@FXML
-	private Button rollButton, nextRoundBtn, startBtn;
+	private Button rollButton, nextRoundBtn, startBtn, endBtn;
 
 	private ArrayList<VBox> vBoxLocationList;
 	private ArrayList<StackPane> playerScoreBoard, balanceScoreBoard, diceScoreBoard;
@@ -80,8 +94,6 @@ public class GameLogic implements Initializable {
 	public void setVariable(ArrayList<Player> playerList, int amount) {
 		this.playerList = playerList;
 		this.amountOfPlayer = amount;
-
-		// newGame();
 	}
 
 	@FXML
@@ -89,6 +101,14 @@ public class GameLogic implements Initializable {
 		startBtn.setVisible(false);
 		nextRoundBtn.setVisible(true);
 		rollButton.setDisable(false);
+		// Create a Media object from the audio file
+//		Media media = new Media(new File("voice/theme.mp3").toURI().toString());
+//		// Create a MediaPlayer object
+//		MediaPlayer mediaPlayer = new MediaPlayer(media);
+		// Set the audio to play indefinitely
+//		mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+//		// Start playing the audio
+//		mediaPlayer.play();
 		newGame();
 	}
 
@@ -212,6 +232,7 @@ public class GameLogic implements Initializable {
 			rollButton.setDisable(false);
 			return;
 		}
+		// playAudio();
 		Thread thread = new Thread() {
 			public void run() {
 				try {
@@ -308,10 +329,11 @@ public class GameLogic implements Initializable {
 	public void checkGameEnd() {
 		updateBalanceStatus();
 		updateScoreBoard();
-		if (roundCount <= 4) {
+		if (roundCount <= 1) {
 			nextRoundBtn.setDisable(false);
 		} else {
-			endgame();
+			nextRoundBtn.setVisible(false);
+			endBtn.setVisible(true);
 		}
 	}
 
@@ -581,6 +603,22 @@ public class GameLogic implements Initializable {
 		return richestPlayer;
 	}
 
+	public ArrayList<Player> findRichestPlayer() {
+		ArrayList<Player> richestPlayerList = new ArrayList<>();
+		int max = -1;
+		for (Player p : playerList) {
+			if (p.getBalance() > max) {
+				max = p.getBalance();
+				richestPlayerList.clear();
+				richestPlayerList.add(p);
+			} else if (p.getBalance() == max) {
+				richestPlayerList.add(p);
+			}
+
+		}
+		return richestPlayerList;
+	}
+
 	public void editSelectDice(int dicePoint, Player player) {
 		selected = true;
 		curretntDiceSelect = dicePoint;
@@ -593,10 +631,22 @@ public class GameLogic implements Initializable {
 		}
 	}
 
-	public void endgame() {
-		updateGameStatus("GAME END!!", Color.MEDIUMPURPLE);
-		// ->เขียนยังไงดี
-	}
+//	public void playAudio() {
+//		try {
+//			URL url = getClass().getResource("res/Rolldice_cut.mp3");
+//			if (url == null) {
+//				throw new RuntimeException("Cannot find resource: res/Rolldice_cut.mp3");
+//			}
+//			Media media = new Media(url.toURI().toString());
+//			MediaPlayer mediaPlayer = new MediaPlayer(media);
+//			mediaPlayer.play();
+//		} catch (URISyntaxException e) {
+//			throw new RuntimeException("Invalid URL for resource: res/Rolldice_cut.mp3", e);
+//		} catch (MediaException e) {
+//			throw new RuntimeException("Error playing media: res/Rolldice_cut.mp3", e);
+//		}
+//
+//	}
 
 	public boolean allOutOfDice() {
 		for (Player p : playerList) {
@@ -604,6 +654,25 @@ public class GameLogic implements Initializable {
 				return false;
 		}
 		return true;
+	}
+
+	@FXML
+	public void endGame(MouseEvent event) {
+		updateGameStatus("GAME END!!", Color.MEDIUMPURPLE);
+		try {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/EndScene.fxml"));
+			Parent root = loader.load();
+			EndScene controller = loader.getController();
+			controller.setEnd(findRichestPlayer());
+			Scene scene = new Scene(root);
+			Stage stage = new Stage();
+			stage.setScene(scene);
+			stage.show();
+			Window window = ((Node) (event.getSource())).getScene().getWindow();
+			window.hide();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public ArrayList<String> getLocationNameList() {
@@ -643,7 +712,6 @@ public class GameLogic implements Initializable {
 		// add all diceLocationImagelist in Sumlist
 		diceInLocationImgList = new ArrayList<>(Arrays.asList(diceLocation1ImgList, diceLocation2ImgList,
 				diceLocation3ImgList, diceLocation4ImgList, diceLocation5ImgList, diceLocation6ImgList));
-
 		textOfAmountInLocation1List = new ArrayList<>(Arrays.asList(textP1L1, textP2L1, textP3L1, textP4L1, textP5L1));
 		textOfAmountInLocation2List = new ArrayList<>(Arrays.asList(textP1L2, textP2L2, textP3L2, textP4L2, textP5L2));
 		textOfAmountInLocation3List = new ArrayList<>(Arrays.asList(textP1L3, textP2L3, textP3L3, textP4L3, textP5L3));
@@ -659,6 +727,7 @@ public class GameLogic implements Initializable {
 				Arrays.asList(diceImg0, diceImg1, diceImg2, diceImg3, diceImg4, diceImg5, diceImg6, diceImg7));
 		locationImgList = new ArrayList<ImageView>(
 				Arrays.asList(locationImg1, locationImg2, locationImg3, locationImg4, locationImg5, locationImg6));
+		endBtn.setVisible(false);
 	}
 
 }

@@ -872,5 +872,10 @@
             <Font name="Bell MT Bold" size="22.0" />
          </font>
       </Button>
+      <Button fx:id="endBtn" layoutX="1067.0" layoutY="714.0" mnemonicParsing="false" onMouseClicked="#endGame" style="-fx-background-color: black;" text="END" textFill="WHITE" visible="false">
+         <font>
+            <Font name="Bell MT Bold" size="21.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

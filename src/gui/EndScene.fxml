@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-image: url('file:res/main_bg.png');" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-image: url('file:res/endScene.png');" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.EndScene">
    <top>
-      <Text fill="#e90000" stroke="#fffdfd" strokeType="OUTSIDE" strokeWidth="5.0" text="Casino Royal Dice" BorderPane.alignment="CENTER">
+      <Text fill="#e90000" stroke="#fffdfd" strokeType="OUTSIDE" strokeWidth="5.0" text="Casino Royal Dice" BorderPane.alignment="BOTTOM_CENTER">
          <font>
             <Font name="Perpetua Titling MT Bold" size="42.0" />
          </font>
@@ -16,4 +19,46 @@
          </BorderPane.margin>
       </Text>
    </top>
+   <center>
+      <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="374.0" prefWidth="615.0" spacing="10.0" BorderPane.alignment="CENTER">
+         <children>
+            <Text fill="WHITE" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="2.0" text="Congratulations!!">
+               <font>
+                  <Font name="Bell MT Bold" size="50.0" />
+               </font>
+            </Text>
+            <Text fx:id="nameText" fill="#174a82" stroke="WHITE" strokeType="OUTSIDE" strokeWidth="4.0" text="Poommmmmmmmmmmm" textAlignment="CENTER">
+               <font>
+                  <Font name="Bell MT Bold" size="50.0" />
+               </font>
+            </Text>
+            <Text fill="#006b12" stroke="WHITE" strokeType="OUTSIDE" strokeWidth="4.0" text="is the winer">
+               <font>
+                  <Font name="Bell MT Bold" size="50.0" />
+               </font>
+            </Text>
+            <Text fx:id="balanceText" fill="#ff7600" stroke="WHITE" strokeType="OUTSIDE" strokeWidth="4.0" text="balance is 1200000 $">
+               <font>
+                  <Font name="Bell MT Bold" size="36.0" />
+               </font>
+            </Text>
+         </children>
+      </VBox>
+   </center>
+   <bottom>
+      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="165.0" prefWidth="800.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="homeBtn" layoutX="661.0" layoutY="39.0" mnemonicParsing="false" onMouseClicked="#beginNewGame" style="-fx-background-color: white;" text="Home" textFill="#150a7b">
+               <font>
+                  <Font name="Bell MT Bold" size="23.0" />
+               </font>
+            </Button>
+            <Button fx:id="exitBtn" layoutX="677.0" layoutY="98.0" mnemonicParsing="false" onMouseClicked="#exitGame" prefHeight="33.0" prefWidth="74.0" style="-fx-background-color: #FF2511;" text="Exit" textFill="WHITE">
+               <font>
+                  <Font name="Bell MT Bold" size="23.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+   </bottom>
 </BorderPane>
