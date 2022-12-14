@@ -1,0 +1,267 @@
+[33mcommit 0cb5ddbacb531959b34203e96ba7b98acf2ed38e[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: POOMMMMMM <poom99.2002@gmail.com>
+Date:   Wed Dec 14 16:45:50 2022 +0700
+
+    add dice images in score board
+
+[33mcommit 5ba30ddb2502ef6eabb9ac841e74c42a54ecca43[m
+Author: bananagrill <111755333+bananagrill@users.noreply.github.com>
+Date:   Wed Dec 14 15:41:01 2022 +0700
+
+    Delete ~WRL3066.tmp
+
+[33mcommit 69fc7d6c05385044cbce294596070bc2a4c3ae89[m
+Author: bananagrill <111755333+bananagrill@users.noreply.github.com>
+Date:   Wed Dec 14 15:40:50 2022 +0700
+
+    Delete ~$Report.docx
+
+[33mcommit 9a7f47942fd3f107b5d81a79504eb6a48e7e145f[m
+Author: unknown <peeraphat4106@gmail.com>
+Date:   Wed Dec 14 15:40:10 2022 +0700
+
+    start game button
+
+[33mcommit 9b8a2337844b49f1da766a6a4dc19f4ddf8e94b0[m
+Author: bananagrill <111755333+bananagrill@users.noreply.github.com>
+Date:   Wed Dec 14 03:22:26 2022 +0700
+
+    Delete ~WRL3722.tmp
+
+[33mcommit bfc2fc3e0ae2f94f6f4d5a335cbb44e6cc4c4e30[m
+Author: bananagrill <111755333+bananagrill@users.noreply.github.com>
+Date:   Wed Dec 14 03:22:15 2022 +0700
+
+    Delete ~WRL2515.tmp
+
+[33mcommit 7f065dd649cc139d60b7d8d5c88587bb3857df94[m
+Author: bananagrill <111755333+bananagrill@users.noreply.github.com>
+Date:   Wed Dec 14 03:22:03 2022 +0700
+
+    Delete ~$Report.docx
+
+[33mcommit cc1782ebbd1064320ceea262178382cbd1645f5e[m
+Author: unknown <peeraphat4106@gmail.com>
+Date:   Wed Dec 14 03:03:49 2022 +0700
+
+    selectplayer edit
+
+[33mcommit 8fdd8200f5afa881f4af65227f8958c39089b042[m
+Author: POOMMMMMM <poom99.2002@gmail.com>
+Date:   Wed Dec 14 02:59:28 2022 +0700
+
+    almost complete GameLogic (check coding style and add music)
+
+[33mcommit a62e876c5fb745637858b2238a5546edb722acd0[m
+Author: POOMMMMMM <poom99.2002@gmail.com>
+Date:   Wed Dec 14 00:26:07 2022 +0700
+
+    Edit file after GIT explorer
+
+[33mcommit 2f13a5599b874abe5c9247ca603916c169d325d4[m
+Merge: d66315e 0ab1558
+Author: POOMMMMMM <poom99.2002@gmail.com>
+Date:   Tue Dec 13 23:59:58 2022 +0700
+
+    Merge branch 'master' of https://github.com/PoomThammasorn/Progmeth_Project
+
+[33mcommit d66315e782876b2598542a6f0e70d09f45ea8746[m
+Author: POOMMMMMM <poom99.2002@gmail.com>
+Date:   Tue Dec 13 23:58:54 2022 +0700
+
+    edit card logic
+
+[33mcommit 0ab15580b64d66c8553cc4b0a281e662ec46e08e[m
+Author: unknown <peeraphat4106@gmail.com>
+Date:   Tue Dec 13 23:57:04 2022 +0700
+
+    edit location again and again
+
+[33mcommit e2e294f231f5fa02ad44daa0f56b1da75e89bd63[m
+Author: unknown <peeraphat4106@gmail.com>
+Date:   Tue Dec 13 22:20:46 2022 +0700
+
+    mainpane
+
+[33mcommit e7d6ddf67a088556a14707ef9f386febf52e95b2[m
+Merge: e097cf0 c16fef7
+Author: unknown <peeraphat4106@gmail.com>
+Date:   Tue Dec 13 18:54:50 2022 +0700
+
+    edit location
+
+[33mcommit e097cf0030becc86b8f66feb1e7e1bc0eed5a7ee[m
+Author: unknown <peeraphat4106@gmail.com>
+Date:   Tue Dec 13 18:53:06 2022 +0700
+
+    edit location again
+
+[33mcommit c16fef7a8b9b35696063374f90ceb06de1f47cba[m
+Author: POOMMMMMM <poom99.2002@gmail.com>
+Date:   Tue Dec 13 18:51:12 2022 +0700
+
+    Try to add boolean wait in GameLogic.java
+
+[33mcommit a27cd759e0e3e8593fe6173f1355b3166df29344[m
+Author: POOMMMMMM <poom99.2002@gmail.com>
+Date:   Tue Dec 13 18:13:20 2022 +0700
+
+    delete system.out.println in some Lines
+
+[33mcommit 3d8a9ca95564947c374843506c1c2e120747ca06[m
+Author: unknown <peeraphat4106@gmail.com>
+Date:   Tue Dec 13 16:53:45 2022 +0700
+
+    edit Location
+
+[33mcommit e7da86b78cc5d967c83b57cd320d75b027822e9c[m
+Author: POOMMMMMM <poom99.2002@gmail.com>
+Date:   Tue Dec 13 16:40:44 2022 +0700
+
+    add method initialLocationList in GameLogic.java
+
+[33mcommit 3aa503c6e284c11637c1f83f5ba09e678aa845b6[m
+Author: unknown <peeraphat4106@gmail.com>
+Date:   Tue Dec 13 12:08:11 2022 +0700
+
+    voice
+
+[33mcommit 7a673c87c0a195a1b964f2d344971d409756e4d6[m
+Author: POOMMMMMM <poom99.2002@gmail.com>
+Date:   Tue Dec 13 07:55:30 2022 +0700
+
+    เหลือแจกเงินให้คน เปิดการ์ด หน้าเริ่มเกม หน้าตั้งชื่อ player
+
+[33mcommit e8d8146fa00f75492c6c0d9af0156b108c4a32f2[m
+Author: POOMMMMMM <poom99.2002@gmail.com>
+Date:   Mon Dec 12 19:31:30 2022 +0700
+
+    add method selectDice() and dropDiceInLocation()[no complete] in GameLogic.java
+
+[33mcommit 8dd370d97eaaed82d4d7dca0c56a496c6f8971d7[m
+Merge: 2fe0344 e728bb6
+Author: POOMMMMMM <poom99.2002@gmail.com>
+Date:   Mon Dec 12 16:22:12 2022 +0700
+
+    Merge branch 'master' of https://github.com/PoomThammasorn/Progmeth_Project
+
+[33mcommit 2fe0344a7b18428453a31cd5736243e0d687d1c3[m
+Author: POOMMMMMM <poom99.2002@gmail.com>
+Date:   Mon Dec 12 16:21:55 2022 +0700
+
+    src/base/Location.java
+
+[33mcommit e728bb6b848507a522ca869078058140dda81bea[m
+Author: unknown <peeraphat4106@gmail.com>
+Date:   Mon Dec 12 16:16:56 2022 +0700
+
+    edit Location
+
+[33mcommit 927d16d5d97273e52ccf3580f54e04e53948f382[m
+Author: unknown <peeraphat4106@gmail.com>
+Date:   Mon Dec 12 15:12:22 2022 +0700
+
+    edit Location
+
+[33mcommit b3907fddd81f85564bc008215cf08392e028d14d[m
+Author: POOMMMMMM <poom99.2002@gmail.com>
+Date:   Mon Dec 12 05:09:19 2022 +0700
+
+    Test NewGame Method and found Problem about LocationList.add(new Location)
+
+[33mcommit 2ed8a0ffb2e17fd43e948916aa1c7023a34292d2[m
+Merge: 8aaf2e5 20da790
+Author: POOMMMMMM <poom99.2002@gmail.com>
+Date:   Mon Dec 12 03:12:08 2022 +0700
+
+    Merge branch 'master' of https://github.com/PoomThammasorn/Progmeth_Project
+
+[33mcommit 8aaf2e57a9154fdadf82c6bb22eb2f560e5a5d57[m
+Author: POOMMMMMM <poom99.2002@gmail.com>
+Date:   Mon Dec 12 03:11:09 2022 +0700
+
+    Edit method rollDice and add nullDice.png
+
+[33mcommit 20da790aa61ae4a277d738b5c176d05878a30a7b[m
+Author: unknown <peeraphat4106@gmail.com>
+Date:   Mon Dec 12 02:58:41 2022 +0700
+
+    update report and edit gamelogic
+
+[33mcommit bbf92659e7206187f0facbb4e103bb0a3df7d6e3[m
+Author: POOMMMMMM <poom99.2002@gmail.com>
+Date:   Mon Dec 12 00:39:29 2022 +0700
+
+    edit dice1blue.png
+
+[33mcommit e32d52ef3d404e37d6b5b368e8cf3f4ae8ae193b[m
+Merge: 0ec5c8d 5468c37
+Author: POOMMMMMM <poom99.2002@gmail.com>
+Date:   Mon Dec 12 00:35:54 2022 +0700
+
+    Merge branch 'master' of https://github.com/PoomThammasorn/Progmeth_Project
+
+[33mcommit 0ec5c8d622a19634baa22b4a813df2cf8737178b[m
+Author: POOMMMMMM <poom99.2002@gmail.com>
+Date:   Mon Dec 12 00:34:59 2022 +0700
+
+    add GUI and resources
+
+[33mcommit 5468c37d64f4ff812b31259bb51c95e6fe029d67[m
+Author: unknown <peeraphat4106@gmail.com>
+Date:   Sun Dec 11 17:06:44 2022 +0700
+
+    report
+
+[33mcommit fa95d40e6b99a20bb1ca971816ad53a1f8167ffc[m
+Author: POOMMMMMM <poom99.2002@gmail.com>
+Date:   Sun Dec 11 02:11:32 2022 +0700
+
+    Edit something in the TaxCard
+
+[33mcommit 0b304dc8e7e7be33494e3b27b1f377a731d3e1f9[m
+Author: unknown <peeraphat4106@gmail.com>
+Date:   Sun Dec 11 00:05:25 2022 +0700
+
+    updata gamelogic and player
+
+[33mcommit 6a65766a84791ac48d53e196e26aa13aa1fe3422[m
+Author: unknown <peeraphat4106@gmail.com>
+Date:   Sat Dec 10 16:16:23 2022 +0700
+
+    gamelogic and edit location
+
+[33mcommit 469e5988ee5456164db0716e75d6966eaec2d01e[m
+Author: POOMMMMMM <poom99.2002@gmail.com>
+Date:   Sat Dec 10 12:03:14 2022 +0700
+
+    Make Card abstract and add abstract method description() to BonusCard, StealCard, TaxCard.
+
+[33mcommit a2dbabe7afa0b01fd0a234138ed101daf301db3c[m
+Author: POOMMMMMM <poom99.2002@gmail.com>
+Date:   Sat Dec 10 10:48:41 2022 +0700
+
+    initial GameLogic
+
+[33mcommit 847014032c52eb130fea75c22dd34910583287a3[m
+Author: POOMMMMMM <poom99.2002@gmail.com>
+Date:   Sat Dec 10 01:19:39 2022 +0700
+
+    Ctrl + F
+
+[33mcommit 68d53fb38e59b5a8bb4736630bd1a85679b6820f[m
+Author: POOMMMMMM <poom99.2002@gmail.com>
+Date:   Sat Dec 10 01:15:02 2022 +0700
+
+    Edit BonusCard and StealCard
+
+[33mcommit e2cd5bae20656d805541f7cf789b807dbbd0a0b3[m
+Merge: 67e552a ebe5337
+Author: unknown <peeraphat4106@gmail.com>
+Date:   Sat Dec 10 00:57:14 2022 +0700
+
+    classify card
+
+[33mcommit 67e552a7673a2fd1215710d9777c8cd9b3c0a097[m
+Author: unknown <peeraphat4106@gmail.com>
+Date:   Sat Dec

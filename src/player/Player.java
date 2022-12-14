@@ -81,15 +81,15 @@ public class Player {
 
 	public int playerNumber() {
 		if (playerColour == "white") {
-			return 5;
+			return 1;
 		} else if (playerColour == "blue") {
-			return 4;
+			return 2;
 		} else if (playerColour == "red") {
 			return 3;
 		} else if (playerColour == "green") {
-			return 2;
+			return 4;
 		} else {
-			return 1;
+			return 5;
 		}
 	}
 

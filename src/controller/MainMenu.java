@@ -1,4 +1,4 @@
-package gui;
+package controller;
 
 import java.io.IOException;
 
@@ -27,12 +27,7 @@ public class MainMenu {
 	public void beginNewGame(ActionEvent event) throws IOException {
 
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("SelectPlayerScene.fxml"));	
-		root = loader.load();	
-		
-		//Scene2Controller scene2Controller = loader.getController();
-		//scene2Controller.displayName(username);
-		
-		//root = FXMLLoader.load(getClass().getResource("Scene2.fxml"));	
+		root = loader.load();
 		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 		scene = new Scene(root);
 		stage.setScene(scene);

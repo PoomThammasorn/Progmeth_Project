@@ -65,7 +65,6 @@ public class GameLogic {
 	private ArrayList<ArrayList<ImageView>> diceInLocationImgList;
 	private ArrayList<Text> textOfAmountInLocation1List, textOfAmountInLocation2List, textOfAmountInLocation3List,
 			textOfAmountInLocation4List, textOfAmountInLocation5List, textOfAmountInLocation6List;
-	private static GameLogic instance = null;
 	private ArrayList<Location> locationList = new ArrayList<>();
 	private ArrayList<String> locationNameList;
 	private ArrayList<Player> playerList = new ArrayList<>();
@@ -76,7 +75,7 @@ public class GameLogic {
 	private CardDeck cardDeck;
 	private ArrayList<Integer> oldBalanceList = new ArrayList<>();
 
-	public GameLogic(ArrayList<String> playerNameList) {
+	public GameLogic() {
 		// TODO Auto-generated constructor stub
 		// add dice Image in diceImgList
 		diceImgList = new ArrayList<ImageView>(
