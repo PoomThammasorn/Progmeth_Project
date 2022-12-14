@@ -26,7 +26,8 @@ public class Location {
 		while (fundValue(fund) < 50000) {
 			this.updateFund();
 		}
-
+		//this.getFund().add(new Banknote(50000));
+		//this.getFund().add(new Banknote(30000));
 	}
 
 	public int fundValue(ArrayList<Banknote> fund) {
@@ -62,6 +63,7 @@ public class Location {
 		for (int i = 0; i < this.getDiceInLocation().size(); i++) {
 			if (this.getDiceInLocation().get(i) == amount && i != index) {
 				nothavesame = false;
+				this.getDiceInLocation().set(index,0);
 				this.getDiceInLocation().set(i, 0);
 			}
 		}
