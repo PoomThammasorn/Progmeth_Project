@@ -82,27 +82,27 @@
                <children>
                   <ImageView fx:id="diceP2L1Img" fitHeight="45.0" fitWidth="45.0" GridPane.rowIndex="1">
                      <image>
-                        <Image url="@../../res/dice1Seal.png" />
+                        <Image url="@file:res/dice1Seal.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="diceP1L1Img" fitHeight="45.0" fitWidth="45.0">
                      <image>
-                        <Image url="@../../res/dice1Seal.png" />
+                        <Image url="@file:res/dice1Seal.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="diceP3L1Img" fitHeight="45.0" fitWidth="45.0" GridPane.rowIndex="2">
                      <image>
-                        <Image url="@../../res/dice1Seal.png" />
+                        <Image url="@file:res/dice1Seal.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="diceP4L1Img" fitHeight="45.0" fitWidth="45.0" GridPane.rowIndex="3">
                      <image>
-                        <Image url="@../../res/dice1Seal.png" />
+                        <Image url="@file:res/dice1Seal.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="diceP5L1Img" fitHeight="45.0" fitWidth="45.0" GridPane.rowIndex="4">
                      <image>
-                        <Image url="@../../res/dice1Seal.png" />
+                        <Image url="@file:res/dice1Seal.png" />
                      </image>
                   </ImageView>
                   <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1">
@@ -166,27 +166,27 @@
                <children>
                   <ImageView fx:id="diceP1L2Img" fitHeight="45.0" fitWidth="45.0">
                      <image>
-                        <Image url="@../../res/dice2Seal.png" />
+                        <Image url="@file:res/dice2Seal.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="diceP2L2Img" fitHeight="45.0" fitWidth="45.0" layoutX="12.0" layoutY="12.0" GridPane.rowIndex="1">
                      <image>
-                        <Image url="@../../res/dice2Seal.png" />
+                        <Image url="@file:res/dice2Seal.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="diceP3L2Img" fitHeight="45.0" fitWidth="45.0" layoutX="12.0" layoutY="65.0" GridPane.rowIndex="2">
                      <image>
-                        <Image url="@../../res/dice2Seal.png" />
+                        <Image url="@file:res/dice2Seal.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="diceP4L2Img" fitHeight="45.0" fitWidth="45.0" layoutX="12.0" layoutY="118.0" GridPane.rowIndex="3">
                      <image>
-                        <Image url="@../../res/dice2Seal.png" />
+                        <Image url="@file:res/dice2Seal.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="diceP5L2Img" fitHeight="45.0" fitWidth="45.0" layoutX="12.0" layoutY="172.0" GridPane.rowIndex="4">
                      <image>
-                        <Image url="@../../res/dice2Seal.png" />
+                        <Image url="@file:res/dice2Seal.png" />
                      </image>
                   </ImageView>
                   <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1">
@@ -246,27 +246,27 @@
                <children>
                   <ImageView fx:id="diceP1L3Img" fitHeight="45.0" fitWidth="45.0">
                      <image>
-                        <Image url="@../../res/dice3Seal.png" />
+                        <Image url="@file:res/dice3Seal.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="diceP2L3Img" fitHeight="45.0" fitWidth="45.0" GridPane.rowIndex="1">
                      <image>
-                        <Image url="@../../res/dice3Seal.png" />
+                        <Image url="@file:res/dice3Seal.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="diceP3L3Img" fitHeight="45.0" fitWidth="45.0" GridPane.rowIndex="2">
                      <image>
-                        <Image url="@../../res/dice3Seal.png" />
+                        <Image url="@file:res/dice3Seal.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="diceP4L3Img" fitHeight="45.0" fitWidth="45.0" GridPane.rowIndex="3">
                      <image>
-                        <Image url="@../../res/dice3Seal.png" />
+                        <Image url="@file:res/dice3Seal.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="diceP5L3Img" fitHeight="45.0" fitWidth="45.0" GridPane.rowIndex="4">
                      <image>
-                        <Image url="@../../res/dice3Seal.png" />
+                        <Image url="@file:res/dice3Seal.png" />
                      </image>
                   </ImageView>
                   <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1">
@@ -329,27 +329,27 @@
                 <children>
                   <ImageView fx:id="diceP1L4Img" fitHeight="45.0" fitWidth="45.0">
                      <image>
-                        <Image url="@../../res/dice4Seal.png" />
+                        <Image url="@file:res/dice4Seal.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="diceP2L4Img" fitHeight="45.0" fitWidth="45.0" GridPane.rowIndex="1">
                      <image>
-                        <Image url="@../../res/dice4Seal.png" />
+                        <Image url="@file:res/dice4Seal.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="diceP3L4Img" fitHeight="45.0" fitWidth="45.0" GridPane.rowIndex="2">
                      <image>
-                        <Image url="@../../res/dice4Seal.png" />
+                        <Image url="@file:res/dice4Seal.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="diceP4L4Img" fitHeight="45.0" fitWidth="45.0" GridPane.rowIndex="3">
                      <image>
-                        <Image url="@../../res/dice4Seal.png" />
+                        <Image url="@file:res/dice4Seal.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="diceP5L4Img" fitHeight="45.0" fitWidth="45.0" GridPane.rowIndex="4">
                      <image>
-                        <Image url="@../../res/dice4Seal.png" />
+                        <Image url="@file:res/dice4Seal.png" />
                      </image>
                   </ImageView>
                   <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1">
@@ -412,27 +412,27 @@
                              <children>
                   <ImageView fx:id="diceP1L5Img" fitHeight="45.0" fitWidth="45.0">
                      <image>
-                        <Image url="@../../res/dice5Seal.png" />
+                        <Image url="@file:res/dice5Seal.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="diceP2L5Img" fitHeight="45.0" fitWidth="45.0" GridPane.rowIndex="1">
                      <image>
-                        <Image url="@../../res/dice5Seal.png" />
+                        <Image url="@file:res/dice5Seal.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="diceP3L5Img" fitHeight="45.0" fitWidth="45.0" GridPane.rowIndex="2">
                      <image>
-                        <Image url="@../../res/dice5Seal.png" />
+                        <Image url="@file:res/dice5Seal.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="diceP4L5Img" fitHeight="45.0" fitWidth="45.0" GridPane.rowIndex="3">
                      <image>
-                        <Image url="@../../res/dice5Seal.png" />
+                        <Image url="@file:res/dice5Seal.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="diceP5L5Img" fitHeight="45.0" fitWidth="45.0" GridPane.rowIndex="4">
                      <image>
-                        <Image url="@../../res/dice5Seal.png" />
+                        <Image url="@file:res/dice5Seal.png" />
                      </image>
                   </ImageView>
                   <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1">
@@ -495,27 +495,27 @@
                              <children>
                   <ImageView fx:id="diceP1L6Img" fitHeight="45.0" fitWidth="45.0">
                      <image>
-                        <Image url="@../../res/dice6Seal.png" />
+                        <Image url="@file:res/dice6Seal.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="diceP2L6Img" fitHeight="45.0" fitWidth="45.0" GridPane.rowIndex="1">
                      <image>
-                        <Image url="@../../res/dice6Seal.png" />
+                        <Image url="@file:res/dice6Seal.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="diceP3L6Img" fitHeight="45.0" fitWidth="45.0" GridPane.rowIndex="2">
                      <image>
-                        <Image url="@../../res/dice6Seal.png" />
+                        <Image url="@file:res/dice6Seal.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="diceP4L6Img" fitHeight="45.0" fitWidth="45.0" GridPane.rowIndex="3">
                      <image>
-                        <Image url="@../../res/dice6Seal.png" />
+                        <Image url="@file:res/dice6Seal.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="diceP5L6Img" fitHeight="45.0" fitWidth="45.0" GridPane.rowIndex="4">
                      <image>
-                        <Image url="@../../res/dice6Seal.png" />
+                        <Image url="@file:res/dice6Seal.png" />
                      </image>
                   </ImageView>
                   <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1">
@@ -567,7 +567,7 @@
                <children>
                   <ImageView fx:id="locationImg1" fitHeight="90.0" fitWidth="143.0" onMouseClicked="#selectLocation">
                      <image>
-                        <Image url="@../../res/location1.png" />
+                        <Image url="@file:res/location1.png" />
                      </image>
                      <cursor>
                         <Cursor fx:constant="HAND" />
@@ -579,7 +579,7 @@
                <children>
                   <ImageView fx:id="locationImg2" fitHeight="90.0" fitWidth="143.0" onMouseClicked="#selectLocation">
                      <image>
-                        <Image url="@../../res/location2.png" />
+                        <Image url="@file:res/location2.png" />
                      </image>
                      <cursor>
                         <Cursor fx:constant="HAND" />
@@ -591,7 +591,7 @@
                <children>
                   <ImageView fx:id="locationImg3" fitHeight="90.0" fitWidth="143.0" onMouseClicked="#selectLocation">
                      <image>
-                        <Image url="@../../res/location3.png" />
+                        <Image url="@file:res/location3.png" />
                      </image>
                      <cursor>
                         <Cursor fx:constant="HAND" />
@@ -603,7 +603,7 @@
                <children>
                   <ImageView fx:id="locationImg4" fitHeight="90.0" fitWidth="143.0" onMouseClicked="#selectLocation">
                      <image>
-                        <Image url="@../../res/location4.png" />
+                        <Image url="@file:res/location4.png" />
                      </image>
                      <cursor>
                         <Cursor fx:constant="HAND" />
@@ -615,7 +615,7 @@
                <children>
                   <ImageView fx:id="locationImg5" fitHeight="90.0" fitWidth="143.0" onMouseClicked="#selectLocation">
                      <image>
-                        <Image url="@../../res/location5.png" />
+                        <Image url="@file:res/location5.png" />
                      </image>
                      <cursor>
                         <Cursor fx:constant="HAND" />
@@ -627,7 +627,7 @@
                <children>
                   <ImageView fx:id="locationImg6" fitHeight="90.0" fitWidth="143.0" onMouseClicked="#selectLocation">
                      <image>
-                        <Image url="@../../res/location6.png" />
+                        <Image url="@file:res/location6.png" />
                      </image>
                      <cursor>
                         <Cursor fx:constant="HAND" />
@@ -654,7 +654,7 @@
          <children>
             <ImageView fx:id="diceImg0" fitHeight="66.0" fitWidth="66.0" onMouseClicked="#selectDice">
                <image>
-                  <Image url="@../../res/nullDice.png" />
+                  <Image url="@file:res/nullDice.png" />
                </image>
                <cursor>
                   <Cursor fx:constant="HAND" />
@@ -662,7 +662,7 @@
             </ImageView>
             <ImageView fx:id="diceImg1" fitHeight="66.0" fitWidth="66.0" onMouseClicked="#selectDice" GridPane.columnIndex="1">
                <image>
-                  <Image url="@../../res/nullDice.png" />
+                  <Image url="@file:res/nullDice.png" />
                </image>
                <cursor>
                   <Cursor fx:constant="HAND" />
@@ -670,7 +670,7 @@
             </ImageView>
             <ImageView fx:id="diceImg2" fitHeight="66.0" fitWidth="66.0" onMouseClicked="#selectDice" GridPane.columnIndex="2">
                <image>
-                  <Image url="@../../res/nullDice.png" />
+                  <Image url="@file:res/nullDice.png" />
                </image>
                <cursor>
                   <Cursor fx:constant="HAND" />
@@ -678,7 +678,7 @@
             </ImageView>
             <ImageView fx:id="diceImg3" fitHeight="66.0" fitWidth="66.0" onMouseClicked="#selectDice" GridPane.columnIndex="3">
                <image>
-                  <Image url="@../../res/nullDice.png" />
+                  <Image url="@file:res/nullDice.png" />
                </image>
                <cursor>
                   <Cursor fx:constant="HAND" />
@@ -686,7 +686,7 @@
             </ImageView>
             <ImageView fx:id="diceImg4" fitHeight="66.0" fitWidth="66.0" onMouseClicked="#selectDice" GridPane.columnIndex="4">
                <image>
-                  <Image url="@../../res/nullDice.png" />
+                  <Image url="@file:res/nullDice.png" />
                </image>
                <cursor>
                   <Cursor fx:constant="HAND" />
@@ -694,7 +694,7 @@
             </ImageView>
             <ImageView fx:id="diceImg5" fitHeight="66.0" fitWidth="66.0" onMouseClicked="#selectDice" GridPane.columnIndex="5">
                <image>
-                  <Image url="@../../res/nullDice.png" />
+                  <Image url="@file:res/nullDice.png" />
                </image>
                <cursor>
                   <Cursor fx:constant="HAND" />
@@ -702,7 +702,7 @@
             </ImageView>
             <ImageView fx:id="diceImg6" fitHeight="66.0" fitWidth="66.0" onMouseClicked="#selectDice" GridPane.columnIndex="6">
                <image>
-                  <Image url="@../../res/nullDice.png" />
+                  <Image url="@file:res/nullDice.png" />
                </image>
                <cursor>
                   <Cursor fx:constant="HAND" />
@@ -710,7 +710,7 @@
             </ImageView>
             <ImageView fx:id="diceImg7" fitHeight="66.0" fitWidth="66.0" onMouseClicked="#selectDice" GridPane.columnIndex="7">
                <image>
-                  <Image url="@../../res/nullDice.png" />
+                  <Image url="@file:res/nullDice.png" />
                </image>
                <cursor>
                   <Cursor fx:constant="HAND" />
@@ -755,7 +755,7 @@
          <children>
             <ImageView fx:id="cardImg" fitHeight="161.0" fitWidth="133.0" onMouseClicked="#openCard">
                <image>
-                  <Image url="@../../res/cardBack.png" />
+                  <Image url="@file:res/cardBack.png" />
                </image>
                <cursor>
                   <Cursor fx:constant="HAND" />
@@ -881,7 +881,7 @@
                <children>
                   <ImageView fx:id="diceImgP1" fitHeight="28.0" fitWidth="28.0">
                      <image>
-                        <Image url="@../../res/dice1Visible.png" />
+                        <Image url="@file:res/dice1Visible.png" />
                      </image>
                   </ImageView>
                </children></StackPane>
@@ -889,7 +889,7 @@
                <children>
                   <ImageView fx:id="diceImgP2" fitHeight="28.0" fitWidth="28.0">
                      <image>
-                        <Image url="@../../res/dice2Visible.png" />
+                        <Image url="@file:res/dice2Visible.png" />
                      </image>
                   </ImageView>
                </children></StackPane>
@@ -897,7 +897,7 @@
                <children>
                   <ImageView fx:id="diceImgP3" fitHeight="28.0" fitWidth="28.0">
                      <image>
-                        <Image url="@../../res/dice3Visible.png" />
+                        <Image url="@file:res/dice3Visible.png" />
                      </image>
                   </ImageView>
                </children></StackPane>
@@ -905,7 +905,7 @@
                <children>
                   <ImageView fx:id="diceImgP4" fitHeight="28.0" fitWidth="28.0">
                      <image>
-                        <Image url="@../../res/dice4Visible.png" />
+                        <Image url="@file:res/dice4Visible.png" />
                      </image>
                   </ImageView>
                </children></StackPane>
@@ -913,7 +913,7 @@
                <children>
                   <ImageView fx:id="diceImgP5" fitHeight="28.0" fitWidth="28.0">
                      <image>
-                        <Image url="@../../res/dice5Visible.png" />
+                        <Image url="@file:res/dice5Visible.png" />
                      </image>
                   </ImageView>
                </children></StackPane>

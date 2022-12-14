@@ -15,7 +15,7 @@
          <children>
             <ImageView fx:id="newGameImg" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#beginNewGame" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../res/new-game-button.png" />
+                  <Image url="@file:res/new-game-button.png" />
                </image>
                <cursor>
                   <Cursor fx:constant="HAND" />
@@ -23,7 +23,7 @@
             </ImageView>
             <ImageView fx:id="exitImg" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#exitGame" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../res/exit_game.png" />
+                  <Image url="@file:res/exit_game.png" />
                </image>
                <cursor>
                   <Cursor fx:constant="HAND" />

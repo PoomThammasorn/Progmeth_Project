@@ -31,6 +31,7 @@ public class MainMenu {
 		root = loader.load();
 		stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		scene = new Scene(root);
+		stage.setTitle("Casino Royal Dice");
 		stage.setScene(scene);
 		stage.show();
 	}

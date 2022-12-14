@@ -18,6 +18,7 @@ public class Main extends Application {
 		try {
 			Parent root = FXMLLoader.load(getClass().getResource("/gui/MainPane.fxml"));
 			Scene scene = new Scene(root);
+			stage.setTitle("Casino Royal Dice");
 			stage.setScene(scene);
 			stage.show();
 		} catch (Exception e) {

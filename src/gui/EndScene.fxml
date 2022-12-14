@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-image: url('file:res/endScene.png');" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.EndScene">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-image: url('file:res/endScene.png');" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.EndScene">
    <top>
       <Text fill="#e90000" stroke="#fffdfd" strokeType="OUTSIDE" strokeWidth="5.0" text="Casino Royal Dice" BorderPane.alignment="BOTTOM_CENTER">
          <font>
@@ -57,9 +57,9 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button fx:id="exitBtn" layoutX="677.0" layoutY="98.0" mnemonicParsing="false" onMouseClicked="#exitGame" prefHeight="33.0" prefWidth="74.0" style="-fx-background-color: #FF2511;" text="Exit" textFill="WHITE">
+            <Button fx:id="exitBtn" layoutX="671.0" layoutY="99.0" mnemonicParsing="false" onMouseClicked="#exitGame" prefHeight="33.0" prefWidth="74.0" style="-fx-background-color: #FF2511;" text="Exit" textFill="WHITE">
                <font>
-                  <Font name="Bell MT Bold" size="23.0" />
+                  <Font name="Bell MT Bold" size="20.0" />
                </font>
                <cursor>
                   <Cursor fx:constant="HAND" />

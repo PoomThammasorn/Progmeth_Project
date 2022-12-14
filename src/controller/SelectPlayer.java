@@ -73,6 +73,7 @@ public class SelectPlayer implements Initializable {
 			controller.setVariable(playerList, amount);
 			Scene scene = new Scene(root);
 			Stage stage = new Stage();
+			stage.setTitle("Casino Royal Dice");
 			stage.setScene(scene);
 			stage.show();
 			((Node) (event.getSource())).getScene().getWindow().hide();

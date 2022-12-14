@@ -62,7 +62,7 @@
             <Insets bottom="55.0" left="75.0" />
          </BorderPane.margin>
          <image>
-            <Image url="@../../res/start_button.png" />
+            <Image url="@file:res/start_button.png" />
          </image>
          <cursor>
             <Cursor fx:constant="HAND" />
