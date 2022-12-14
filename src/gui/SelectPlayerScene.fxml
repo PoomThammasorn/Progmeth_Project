@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
@@ -11,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-image: url('file:res/main_bg.png');" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-image: url('file:res/main_bg.png');" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SelectPlayer">
    <top>
       <Text fill="#dd2727" stroke="WHITE" strokeType="OUTSIDE" strokeWidth="5.0" text="Casino Royal Dice" BorderPane.alignment="CENTER">
          <font>
@@ -30,14 +31,17 @@
                   <Font name="Perpetua Titling MT Bold" size="20.0" />
                </font>
             </Text>
-            <ChoiceBox prefHeight="25.0" prefWidth="109.0" />
+            <ChoiceBox fx:id="choiceBox" prefHeight="26.0" prefWidth="47.0" style="-fx-background-color: white;">
+               <cursor>
+                  <Cursor fx:constant="OPEN_HAND" />
+               </cursor></ChoiceBox>
             <VBox prefHeight="200.0" prefWidth="300.0" spacing="40.0">
                <children>
-                  <TextField prefHeight="30.0" prefWidth="300.0" promptText="Player1" />
-                  <TextField prefHeight="30.0" prefWidth="300.0" promptText="Player2" />
-                  <TextField prefHeight="30.0" prefWidth="300.0" promptText="Player3" />
-                  <TextField prefHeight="30.0" prefWidth="300.0" promptText="Player4" />
-                  <TextField prefHeight="30.0" prefWidth="300.0" promptText="Player5" />
+                  <TextField fx:id="player1TextField" prefHeight="30.0" prefWidth="300.0" promptText="Player1" />
+                  <TextField fx:id="player2TextField" prefHeight="30.0" prefWidth="300.0" promptText="Player2" />
+                  <TextField fx:id="player3TextField" prefHeight="30.0" prefWidth="300.0" promptText="Player3" />
+                  <TextField fx:id="player4TextField" prefHeight="30.0" prefWidth="300.0" promptText="Player4" />
+                  <TextField fx:id="player5TextField" prefHeight="30.0" prefWidth="300.0" promptText="Player5" />
                </children>
             </VBox>
          </children>
@@ -47,10 +51,13 @@
          <padding>
             <Insets left="100.0" top="100.0" />
          </padding>
+         <cursor>
+            <Cursor fx:constant="OPEN_HAND" />
+         </cursor>
       </HBox>
    </center>
    <bottom>
-      <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="TOP_LEFT">
+      <ImageView fx:id="startImg" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="TOP_LEFT">
          <BorderPane.margin>
             <Insets bottom="55.0" left="75.0" />
          </BorderPane.margin>
