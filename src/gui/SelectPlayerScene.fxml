@@ -37,11 +37,11 @@
                </cursor></ChoiceBox>
             <VBox prefHeight="200.0" prefWidth="300.0" spacing="40.0">
                <children>
-                  <TextField fx:id="player1TextField" prefHeight="30.0" prefWidth="300.0" promptText="Player1" />
-                  <TextField fx:id="player2TextField" prefHeight="30.0" prefWidth="300.0" promptText="Player2" />
-                  <TextField fx:id="player3TextField" prefHeight="30.0" prefWidth="300.0" promptText="Player3" />
-                  <TextField fx:id="player4TextField" prefHeight="30.0" prefWidth="300.0" promptText="Player4" />
-                  <TextField fx:id="player5TextField" prefHeight="30.0" prefWidth="300.0" promptText="Player5" />
+                  <TextField fx:id="player1TextField" prefHeight="30.0" prefWidth="300.0" promptText="Player1" text="Player1" />
+                  <TextField fx:id="player2TextField" prefHeight="30.0" prefWidth="300.0" promptText="Player2" text="Player2" />
+                  <TextField fx:id="player3TextField" prefHeight="30.0" prefWidth="300.0" promptText="Player3" text="Player3" />
+                  <TextField fx:id="player4TextField" prefHeight="30.0" prefWidth="300.0" promptText="Player4" text="Player4" />
+                  <TextField fx:id="player5TextField" prefHeight="30.0" prefWidth="300.0" promptText="Player5" text="Player5" />
                </children>
             </VBox>
          </children>
@@ -57,7 +57,7 @@
       </HBox>
    </center>
    <bottom>
-      <ImageView fx:id="startImg" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="TOP_LEFT">
+      <ImageView fx:id="startImg" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#nextToGameScene" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="TOP_LEFT">
          <BorderPane.margin>
             <Insets bottom="55.0" left="75.0" />
          </BorderPane.margin>

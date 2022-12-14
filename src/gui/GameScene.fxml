@@ -683,12 +683,11 @@
             <Font name="Berlin Sans FB Demi Bold" size="25.0" />
          </font>
       </Text>
-      <Button fx:id="rollButton" layoutX="775.0" layoutY="708.0" mnemonicParsing="false" onMouseClicked="#roll" prefHeight="36.0" prefWidth="79.0" style="-fx-background-color: #3f0556;" text="Roll" textAlignment="CENTER" textFill="WHITE">
+      <Button fx:id="rollButton" disable="true" layoutX="775.0" layoutY="708.0" mnemonicParsing="false" onMouseClicked="#roll" prefHeight="36.0" prefWidth="79.0" style="-fx-background-color: #3f0556;" text="Roll" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="Bell MT Bold" size="24.0" />
          </font>
       </Button>
-      <Button fx:id="newGameBtn" layoutX="872.0" layoutY="711.0" mnemonicParsing="false" onMouseClicked="#testGame" text="Test Game" />
       <ScrollPane layoutX="982.0" layoutY="537.0" prefHeight="158.0" prefWidth="246.0" style="-fx-background-color: Black; -fx-border-color: Green;">
          <content>
             <VBox fx:id="vBoxGameStatus" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="55.0" prefWidth="216.0">
@@ -809,7 +808,7 @@
             </GridPane>
          </children>
       </GridPane>
-      <Button fx:id="nextRoundBtn" layoutX="1043.0" layoutY="729.0" mnemonicParsing="false" onMouseClicked="#clickNextRound" prefHeight="30.0" prefWidth="123.0" style="-fx-background-color: green;" text="Next Round" textAlignment="CENTER" textFill="WHITE">
+      <Button fx:id="nextRoundBtn" disable="true" layoutX="1043.0" layoutY="729.0" mnemonicParsing="false" onMouseClicked="#clickNextRound" prefHeight="30.0" prefWidth="123.0" style="-fx-background-color: green;" text="Next Round" textAlignment="CENTER" textFill="WHITE" visible="false">
          <font>
             <Font name="Bell MT Bold" size="17.0" />
          </font>
@@ -868,5 +867,10 @@
                </children></StackPane>
          </children>
       </GridPane>
+      <Button fx:id="startBtn" layoutX="1057.0" layoutY="713.0" mnemonicParsing="false" onMouseClicked="#beginGame" prefHeight="42.0" prefWidth="96.0" style="-fx-background-color: #891414;" text="Start" textFill="WHITE">
+         <font>
+            <Font name="Bell MT Bold" size="22.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

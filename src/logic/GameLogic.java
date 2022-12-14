@@ -3,10 +3,10 @@ package logic;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.List;
 import java.util.Random;
-
+import java.util.ResourceBundle;
 import java.io.File;
+import java.net.URL;
 
 import base.Banknote;
 import base.Dice;
@@ -18,6 +18,7 @@ import card.CardDeck;
 import card.StealCard;
 import card.TaxCard;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -30,7 +31,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import player.Player;
 
-public class GameLogic {
+public class GameLogic implements Initializable {
 
 	@FXML
 	private StackPane playerBoardPane1, playerBoardPane2, playerBoardPane3, playerBoardPane4, playerBoardPane5,
@@ -56,7 +57,7 @@ public class GameLogic {
 			textP5L4, textP1L5, textP2L5, textP3L5, textP4L5, textP5L5, textP1L6, textP2L6, textP3L6, textP4L6,
 			textP5L6;
 	@FXML
-	private Button rollButton, nextRoundBtn;
+	private Button rollButton, nextRoundBtn, startBtn;
 
 	private ArrayList<VBox> vBoxLocationList;
 	private ArrayList<StackPane> playerScoreBoard, balanceScoreBoard, diceScoreBoard;
@@ -76,47 +77,32 @@ public class GameLogic {
 	private CardDeck cardDeck;
 	private ArrayList<Integer> oldBalanceList = new ArrayList<>();
 
-	public GameLogic() {
-		// TODO Auto-generated constructor stub
-		diceImgList = new ArrayList<ImageView>(
-				Arrays.asList(diceImg0, diceImg1, diceImg2, diceImg3, diceImg4, diceImg5, diceImg6, diceImg7));
-		// add dice Image in each location to each List
-		diceLocation1ImgList = new ArrayList<>(
-				Arrays.asList(diceP1L1Img, diceP2L1Img, diceP3L1Img, diceP4L1Img, diceP5L1Img));
-		diceLocation2ImgList = new ArrayList<>(
-				Arrays.asList(diceP1L2Img, diceP2L2Img, diceP3L2Img, diceP4L2Img, diceP5L2Img));
-		diceLocation3ImgList = new ArrayList<>(
-				Arrays.asList(diceP1L3Img, diceP2L3Img, diceP3L3Img, diceP4L3Img, diceP5L3Img));
-		diceLocation4ImgList = new ArrayList<>(
-				Arrays.asList(diceP1L4Img, diceP2L4Img, diceP3L4Img, diceP4L4Img, diceP5L4Img));
-		diceLocation5ImgList = new ArrayList<>(
-				Arrays.asList(diceP1L5Img, diceP2L5Img, diceP3L5Img, diceP4L5Img, diceP5L5Img));
-		diceLocation6ImgList = new ArrayList<>(
-				Arrays.asList(diceP1L6Img, diceP2L6Img, diceP3L6Img, diceP4L6Img, diceP5L6Img));
-		// add all diceLocationImagelist in Sumlist
-		diceInLocationImgList = new ArrayList<>(Arrays.asList(diceLocation1ImgList, diceLocation2ImgList,
-				diceLocation3ImgList, diceLocation4ImgList, diceLocation5ImgList, diceLocation6ImgList));
+	public void setVariable(ArrayList<Player> playerList, int amount) {
+		this.playerList = playerList;
+		this.amountOfPlayer = amount;
 
-		textOfAmountInLocation1List = new ArrayList<>(Arrays.asList(textP1L1, textP2L1, textP3L1, textP4L1, textP5L1));
-		textOfAmountInLocation2List = new ArrayList<>(Arrays.asList(textP1L2, textP2L2, textP3L2, textP4L2, textP5L2));
-		textOfAmountInLocation3List = new ArrayList<>(Arrays.asList(textP1L3, textP2L3, textP3L3, textP4L3, textP5L3));
-		textOfAmountInLocation4List = new ArrayList<>(Arrays.asList(textP1L4, textP2L4, textP3L4, textP4L4, textP5L4));
-		textOfAmountInLocation5List = new ArrayList<>(Arrays.asList(textP1L5, textP2L5, textP3L5, textP4L5, textP5L5));
-		textOfAmountInLocation6List = new ArrayList<>(Arrays.asList(textP1L6, textP2L6, textP3L6, textP4L6, textP5L6));
-		// add location name
-		diceImgScoreBoard = new ArrayList<>(Arrays.asList(diceImgP1, diceImgP2, diceImgP3, diceImgP4, diceImgP5));
-
-		locationNameList = new ArrayList<>(Arrays.asList("Gold Tower Casino", "Riverside Casino", "The Royal Casino",
-				"Lucky 7's Casino", "The Edge Casino", "Blackbird Casino"));
-	}
-
-	public void setVariable(String s) {
-
+		// newGame();
 	}
 
 	@FXML
-	public void testGame() {
-		newGame(3);
+	public void beginGame(MouseEvent event) {
+		startBtn.setVisible(false);
+		nextRoundBtn.setVisible(true);
+		rollButton.setDisable(false);
+		newGame();
+	}
+
+	// new game
+	public void newGame() {
+		updateGameStatus("Start New Game!!", Color.web("#FF8C00"));
+		this.setRoundCount(1);
+		for (int i = 0; i < amountOfPlayer; i++) {
+			oldBalanceList.add(0);
+		}
+		initialScoreBoard();
+		resetBoard(amountOfPlayer);
+		updateGameStatus("==== Round " + getRoundCount() + " Start!! ====", Color.BLACK);
+		this.playGame(playerList);
 	}
 
 	public void updateGameStatus(String string, Color color) {
@@ -151,94 +137,86 @@ public class GameLogic {
 	}
 
 	public void updateScoreBoard() {
-		Font font = new Font("Book Antiqua Bold", 22.0);
 		for (int i = 0; i < playerList.size(); i++) {
-			playerScoreBoard.get(i).getChildren().clear();
-			balanceScoreBoard.get(i).getChildren().clear();
-			diceScoreBoard.get(i).getChildren().clear();
+			Font font = new Font("Book Antiqua Bold", 22.0);
 
+			playerScoreBoard.get(i).getChildren().clear();
 			Text nameText = new Text(playerList.get(i).getName());
 			nameText.setFont(font);
-			playerScoreBoard.get(i).getChildren().add(nameText);
 
+			balanceScoreBoard.get(i).getChildren().clear();
 			Text balanceText = new Text(playerList.get(i).getBalance() + "");
 			balanceText.setFont(font);
-			balanceScoreBoard.get(i).getChildren().add(balanceText);
 
+			diceScoreBoard.get(i).getChildren().clear();
 			Text diceText = new Text(playerList.get(i).getDiceInPlayer().size() + "");
 			diceText.setFont(font);
+
+			playerScoreBoard.get(i).getChildren().add(nameText);
+			balanceScoreBoard.get(i).getChildren().add(balanceText);
 			diceScoreBoard.get(i).getChildren().add(diceText);
 		}
 	}
 
 	public void updateTurnSB() {
 		for (int i = 0; i < amountOfPlayer; i++) {
-			diceImgScoreBoard.get(i).setImage(new Image("res/dice" + (i + 1) + "Visible.png"));
+			File file1 = new File("res/dice" + (i + 1) + "Visible.png");
+			diceImgScoreBoard.get(i).setImage(new Image(file1.toURI().toString()));
 		}
-
 		int index = currentPlayer.playerNumber();
-		diceImgScoreBoard.get(index - 1)
-				.setImage(new Image("res/dice" + index + currentPlayer.getPlayerColour() + ".png"));
+		File file2 = new File("res/dice" + index + currentPlayer.getPlayerColour() + ".png");
+		diceImgScoreBoard.get(index - 1).setImage(new Image(file2.toURI().toString()));
 	}
 
 	public void updateBalanceStatus() {
-		// Iterate over the players
+		String pref = "+";
 		for (int i = 0; i < amountOfPlayer; i++) {
-			// Initialize variables
-			String pref = "+";
 			Color color = Color.web("#00A300"); // green;
 			int oldBalance = oldBalanceList.get(i);
-
-			// Check if the player's balance has decreased
 			if (oldBalance > playerList.get(i).getBalance()) {
 				color = Color.web("#D2042D"); // red
 				pref = "";
 			}
-
-			// Create the string to update the game status
-			String s = playerList.get(i).getName() + "'s balance: " + playerList.get(i).getBalance();
+			String s = playerList.get(i).getName() + "'s balace : " + playerList.get(i).getBalance();
 			s += " (" + pref + (playerList.get(i).getBalance() - oldBalance) + ")";
-
 			updateGameStatus(s, color);
 		}
 	}
 
 	public void updateDice(Player player) {
-		List<Dice> diceList = player.getDiceInPlayer();
-		for (int i = 0; i < 8; i++) {
-			if (i >= diceList.size()) {
+		for (int k = 0; k < player.getDiceInPlayer().size(); k++) {
+			int dicePoint = player.getDiceInPlayer().get(k).getPoint();
+			String diceColour = player.getDiceInPlayer().get(k).getColour();
+			File file = new File("res/dice" + dicePoint + diceColour + ".png");
+			diceImgList.get(k).setImage(new Image(file.toURI().toString()));
+		}
+		if (player.getDiceInPlayer().size() < 8) {
+			for (int k = player.getDiceInPlayer().size(); k < 8; k++) {
 				File file = new File("res/nullDice.png");
-				diceImgList.get(i).setImage(new Image(file.toURI().toString()));
-				continue;
+				diceImgList.get(k).setImage(new Image(file.toURI().toString()));
 			}
 
-			int dicePoint = diceList.get(i).getPoint();
-			String diceColour = diceList.get(i).getColour();
-			File file = new File("res/dice" + dicePoint + diceColour + ".png");
-			diceImgList.get(i).setImage(new Image(file.toURI().toString()));
 		}
 	}
 
 	@FXML
 	public void roll() {
+		rollButton.setDisable(true);
 		Player player = currentPlayer;
-		if (player.getDiceInPlayer().size() <= 0) {
-			updateGameStatus("You don't have dice!!", Color.RED);
-			return;
-		}
 		if (isRoll) {
 			updateGameStatus("You already rolled the dice!!", Color.RED);
+			rollButton.setDisable(false);
+			return;
+		} else if (player.getDiceInPlayer().size() <= 0) {
+			updateGameStatus("You don't have dice!!", Color.RED);
+			rollButton.setDisable(false);
 			return;
 		}
-
-		rollButton.setDisable(true);
-		isRoll = true;
-		waiting = true;
-
 		Thread thread = new Thread() {
 			public void run() {
 				try {
 					for (int i = 0; i < 30; i++) {
+						waiting = true;
 						player.rollDice();
 						if (i == 29) {
 							player.sortDiceInPlayer();
@@ -250,7 +228,9 @@ public class GameLogic {
 							diceImgList.get(k).setImage(new Image(file.toURI().toString()));
 						}
 						Thread.sleep(40);
+
 					}
+					isRoll = true;
 					waiting = false;
 					rollButton.setDisable(false);
 				} catch (InterruptedException e) {
@@ -259,32 +239,6 @@ public class GameLogic {
 			}
 		};
 		thread.start();
-	}
-
-	// new game
-	public void newGame(int amount) {
-		updateGameStatus("Start New Game!!", Color.web("#FF8C00"));
-		this.amountOfPlayer = amount;
-		this.setRoundCount(1);
-		for (int i = 0; i < amountOfPlayer; i++) {
-			oldBalanceList.add(0);
-		}
-		// ->ค้างสร้าง player
-		// ลองสร้างไว้ทดสอบเฉยๆ
-		playerList.add(new Player("Poom", "white"));
-		playerList.add(new Player("Tungmay", "blue"));
-		playerList.add(new Player("Fifa", "red"));
-		// playerList.add(new Player("Night", "green"));
-		// playerList.add(new Player("Toe", "yellow"));
-		vBoxLocationList = new ArrayList<>(Arrays.asList(vBoxL1, vBoxL2, vBoxL3, vBoxL4, vBoxL5, vBoxL6));
-		diceImgList = new ArrayList<ImageView>(
-				Arrays.asList(diceImg0, diceImg1, diceImg2, diceImg3, diceImg4, diceImg5, diceImg6, diceImg7));
-		locationImgList = new ArrayList<ImageView>(
-				Arrays.asList(locationImg1, locationImg2, locationImg3, locationImg4, locationImg5, locationImg6));
-		initialScoreBoard();
-		resetBoard(amountOfPlayer);
-		updateGameStatus("==== Round " + getRoundCount() + " Start!! ====", Color.BLACK);
-		this.playGame(playerList);
 	}
 
 	public void playGame(ArrayList<Player> playerList) {
@@ -319,23 +273,24 @@ public class GameLogic {
 	// อัพเดตเงินในแต่ละสถานที่+แจกเงิน
 	public void endRound() {
 		for (Location l : locationList) {
-			int maxElement = Collections.max(l.getDiceInLocation());
-			int maxElementIndex = l.getDiceInLocation().indexOf(maxElement);
-			Player winner = playerList.get(maxElementIndex);
-			if (maxElement == 0 || l.notHaveSameElement(maxElement, maxElementIndex)) {
-				continue;
-			}
 			if (l instanceof SpecialLocation) {
 				SpecialLocation sp = (SpecialLocation) l;
-				sp.sendReward(winner);
-				l.getDiceInLocation().set(maxElementIndex, 0);
-
-				if (playerWinSpecial == null) {
-					playerWinSpecial = winner;
+				int maxelement = Collections.max(sp.getDiceInLocation());
+				int maxelementindex = sp.getDiceInLocation().indexOf(maxelement);
+				if (maxelement != 0 && sp.notHaveSameElement(maxelement, maxelementindex)) {
+					sp.sendReward(playerList.get(maxelementindex));
+					l.getDiceInLocation().set(maxelementindex, 0);
+					if (playerWinSpecial == null) {
+						playerWinSpecial = playerList.get(maxelementindex);
+					}
 				}
 			} else {
-				l.sendReward(winner);
-				l.getDiceInLocation().set(maxElementIndex, 0);
+				int maxelement = Collections.max(l.getDiceInLocation());
+				int maxelementindex = l.getDiceInLocation().indexOf(maxelement);
+				if (maxelement != 0 && l.notHaveSameElement(maxelement, maxelementindex)) {
+					l.sendReward(playerList.get(maxelementindex));
+					l.getDiceInLocation().set(maxelementindex, 0);
+				}
 			}
 		}
 		updateScoreBoard();
@@ -372,8 +327,8 @@ public class GameLogic {
 	}
 
 	public void resetBoard(int amountOfPlayer) {
-		playerWinSpecial = null;
 		nextRoundBtn.setDisable(true);
+		playerWinSpecial = null;
 		setNewSpecialLocation();
 		updateScoreBoard();
 		isRoll = false;
@@ -395,7 +350,8 @@ public class GameLogic {
 			}
 			for (Banknote banknote : location.getFund()) {
 				String filePath = "res/bankNote" + banknote.getBanknoteValue() + ".png";
-				ImageView img = new ImageView(filePath);
+				File file = new File(filePath);
+				ImageView img = new ImageView(new Image(file.toURI().toString()));
 				img.setFitHeight(60);
 				img.setFitWidth(140);
 				vBoxLocationList.get(location.getDiceValue() - 1).getChildren().add(img);
@@ -666,11 +622,43 @@ public class GameLogic {
 		this.roundCount = roundCount;
 	}
 
-//	public static GameLogic getInstance() {
-//		if (instance == null) {
-//			instance = new GameLogic();
-//		}
-//		return instance;
-//	}
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		// TODO Auto-generated method stub
+		diceImgList = new ArrayList<ImageView>(
+				Arrays.asList(diceImg0, diceImg1, diceImg2, diceImg3, diceImg4, diceImg5, diceImg6, diceImg7));
+		// add dice Image in each location to each List
+		diceLocation1ImgList = new ArrayList<>(
+				Arrays.asList(diceP1L1Img, diceP2L1Img, diceP3L1Img, diceP4L1Img, diceP5L1Img));
+		diceLocation2ImgList = new ArrayList<>(
+				Arrays.asList(diceP1L2Img, diceP2L2Img, diceP3L2Img, diceP4L2Img, diceP5L2Img));
+		diceLocation3ImgList = new ArrayList<>(
+				Arrays.asList(diceP1L3Img, diceP2L3Img, diceP3L3Img, diceP4L3Img, diceP5L3Img));
+		diceLocation4ImgList = new ArrayList<>(
+				Arrays.asList(diceP1L4Img, diceP2L4Img, diceP3L4Img, diceP4L4Img, diceP5L4Img));
+		diceLocation5ImgList = new ArrayList<>(
+				Arrays.asList(diceP1L5Img, diceP2L5Img, diceP3L5Img, diceP4L5Img, diceP5L5Img));
+		diceLocation6ImgList = new ArrayList<>(
+				Arrays.asList(diceP1L6Img, diceP2L6Img, diceP3L6Img, diceP4L6Img, diceP5L6Img));
+		// add all diceLocationImagelist in Sumlist
+		diceInLocationImgList = new ArrayList<>(Arrays.asList(diceLocation1ImgList, diceLocation2ImgList,
+				diceLocation3ImgList, diceLocation4ImgList, diceLocation5ImgList, diceLocation6ImgList));
+
+		textOfAmountInLocation1List = new ArrayList<>(Arrays.asList(textP1L1, textP2L1, textP3L1, textP4L1, textP5L1));
+		textOfAmountInLocation2List = new ArrayList<>(Arrays.asList(textP1L2, textP2L2, textP3L2, textP4L2, textP5L2));
+		textOfAmountInLocation3List = new ArrayList<>(Arrays.asList(textP1L3, textP2L3, textP3L3, textP4L3, textP5L3));
+		textOfAmountInLocation4List = new ArrayList<>(Arrays.asList(textP1L4, textP2L4, textP3L4, textP4L4, textP5L4));
+		textOfAmountInLocation5List = new ArrayList<>(Arrays.asList(textP1L5, textP2L5, textP3L5, textP4L5, textP5L5));
+		textOfAmountInLocation6List = new ArrayList<>(Arrays.asList(textP1L6, textP2L6, textP3L6, textP4L6, textP5L6));
+		// add location name
+		diceImgScoreBoard = new ArrayList<>(Arrays.asList(diceImgP1, diceImgP2, diceImgP3, diceImgP4, diceImgP5));
+		locationNameList = new ArrayList<>(Arrays.asList("Gold Tower Casino", "Riverside Casino", "The Royal Casino",
+				"Lucky 7's Casino", "The Edge Casino", "Blackbird Casino"));
+		vBoxLocationList = new ArrayList<>(Arrays.asList(vBoxL1, vBoxL2, vBoxL3, vBoxL4, vBoxL5, vBoxL6));
+		diceImgList = new ArrayList<ImageView>(
+				Arrays.asList(diceImg0, diceImg1, diceImg2, diceImg3, diceImg4, diceImg5, diceImg6, diceImg7));
+		locationImgList = new ArrayList<ImageView>(
+				Arrays.asList(locationImg1, locationImg2, locationImg3, locationImg4, locationImg5, locationImg6));
+	}
 
 }
