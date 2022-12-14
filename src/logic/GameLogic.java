@@ -7,7 +7,6 @@ import java.util.Random;
 import java.util.ResourceBundle;
 import java.io.File;
 import java.io.IOException;
-import java.net.URISyntaxException;
 import java.net.URL;
 
 import base.Banknote;
@@ -90,6 +89,7 @@ public class GameLogic implements Initializable {
 	private int curretntDiceSelect, amountOfPlayer;
 	private CardDeck cardDeck;
 	private ArrayList<Integer> oldBalanceList = new ArrayList<>();
+	private MediaPlayer themeSongPlayer;
 
 	public void setVariable(ArrayList<Player> playerList, int amount) {
 		this.playerList = playerList;
@@ -101,18 +101,10 @@ public class GameLogic implements Initializable {
 		startBtn.setVisible(false);
 		nextRoundBtn.setVisible(true);
 		rollButton.setDisable(false);
-		// Create a Media object from the audio file
-//		Media media = new Media(new File("voice/theme.mp3").toURI().toString());
-//		// Create a MediaPlayer object
-//		MediaPlayer mediaPlayer = new MediaPlayer(media);
-		// Set the audio to play indefinitely
-//		mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
-//		// Start playing the audio
-//		mediaPlayer.play();
+		beginThemeSong();
 		newGame();
 	}
 
-	// new game
 	public void newGame() {
 		updateGameStatus("Start New Game!!", Color.web("#FF8C00"));
 		this.setRoundCount(1);
@@ -123,6 +115,94 @@ public class GameLogic implements Initializable {
 		resetBoard(amountOfPlayer);
 		updateGameStatus("==== Round " + getRoundCount() + " Start!! ====", Color.BLACK);
 		this.playGame(playerList);
+	}
+
+	public void playGame(ArrayList<Player> playerList) {
+		rollButton.setDisable(false);
+		indexPlayer = indexPlayer % playerList.size();
+		selected = false;
+		isRoll = false;
+		curretntDiceSelect = -1;
+		updateScoreBoard();
+
+		if (allOutOfDice()) {
+			updateGameStatus("==== End Round " + getRoundCount() + " ====", Color.BLACK);
+			setRoundCount(getRoundCount() + 1);
+			this.endRound();
+			return;
+		}
+
+		Player p = playerList.get(indexPlayer);
+		currentPlayer = p;
+		updateTurnSB();
+
+		if (p.getDiceInPlayer().size() == 0) {
+			indexPlayer += 1;
+			playGame(playerList);
+			return;
+		}
+
+		updateDice(p);
+		updateGameStatus(p.getName() + "'s turn!!", Color.web("#4D34A0"));
+	}
+
+	// อัพเดตเงินในแต่ละสถานที่+แจกเงิน
+	public void endRound() {
+		for (Location l : locationList) {
+			for (int i = 0; i < l.getDiceInLocation().size(); i++) {
+				if (l instanceof SpecialLocation) {
+					SpecialLocation sp = (SpecialLocation) l;
+					int maxelement = Collections.max(sp.getDiceInLocation());
+					int maxelementindex = sp.getDiceInLocation().indexOf(maxelement);
+					if (maxelement != 0 && sp.notHaveSameElement(maxelement, maxelementindex)) {
+						sp.sendReward(playerList.get(maxelementindex));
+						l.getDiceInLocation().set(maxelementindex, 0);
+						if (playerWinSpecial == null) {
+							playerWinSpecial = playerList.get(maxelementindex);
+						}
+					}
+				} else {
+					int maxelement = Collections.max(l.getDiceInLocation());
+					int maxelementindex = l.getDiceInLocation().indexOf(maxelement);
+					if (maxelement != 0 && l.notHaveSameElement(maxelement, maxelementindex)) {
+						l.sendReward(playerList.get(maxelementindex));
+						l.getDiceInLocation().set(maxelementindex, 0);
+					}
+				}
+			}
+		}
+		updateScoreBoard();
+		rollButton.setDisable(true);
+		if (playerWinSpecial == null) {
+			checkGameEnd();
+		} else {
+			cardImg.setImage(new Image(new File("res/cardBack.png").toURI().toString()));
+			cardSeal = false;
+			updateGameStatus(playerWinSpecial.getName() + " win the special location!", Color.web("#4B0082"));
+			updateGameStatus(playerWinSpecial.getName() + " must draw a card!", Color.web("#4B0082"));
+		}
+	}
+
+	public void checkGameEnd() {
+		updateBalanceStatus();
+		updateScoreBoard();
+		if (roundCount <= 4) {
+			nextRoundBtn.setDisable(false);
+		} else {
+			nextRoundBtn.setVisible(false);
+			endBtn.setVisible(true);
+		}
+	}
+
+	@FXML
+	public void clickNextRound(MouseEvent event) {
+		for (int i = 0; i < amountOfPlayer; i++) {
+			oldBalanceList.set(i, playerList.get(i).getBalance());
+		}
+		roundText.setText("Round " + getRoundCount() + " of 4");
+		resetBoard(playerList.size());
+		updateGameStatus("==== Round " + getRoundCount() + " Start!! ====", Color.BLACK);
+		playGame(playerList);
 	}
 
 	public void updateGameStatus(String string, Color color) {
@@ -203,153 +283,6 @@ public class GameLogic implements Initializable {
 		}
 	}
 
-	public void updateDice(Player player) {
-		for (int k = 0; k < player.getDiceInPlayer().size(); k++) {
-			int dicePoint = player.getDiceInPlayer().get(k).getPoint();
-			String diceColour = player.getDiceInPlayer().get(k).getColour();
-			File file = new File("res/dice" + dicePoint + diceColour + ".png");
-			diceImgList.get(k).setImage(new Image(file.toURI().toString()));
-		}
-		if (player.getDiceInPlayer().size() < 8) {
-			for (int k = player.getDiceInPlayer().size(); k < 8; k++) {
-				File file = new File("res/nullDice.png");
-				diceImgList.get(k).setImage(new Image(file.toURI().toString()));
-			}
-
-		}
-	}
-
-	@FXML
-	public void roll() {
-		rollButton.setDisable(true);
-		Player player = currentPlayer;
-		if (isRoll) {
-			updateGameStatus("You already rolled the dice!!", Color.RED);
-			rollButton.setDisable(false);
-			return;
-		} else if (player.getDiceInPlayer().size() <= 0) {
-			updateGameStatus("You don't have dice!!", Color.RED);
-			rollButton.setDisable(false);
-			return;
-		}
-		// playAudio();
-		Thread thread = new Thread() {
-			public void run() {
-				try {
-					for (int i = 0; i < 30; i++) {
-						waiting = true;
-						player.rollDice();
-						if (i == 29) {
-							player.sortDiceInPlayer();
-						}
-						for (int k = 0; k < player.getDiceInPlayer().size(); k++) {
-							int dicePoint = player.getDiceInPlayer().get(k).getPoint();
-							String diceColour = player.getDiceInPlayer().get(k).getColour();
-							File file = new File("res/dice" + dicePoint + diceColour + ".png");
-							diceImgList.get(k).setImage(new Image(file.toURI().toString()));
-						}
-						Thread.sleep(40);
-
-					}
-					isRoll = true;
-					waiting = false;
-					rollButton.setDisable(false);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-			}
-		};
-		thread.start();
-	}
-
-	public void playGame(ArrayList<Player> playerList) {
-		rollButton.setDisable(false);
-		indexPlayer = indexPlayer % playerList.size();
-		selected = false;
-		isRoll = false;
-		curretntDiceSelect = -1;
-		updateScoreBoard();
-
-		if (allOutOfDice()) {
-			updateGameStatus("==== End Round " + getRoundCount() + " ====", Color.BLACK);
-			setRoundCount(getRoundCount() + 1);
-			this.endRound();
-			return;
-		}
-
-		Player p = playerList.get(indexPlayer);
-		currentPlayer = p;
-		updateTurnSB();
-
-		if (p.getDiceInPlayer().size() == 0) {
-			indexPlayer += 1;
-			playGame(playerList);
-			return;
-		}
-
-		updateDice(p);
-		updateGameStatus(p.getName() + "'s turn!!", Color.web("#4D34A0"));
-	}
-
-	// อัพเดตเงินในแต่ละสถานที่+แจกเงิน
-	public void endRound() {
-		for (Location l : locationList) {
-			for (int i = 0; i < l.getDiceInLocation().size(); i++) {
-				if (l instanceof SpecialLocation) {
-					SpecialLocation sp = (SpecialLocation) l;
-					int maxelement = Collections.max(sp.getDiceInLocation());
-					int maxelementindex = sp.getDiceInLocation().indexOf(maxelement);
-					if (maxelement != 0 && sp.notHaveSameElement(maxelement, maxelementindex)) {
-						sp.sendReward(playerList.get(maxelementindex));
-						l.getDiceInLocation().set(maxelementindex, 0);
-						if (playerWinSpecial == null) {
-							playerWinSpecial = playerList.get(maxelementindex);
-						}
-					}
-				} else {
-					int maxelement = Collections.max(l.getDiceInLocation());
-					int maxelementindex = l.getDiceInLocation().indexOf(maxelement);
-					if (maxelement != 0 && l.notHaveSameElement(maxelement, maxelementindex)) {
-						l.sendReward(playerList.get(maxelementindex));
-						l.getDiceInLocation().set(maxelementindex, 0);
-					}
-				}
-			}
-		}
-		updateScoreBoard();
-		rollButton.setDisable(true);
-		if (playerWinSpecial == null) {
-			checkGameEnd();
-		} else {
-			cardImg.setImage(new Image(new File("res/cardBack.png").toURI().toString()));
-			cardSeal = false;
-			updateGameStatus(playerWinSpecial.getName() + " win the special location!", Color.web("#4B0082"));
-			updateGameStatus(playerWinSpecial.getName() + " must draw a card!", Color.web("#4B0082"));
-		}
-	}
-
-	public void checkGameEnd() {
-		updateBalanceStatus();
-		updateScoreBoard();
-		if (roundCount <= 1) {
-			nextRoundBtn.setDisable(false);
-		} else {
-			nextRoundBtn.setVisible(false);
-			endBtn.setVisible(true);
-		}
-	}
-
-	@FXML
-	public void clickNextRound(MouseEvent event) {
-		for (int i = 0; i < amountOfPlayer; i++) {
-			oldBalanceList.set(i, playerList.get(i).getBalance());
-		}
-		roundText.setText("Round " + getRoundCount() + " of 4");
-		resetBoard(playerList.size());
-		updateGameStatus("==== Round " + getRoundCount() + " Start!! ====", Color.BLACK);
-		playGame(playerList);
-	}
-
 	public void resetBoard(int amountOfPlayer) {
 		nextRoundBtn.setDisable(true);
 		playerWinSpecial = null;
@@ -373,12 +306,14 @@ public class GameLogic implements Initializable {
 				location.updateFund();
 			}
 			for (Banknote banknote : location.getFund()) {
-				String filePath = "res/bankNote" + banknote.getBanknoteValue() + ".png";
-				File file = new File(filePath);
-				ImageView img = new ImageView(new Image(file.toURI().toString()));
-				img.setFitHeight(60);
-				img.setFitWidth(140);
-				vBoxLocationList.get(location.getDiceValue() - 1).getChildren().add(img);
+				for (int i = 0; i < banknote.getAmount(); i++) {
+					String filePath = "res/bankNote" + banknote.getBanknoteValue() + ".png";
+					File file = new File(filePath);
+					ImageView img = new ImageView(new Image(file.toURI().toString()));
+					img.setFitHeight(60);
+					img.setFitWidth(140);
+					vBoxLocationList.get(location.getDiceValue() - 1).getChildren().add(img);
+				}
 			}
 		}
 	}
@@ -392,6 +327,7 @@ public class GameLogic implements Initializable {
 	@FXML
 	public void openCard(MouseEvent event) {
 		if (!cardSeal) {
+			playAudio("/Draw_edit.mp3", 1);
 			Card card = cardDeck.giveTopCardTo();
 			File file = new File("res/" + card.getName() + ".png");
 			cardImg.setImage(new Image(file.toURI().toString()));
@@ -463,6 +399,22 @@ public class GameLogic implements Initializable {
 		}
 	}
 
+	public void updateDice(Player player) {
+		for (int k = 0; k < player.getDiceInPlayer().size(); k++) {
+			int dicePoint = player.getDiceInPlayer().get(k).getPoint();
+			String diceColour = player.getDiceInPlayer().get(k).getColour();
+			File file = new File("res/dice" + dicePoint + diceColour + ".png");
+			diceImgList.get(k).setImage(new Image(file.toURI().toString()));
+		}
+		if (player.getDiceInPlayer().size() < 8) {
+			for (int k = player.getDiceInPlayer().size(); k < 8; k++) {
+				File file = new File("res/nullDice.png");
+				diceImgList.get(k).setImage(new Image(file.toURI().toString()));
+			}
+
+		}
+	}
+
 	public void resetDiceImgInLocation() {
 		for (int i = 0; i < diceInLocationImgList.size(); i++) {
 			for (ImageView img : diceInLocationImgList.get(i)) {
@@ -510,6 +462,49 @@ public class GameLogic implements Initializable {
 		for (VBox vBox : vBoxLocationList) {
 			vBox.getChildren().clear();
 		}
+	}
+
+	@FXML
+	public void roll() {
+		Player player = currentPlayer;
+		if (isRoll) {
+			updateGameStatus("You already rolled the dice!!", Color.RED);
+			rollButton.setDisable(false);
+			return;
+		} else if (player.getDiceInPlayer().size() <= 0) {
+			updateGameStatus("You don't have dice!!", Color.RED);
+			rollButton.setDisable(false);
+			return;
+		}
+		playAudio("/Rolldice_cut.mp3", 0.3);
+		rollButton.setDisable(true);
+		Thread thread = new Thread() {
+			public void run() {
+				try {
+					for (int i = 0; i < 30; i++) {
+						waiting = true;
+						player.rollDice();
+						if (i == 29) {
+							player.sortDiceInPlayer();
+						}
+						for (int k = 0; k < player.getDiceInPlayer().size(); k++) {
+							int dicePoint = player.getDiceInPlayer().get(k).getPoint();
+							String diceColour = player.getDiceInPlayer().get(k).getColour();
+							File file = new File("res/dice" + dicePoint + diceColour + ".png");
+							diceImgList.get(k).setImage(new Image(file.toURI().toString()));
+						}
+						Thread.sleep(30);
+
+					}
+					isRoll = true;
+					waiting = false;
+					rollButton.setDisable(false);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+		};
+		thread.start();
 	}
 
 	@FXML
@@ -633,22 +628,32 @@ public class GameLogic implements Initializable {
 		}
 	}
 
-//	public void playAudio() {
-//		try {
-//			URL url = getClass().getResource("res/Rolldice_cut.mp3");
-//			if (url == null) {
-//				throw new RuntimeException("Cannot find resource: res/Rolldice_cut.mp3");
-//			}
-//			Media media = new Media(url.toURI().toString());
-//			MediaPlayer mediaPlayer = new MediaPlayer(media);
-//			mediaPlayer.play();
-//		} catch (URISyntaxException e) {
-//			throw new RuntimeException("Invalid URL for resource: res/Rolldice_cut.mp3", e);
-//		} catch (MediaException e) {
-//			throw new RuntimeException("Error playing media: res/Rolldice_cut.mp3", e);
-//		}
-//
-//	}
+	public void beginThemeSong() {
+		Media themeSong = new Media(new File("voice/backGroundTheme.mp3").toURI().toString());
+		themeSongPlayer = new MediaPlayer(themeSong);
+		themeSongPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+		themeSongPlayer.setVolume(0.2);
+		themeSongPlayer.setOnEndOfMedia(new Runnable() {
+			public void run() {
+				themeSongPlayer.play();
+			}
+		});
+		themeSongPlayer.play();
+
+	}
+
+	public void playAudio(String string, double volume) {
+		Media media = new Media(getClass().getResource(string).toExternalForm());
+		MediaPlayer mediaPlayer = new MediaPlayer(media);
+		mediaPlayer.setVolume(volume);
+		mediaPlayer.setCycleCount(1);
+		mediaPlayer.setOnEndOfMedia(new Runnable() {
+			public void run() {
+				mediaPlayer.play();
+			}
+		});
+		mediaPlayer.play();
+	}
 
 	public boolean allOutOfDice() {
 		for (Player p : playerList) {
@@ -662,6 +667,7 @@ public class GameLogic implements Initializable {
 	public void endGame(MouseEvent event) {
 		updateGameStatus("GAME END!!", Color.MEDIUMPURPLE);
 		try {
+			themeSongPlayer.stop();
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/EndScene.fxml"));
 			Parent root = loader.load();
 			EndScene controller = loader.getController();

@@ -71,7 +71,6 @@ public class SelectPlayer implements Initializable {
 			Parent root = loader.load();
 			GameLogic controller = loader.getController();
 			controller.setVariable(playerList, amount);
-
 			Scene scene = new Scene(root);
 			Stage stage = new Stage();
 			stage.setScene(scene);

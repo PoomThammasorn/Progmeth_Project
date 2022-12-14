@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
@@ -16,11 +17,17 @@
                <image>
                   <Image url="@../../res/new-game-button.png" />
                </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </ImageView>
             <ImageView fx:id="exitImg" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#exitGame" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../res/exit_game.png" />
                </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </ImageView>
          </children>
          <padding>
