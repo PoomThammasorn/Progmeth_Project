@@ -273,23 +273,25 @@ public class GameLogic implements Initializable {
 	// อัพเดตเงินในแต่ละสถานที่+แจกเงิน
 	public void endRound() {
 		for (Location l : locationList) {
-			if (l instanceof SpecialLocation) {
-				SpecialLocation sp = (SpecialLocation) l;
-				int maxelement = Collections.max(sp.getDiceInLocation());
-				int maxelementindex = sp.getDiceInLocation().indexOf(maxelement);
-				if (maxelement != 0 && sp.notHaveSameElement(maxelement, maxelementindex)) {
-					sp.sendReward(playerList.get(maxelementindex));
-					l.getDiceInLocation().set(maxelementindex, 0);
-					if (playerWinSpecial == null) {
-						playerWinSpecial = playerList.get(maxelementindex);
+			for (int i = 0; i < l.getDiceInLocation().size(); i++) {
+				if (l instanceof SpecialLocation) {
+					SpecialLocation sp = (SpecialLocation) l;
+					int maxelement = Collections.max(sp.getDiceInLocation());
+					int maxelementindex = sp.getDiceInLocation().indexOf(maxelement);
+					if (maxelement != 0 && sp.notHaveSameElement(maxelement, maxelementindex)) {
+						sp.sendReward(playerList.get(maxelementindex));
+						l.getDiceInLocation().set(maxelementindex, 0);
+						if (playerWinSpecial == null) {
+							playerWinSpecial = playerList.get(maxelementindex);
+						}
 					}
-				}
-			} else {
-				int maxelement = Collections.max(l.getDiceInLocation());
-				int maxelementindex = l.getDiceInLocation().indexOf(maxelement);
-				if (maxelement != 0 && l.notHaveSameElement(maxelement, maxelementindex)) {
-					l.sendReward(playerList.get(maxelementindex));
-					l.getDiceInLocation().set(maxelementindex, 0);
+				} else {
+					int maxelement = Collections.max(l.getDiceInLocation());
+					int maxelementindex = l.getDiceInLocation().indexOf(maxelement);
+					if (maxelement != 0 && l.notHaveSameElement(maxelement, maxelementindex)) {
+						l.sendReward(playerList.get(maxelementindex));
+						l.getDiceInLocation().set(maxelementindex, 0);
+					}
 				}
 			}
 		}

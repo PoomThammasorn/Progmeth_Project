@@ -1,39 +1,36 @@
 package base;
 
 public class Banknote {
-	private int banknoteValue;
-	private int amount;
+    private int banknoteValue;
+    private int amount;
 
-	public Banknote(int banknoteValue) {
-		this.setBanknoteValue(banknoteValue);
-		this.setAmount(1);
-	}
+    public Banknote(int banknoteValue) {
+        this.setBanknoteValue(banknoteValue);
+        this.setAmount(1);
+    }
 
-	public int getAmount() {
-		return amount;
-	}
+    public int getAmount() {
+        return amount;
+    }
 
-	public void setAmount(int amount) {
-		if (amount < 0) {
-			this.amount = 0;
-			return;
-		}
-		this.amount = amount;
-	}
+    public void setAmount(int amount) {
+        if (amount < 0) {
+            this.amount = 0;
+            return;
+        }
+        this.amount = amount;
+    }
 
-	public int getBanknoteValue() {
-		return banknoteValue;
-	}
+    public int getBanknoteValue() {
+        return banknoteValue;
+    }
 
-	public void setBanknoteValue(int banknoteValue) {
-		this.banknoteValue = banknoteValue;
-	}
+    public void setBanknoteValue(int banknoteValue) {
+        this.banknoteValue = banknoteValue;
+    }
 
-	public boolean equals(Banknote other) {
-		Banknote b = (Banknote) other;
-		return this.getBanknoteValue() == b.getBanknoteValue();
-	}
-
-	// setColor
-	// setPng
+    public boolean equals(Banknote other) {
+        Banknote b = (Banknote) other;
+        return this.getBanknoteValue() == b.getBanknoteValue();
+    }
 }
