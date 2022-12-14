@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.Random;
 import java.util.ResourceBundle;
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 
 import base.Banknote;
@@ -17,8 +18,13 @@ import card.BonusCard;
 import card.CardDeck;
 import card.StealCard;
 import card.TaxCard;
+import controller.EndScene;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -26,9 +32,16 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.AudioClip;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaException;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
+import javafx.stage.Window;
 import player.Player;
 
 public class GameLogic implements Initializable {
@@ -57,7 +70,7 @@ public class GameLogic implements Initializable {
 			textP5L4, textP1L5, textP2L5, textP3L5, textP4L5, textP5L5, textP1L6, textP2L6, textP3L6, textP4L6,
 			textP5L6;
 	@FXML
-	private Button rollButton, nextRoundBtn, startBtn;
+	private Button rollButton, nextRoundBtn, startBtn, endBtn;
 
 	private ArrayList<VBox> vBoxLocationList;
 	private ArrayList<StackPane> playerScoreBoard, balanceScoreBoard, diceScoreBoard;
@@ -76,12 +89,11 @@ public class GameLogic implements Initializable {
 	private int curretntDiceSelect, amountOfPlayer;
 	private CardDeck cardDeck;
 	private ArrayList<Integer> oldBalanceList = new ArrayList<>();
+	private MediaPlayer themeSongPlayer;
 
 	public void setVariable(ArrayList<Player> playerList, int amount) {
 		this.playerList = playerList;
 		this.amountOfPlayer = amount;
-
-		// newGame();
 	}
 
 	@FXML
@@ -89,10 +101,10 @@ public class GameLogic implements Initializable {
 		startBtn.setVisible(false);
 		nextRoundBtn.setVisible(true);
 		rollButton.setDisable(false);
+		beginThemeSong();
 		newGame();
 	}
 
-	// new game
 	public void newGame() {
 		updateGameStatus("Start New Game!!", Color.web("#FF8C00"));
 		this.setRoundCount(1);
@@ -103,6 +115,94 @@ public class GameLogic implements Initializable {
 		resetBoard(amountOfPlayer);
 		updateGameStatus("==== Round " + getRoundCount() + " Start!! ====", Color.BLACK);
 		this.playGame(playerList);
+	}
+
+	public void playGame(ArrayList<Player> playerList) {
+		rollButton.setDisable(false);
+		indexPlayer = indexPlayer % playerList.size();
+		selected = false;
+		isRoll = false;
+		curretntDiceSelect = -1;
+		updateScoreBoard();
+
+		if (allOutOfDice()) {
+			updateGameStatus("==== End Round " + getRoundCount() + " ====", Color.BLACK);
+			setRoundCount(getRoundCount() + 1);
+			this.endRound();
+			return;
+		}
+
+		Player p = playerList.get(indexPlayer);
+		currentPlayer = p;
+		updateTurnSB();
+
+		if (p.getDiceInPlayer().size() == 0) {
+			indexPlayer += 1;
+			playGame(playerList);
+			return;
+		}
+
+		updateDice(p);
+		updateGameStatus(p.getName() + "'s turn!!", Color.web("#4D34A0"));
+	}
+
+	// อัพเดตเงินในแต่ละสถานที่+แจกเงิน
+	public void endRound() {
+		for (Location l : locationList) {
+			for (int i = 0; i < l.getDiceInLocation().size(); i++) {
+				if (l instanceof SpecialLocation) {
+					SpecialLocation sp = (SpecialLocation) l;
+					int maxelement = Collections.max(sp.getDiceInLocation());
+					int maxelementindex = sp.getDiceInLocation().indexOf(maxelement);
+					if (maxelement != 0 && sp.notHaveSameElement(maxelement, maxelementindex)) {
+						sp.sendReward(playerList.get(maxelementindex));
+						l.getDiceInLocation().set(maxelementindex, 0);
+						if (playerWinSpecial == null) {
+							playerWinSpecial = playerList.get(maxelementindex);
+						}
+					}
+				} else {
+					int maxelement = Collections.max(l.getDiceInLocation());
+					int maxelementindex = l.getDiceInLocation().indexOf(maxelement);
+					if (maxelement != 0 && l.notHaveSameElement(maxelement, maxelementindex)) {
+						l.sendReward(playerList.get(maxelementindex));
+						l.getDiceInLocation().set(maxelementindex, 0);
+					}
+				}
+			}
+		}
+		updateScoreBoard();
+		rollButton.setDisable(true);
+		if (playerWinSpecial == null) {
+			checkGameEnd();
+		} else {
+			cardImg.setImage(new Image(new File("res/cardBack.png").toURI().toString()));
+			cardSeal = false;
+			updateGameStatus(playerWinSpecial.getName() + " win the special location!", Color.web("#4B0082"));
+			updateGameStatus(playerWinSpecial.getName() + " must draw a card!", Color.web("#4B0082"));
+		}
+	}
+
+	public void checkGameEnd() {
+		updateBalanceStatus();
+		updateScoreBoard();
+		if (roundCount <= 4) {
+			nextRoundBtn.setDisable(false);
+		} else {
+			nextRoundBtn.setVisible(false);
+			endBtn.setVisible(true);
+		}
+	}
+
+	@FXML
+	public void clickNextRound(MouseEvent event) {
+		for (int i = 0; i < amountOfPlayer; i++) {
+			oldBalanceList.set(i, playerList.get(i).getBalance());
+		}
+		roundText.setText("Round " + getRoundCount() + " of 4");
+		resetBoard(playerList.size());
+		updateGameStatus("==== Round " + getRoundCount() + " Start!! ====", Color.BLACK);
+		playGame(playerList);
 	}
 
 	public void updateGameStatus(String string, Color color) {
@@ -183,151 +283,6 @@ public class GameLogic implements Initializable {
 		}
 	}
 
-	public void updateDice(Player player) {
-		for (int k = 0; k < player.getDiceInPlayer().size(); k++) {
-			int dicePoint = player.getDiceInPlayer().get(k).getPoint();
-			String diceColour = player.getDiceInPlayer().get(k).getColour();
-			File file = new File("res/dice" + dicePoint + diceColour + ".png");
-			diceImgList.get(k).setImage(new Image(file.toURI().toString()));
-		}
-		if (player.getDiceInPlayer().size() < 8) {
-			for (int k = player.getDiceInPlayer().size(); k < 8; k++) {
-				File file = new File("res/nullDice.png");
-				diceImgList.get(k).setImage(new Image(file.toURI().toString()));
-			}
-
-		}
-	}
-
-	@FXML
-	public void roll() {
-		rollButton.setDisable(true);
-		Player player = currentPlayer;
-		if (isRoll) {
-			updateGameStatus("You already rolled the dice!!", Color.RED);
-			rollButton.setDisable(false);
-			return;
-		} else if (player.getDiceInPlayer().size() <= 0) {
-			updateGameStatus("You don't have dice!!", Color.RED);
-			rollButton.setDisable(false);
-			return;
-		}
-		Thread thread = new Thread() {
-			public void run() {
-				try {
-					for (int i = 0; i < 30; i++) {
-						waiting = true;
-						player.rollDice();
-						if (i == 29) {
-							player.sortDiceInPlayer();
-						}
-						for (int k = 0; k < player.getDiceInPlayer().size(); k++) {
-							int dicePoint = player.getDiceInPlayer().get(k).getPoint();
-							String diceColour = player.getDiceInPlayer().get(k).getColour();
-							File file = new File("res/dice" + dicePoint + diceColour + ".png");
-							diceImgList.get(k).setImage(new Image(file.toURI().toString()));
-						}
-						Thread.sleep(40);
-
-					}
-					isRoll = true;
-					waiting = false;
-					rollButton.setDisable(false);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-			}
-		};
-		thread.start();
-	}
-
-	public void playGame(ArrayList<Player> playerList) {
-		rollButton.setDisable(false);
-		indexPlayer = indexPlayer % playerList.size();
-		selected = false;
-		isRoll = false;
-		curretntDiceSelect = -1;
-		updateScoreBoard();
-
-		if (allOutOfDice()) {
-			updateGameStatus("==== End Round " + getRoundCount() + " ====", Color.BLACK);
-			setRoundCount(getRoundCount() + 1);
-			this.endRound();
-			return;
-		}
-
-		Player p = playerList.get(indexPlayer);
-		currentPlayer = p;
-		updateTurnSB();
-
-		if (p.getDiceInPlayer().size() == 0) {
-			indexPlayer += 1;
-			playGame(playerList);
-			return;
-		}
-
-		updateDice(p);
-		updateGameStatus(p.getName() + "'s turn!!", Color.web("#4D34A0"));
-	}
-
-	// อัพเดตเงินในแต่ละสถานที่+แจกเงิน
-	public void endRound() {
-		for (Location l : locationList) {
-			for (int i = 0; i < l.getDiceInLocation().size(); i++) {
-				if (l instanceof SpecialLocation) {
-					SpecialLocation sp = (SpecialLocation) l;
-					int maxelement = Collections.max(sp.getDiceInLocation());
-					int maxelementindex = sp.getDiceInLocation().indexOf(maxelement);
-					if (maxelement != 0 && sp.notHaveSameElement(maxelement, maxelementindex)) {
-						sp.sendReward(playerList.get(maxelementindex));
-						l.getDiceInLocation().set(maxelementindex, 0);
-						if (playerWinSpecial == null) {
-							playerWinSpecial = playerList.get(maxelementindex);
-						}
-					}
-				} else {
-					int maxelement = Collections.max(l.getDiceInLocation());
-					int maxelementindex = l.getDiceInLocation().indexOf(maxelement);
-					if (maxelement != 0 && l.notHaveSameElement(maxelement, maxelementindex)) {
-						l.sendReward(playerList.get(maxelementindex));
-						l.getDiceInLocation().set(maxelementindex, 0);
-					}
-				}
-			}
-		}
-		updateScoreBoard();
-		rollButton.setDisable(true);
-		if (playerWinSpecial == null) {
-			checkGameEnd();
-		} else {
-			cardImg.setImage(new Image(new File("res/cardBack.png").toURI().toString()));
-			cardSeal = false;
-			updateGameStatus(playerWinSpecial.getName() + " win the special location!", Color.web("#4B0082"));
-			updateGameStatus(playerWinSpecial.getName() + " must draw a card!", Color.web("#4B0082"));
-		}
-	}
-
-	public void checkGameEnd() {
-		updateBalanceStatus();
-		updateScoreBoard();
-		if (roundCount <= 4) {
-			nextRoundBtn.setDisable(false);
-		} else {
-			endgame();
-		}
-	}
-
-	@FXML
-	public void clickNextRound(MouseEvent event) {
-		for (int i = 0; i < amountOfPlayer; i++) {
-			oldBalanceList.set(i, playerList.get(i).getBalance());
-		}
-		roundText.setText("Round " + getRoundCount() + " of 4");
-		resetBoard(playerList.size());
-		updateGameStatus("==== Round " + getRoundCount() + " Start!! ====", Color.BLACK);
-		playGame(playerList);
-	}
-
 	public void resetBoard(int amountOfPlayer) {
 		nextRoundBtn.setDisable(true);
 		playerWinSpecial = null;
@@ -351,12 +306,14 @@ public class GameLogic implements Initializable {
 				location.updateFund();
 			}
 			for (Banknote banknote : location.getFund()) {
-				String filePath = "res/bankNote" + banknote.getBanknoteValue() + ".png";
-				File file = new File(filePath);
-				ImageView img = new ImageView(new Image(file.toURI().toString()));
-				img.setFitHeight(60);
-				img.setFitWidth(140);
-				vBoxLocationList.get(location.getDiceValue() - 1).getChildren().add(img);
+				for (int i = 0; i < banknote.getAmount(); i++) {
+					String filePath = "res/bankNote" + banknote.getBanknoteValue() + ".png";
+					File file = new File(filePath);
+					ImageView img = new ImageView(new Image(file.toURI().toString()));
+					img.setFitHeight(60);
+					img.setFitWidth(140);
+					vBoxLocationList.get(location.getDiceValue() - 1).getChildren().add(img);
+				}
 			}
 		}
 	}
@@ -370,6 +327,7 @@ public class GameLogic implements Initializable {
 	@FXML
 	public void openCard(MouseEvent event) {
 		if (!cardSeal) {
+			playAudio("/Draw_edit.mp3", 1);
 			Card card = cardDeck.giveTopCardTo();
 			File file = new File("res/" + card.getName() + ".png");
 			cardImg.setImage(new Image(file.toURI().toString()));
@@ -441,6 +399,22 @@ public class GameLogic implements Initializable {
 		}
 	}
 
+	public void updateDice(Player player) {
+		for (int k = 0; k < player.getDiceInPlayer().size(); k++) {
+			int dicePoint = player.getDiceInPlayer().get(k).getPoint();
+			String diceColour = player.getDiceInPlayer().get(k).getColour();
+			File file = new File("res/dice" + dicePoint + diceColour + ".png");
+			diceImgList.get(k).setImage(new Image(file.toURI().toString()));
+		}
+		if (player.getDiceInPlayer().size() < 8) {
+			for (int k = player.getDiceInPlayer().size(); k < 8; k++) {
+				File file = new File("res/nullDice.png");
+				diceImgList.get(k).setImage(new Image(file.toURI().toString()));
+			}
+
+		}
+	}
+
 	public void resetDiceImgInLocation() {
 		for (int i = 0; i < diceInLocationImgList.size(); i++) {
 			for (ImageView img : diceInLocationImgList.get(i)) {
@@ -488,6 +462,49 @@ public class GameLogic implements Initializable {
 		for (VBox vBox : vBoxLocationList) {
 			vBox.getChildren().clear();
 		}
+	}
+
+	@FXML
+	public void roll() {
+		Player player = currentPlayer;
+		if (isRoll) {
+			updateGameStatus("You already rolled the dice!!", Color.RED);
+			rollButton.setDisable(false);
+			return;
+		} else if (player.getDiceInPlayer().size() <= 0) {
+			updateGameStatus("You don't have dice!!", Color.RED);
+			rollButton.setDisable(false);
+			return;
+		}
+		playAudio("/Rolldice_cut.mp3", 0.3);
+		rollButton.setDisable(true);
+		Thread thread = new Thread() {
+			public void run() {
+				try {
+					for (int i = 0; i < 30; i++) {
+						waiting = true;
+						player.rollDice();
+						if (i == 29) {
+							player.sortDiceInPlayer();
+						}
+						for (int k = 0; k < player.getDiceInPlayer().size(); k++) {
+							int dicePoint = player.getDiceInPlayer().get(k).getPoint();
+							String diceColour = player.getDiceInPlayer().get(k).getColour();
+							File file = new File("res/dice" + dicePoint + diceColour + ".png");
+							diceImgList.get(k).setImage(new Image(file.toURI().toString()));
+						}
+						Thread.sleep(30);
+
+					}
+					isRoll = true;
+					waiting = false;
+					rollButton.setDisable(false);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+		};
+		thread.start();
 	}
 
 	@FXML
@@ -583,6 +600,22 @@ public class GameLogic implements Initializable {
 		return richestPlayer;
 	}
 
+	public ArrayList<Player> findRichestPlayer() {
+		ArrayList<Player> richestPlayerList = new ArrayList<>();
+		int max = -1;
+		for (Player p : playerList) {
+			if (p.getBalance() > max) {
+				max = p.getBalance();
+				richestPlayerList.clear();
+				richestPlayerList.add(p);
+			} else if (p.getBalance() == max) {
+				richestPlayerList.add(p);
+			}
+
+		}
+		return richestPlayerList;
+	}
+
 	public void editSelectDice(int dicePoint, Player player) {
 		selected = true;
 		curretntDiceSelect = dicePoint;
@@ -595,9 +628,31 @@ public class GameLogic implements Initializable {
 		}
 	}
 
-	public void endgame() {
-		updateGameStatus("GAME END!!", Color.MEDIUMPURPLE);
-		// ->เขียนยังไงดี
+	public void beginThemeSong() {
+		Media themeSong = new Media(new File("voice/backGroundTheme.mp3").toURI().toString());
+		themeSongPlayer = new MediaPlayer(themeSong);
+		themeSongPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+		themeSongPlayer.setVolume(0.2);
+		themeSongPlayer.setOnEndOfMedia(new Runnable() {
+			public void run() {
+				themeSongPlayer.play();
+			}
+		});
+		themeSongPlayer.play();
+
+	}
+
+	public void playAudio(String string, double volume) {
+		Media media = new Media(getClass().getResource(string).toExternalForm());
+		MediaPlayer mediaPlayer = new MediaPlayer(media);
+		mediaPlayer.setVolume(volume);
+		mediaPlayer.setCycleCount(1);
+		mediaPlayer.setOnEndOfMedia(new Runnable() {
+			public void run() {
+				mediaPlayer.play();
+			}
+		});
+		mediaPlayer.play();
 	}
 
 	public boolean allOutOfDice() {
@@ -606,6 +661,26 @@ public class GameLogic implements Initializable {
 				return false;
 		}
 		return true;
+	}
+
+	@FXML
+	public void endGame(MouseEvent event) {
+		updateGameStatus("GAME END!!", Color.MEDIUMPURPLE);
+		try {
+			themeSongPlayer.stop();
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/EndScene.fxml"));
+			Parent root = loader.load();
+			EndScene controller = loader.getController();
+			controller.setEnd(findRichestPlayer());
+			Scene scene = new Scene(root);
+			Stage stage = new Stage();
+			stage.setScene(scene);
+			stage.show();
+			Window window = ((Node) (event.getSource())).getScene().getWindow();
+			window.hide();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public ArrayList<String> getLocationNameList() {
@@ -645,7 +720,6 @@ public class GameLogic implements Initializable {
 		// add all diceLocationImagelist in Sumlist
 		diceInLocationImgList = new ArrayList<>(Arrays.asList(diceLocation1ImgList, diceLocation2ImgList,
 				diceLocation3ImgList, diceLocation4ImgList, diceLocation5ImgList, diceLocation6ImgList));
-
 		textOfAmountInLocation1List = new ArrayList<>(Arrays.asList(textP1L1, textP2L1, textP3L1, textP4L1, textP5L1));
 		textOfAmountInLocation2List = new ArrayList<>(Arrays.asList(textP1L2, textP2L2, textP3L2, textP4L2, textP5L2));
 		textOfAmountInLocation3List = new ArrayList<>(Arrays.asList(textP1L3, textP2L3, textP3L3, textP4L3, textP5L3));
@@ -661,6 +735,7 @@ public class GameLogic implements Initializable {
 				Arrays.asList(diceImg0, diceImg1, diceImg2, diceImg3, diceImg4, diceImg5, diceImg6, diceImg7));
 		locationImgList = new ArrayList<ImageView>(
 				Arrays.asList(locationImg1, locationImg2, locationImg3, locationImg4, locationImg5, locationImg6));
+		endBtn.setVisible(false);
 	}
 
 }
