@@ -5,6 +5,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Random;
 import java.util.ResourceBundle;
+import java.util.concurrent.CountDownLatch;
+import java.awt.DisplayMode;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -47,48 +49,90 @@ import player.Player;
 public class GameLogic implements Initializable {
 
 	@FXML
-	private StackPane playerBoardPane1, playerBoardPane2, playerBoardPane3, playerBoardPane4, playerBoardPane5,
-			balanceBoardPane1, balanceBoardPane2, balanceBoardPane3, balanceBoardPane4, balanceBoardPane5,
-			diceBoardPane1, diceBoardPane2, diceBoardPane3, diceBoardPane4, diceBoardPane5;
+	private StackPane playerBoardPane1, playerBoardPane2, playerBoardPane3, playerBoardPane4, playerBoardPane5;
+	@FXML
+	private StackPane balanceBoardPane1, balanceBoardPane2, balanceBoardPane3, balanceBoardPane4, balanceBoardPane5;
+	@FXML
+	private StackPane diceBoardPane1, diceBoardPane2, diceBoardPane3, diceBoardPane4, diceBoardPane5;
 
 	@FXML
-	private GridPane locationGridPane, diceGridPane;
+	private VBox vBoxL1, vBoxL2, vBoxL3, vBoxL4, vBoxL5, vBoxL6;
 	@FXML
-	private VBox vBoxL1, vBoxL2, vBoxL3, vBoxL4, vBoxL5, vBoxL6, vBoxGameStatus;
+	private VBox vBoxGameStatus;
 
 	@FXML
-	private ImageView diceImg0, diceImg1, diceImg2, diceImg3, diceImg4, diceImg5, diceImg6, diceImg7, cardImg,
-			locationImg1, locationImg2, locationImg3, locationImg4, locationImg5, locationImg6, diceP1L1Img,
-			diceP1L2Img, diceP1L3Img, diceP1L4Img, diceP1L5Img, diceP1L6Img, diceP2L1Img, diceP2L2Img, diceP2L3Img,
-			diceP2L4Img, diceP2L5Img, diceP2L6Img, diceP3L1Img, diceP3L2Img, diceP3L3Img, diceP3L4Img, diceP3L5Img,
-			diceP3L6Img, diceP4L1Img, diceP4L2Img, diceP4L3Img, diceP4L4Img, diceP4L5Img, diceP4L6Img, diceP5L1Img,
-			diceP5L2Img, diceP5L3Img, diceP5L4Img, diceP5L5Img, diceP5L6Img, diceImgP1, diceImgP2, diceImgP3, diceImgP4,
-			diceImgP5;
+	private ImageView cardImg;
 	@FXML
-	private Text roundText, textP1L1, textP2L1, textP3L1, textP4L1, textP5L1, textP1L2, textP2L2, textP3L2, textP4L2,
-			textP5L2, textP1L3, textP2L3, textP3L3, textP4L3, textP5L3, textP1L4, textP2L4, textP3L4, textP4L4,
-			textP5L4, textP1L5, textP2L5, textP3L5, textP4L5, textP5L5, textP1L6, textP2L6, textP3L6, textP4L6,
-			textP5L6;
+	private ImageView diceImgP1, diceImgP2, diceImgP3, diceImgP4, diceImgP5;
+	@FXML
+	private ImageView diceImg0, diceImg1, diceImg2, diceImg3, diceImg4, diceImg5, diceImg6, diceImg7;
+	@FXML
+	private ImageView diceP1L1Img, diceP1L2Img, diceP1L3Img, diceP1L4Img, diceP1L5Img, diceP1L6Img;
+	@FXML
+	private ImageView diceP2L1Img, diceP2L2Img, diceP2L3Img, diceP2L4Img, diceP2L5Img, diceP2L6Img;
+	@FXML
+	private ImageView diceP3L1Img, diceP3L2Img, diceP3L3Img, diceP3L4Img, diceP3L5Img, diceP3L6Img;
+	@FXML
+	private ImageView diceP4L1Img, diceP4L2Img, diceP4L3Img, diceP4L4Img, diceP4L5Img, diceP4L6Img;
+	@FXML
+	private ImageView diceP5L1Img, diceP5L2Img, diceP5L3Img, diceP5L4Img, diceP5L5Img, diceP5L6Img;
+
+	@FXML
+	private ImageView locationImg1, locationImg2, locationImg3, locationImg4, locationImg5, locationImg6;
+
+	@FXML
+	private Text roundText;
+	@FXML
+	private Text textP1L1, textP2L1, textP3L1, textP4L1, textP5L1;
+	@FXML
+	private Text textP1L2, textP2L2, textP3L2, textP4L2, textP5L2;
+	@FXML
+	private Text textP1L3, textP2L3, textP3L3, textP4L3, textP5L3;
+	@FXML
+	private Text textP1L4, textP2L4, textP3L4, textP4L4, textP5L4;
+	@FXML
+	private Text textP1L5, textP2L5, textP3L5, textP4L5, textP5L5;
+	@FXML
+	private Text textP1L6, textP2L6, textP3L6, textP4L6, textP5L6;
+
 	@FXML
 	private Button rollButton, nextRoundBtn, startBtn, endBtn;
 
 	private ArrayList<VBox> vBoxLocationList;
 	private ArrayList<StackPane> playerScoreBoard, balanceScoreBoard, diceScoreBoard;
+
 	private ArrayList<ImageView> diceImgList, locationImgList, diceImgScoreBoard;
 	private ArrayList<ImageView> diceLocation1ImgList, diceLocation2ImgList, diceLocation3ImgList, diceLocation4ImgList,
 			diceLocation5ImgList, diceLocation6ImgList;
+
 	private ArrayList<ArrayList<ImageView>> diceInLocationImgList;
+
 	private ArrayList<Text> textOfAmountInLocation1List, textOfAmountInLocation2List, textOfAmountInLocation3List,
 			textOfAmountInLocation4List, textOfAmountInLocation5List, textOfAmountInLocation6List;
+
 	private ArrayList<Location> locationList = new ArrayList<>();
+
 	private ArrayList<String> locationNameList;
+
 	private ArrayList<Player> playerList = new ArrayList<>();
-	private int roundCount, indexPlayer = 0;
-	private boolean isRoll = false, selected = false, cardSeal = true, waiting = false;
-	private Player currentPlayer, playerWinSpecial = null;
-	private int curretntDiceSelect, amountOfPlayer;
-	private CardDeck cardDeck;
+
 	private ArrayList<Integer> oldBalanceList = new ArrayList<>();
+
+	private boolean isRoll = false;
+	private boolean selected = false;
+	private boolean cardSeal = true;
+	private boolean waiting = false;
+
+	private Player currentPlayer;
+	private Player playerWinSpecial = null;
+
+	private int curretntDiceSelect;
+	private int amountOfPlayer;
+	private int roundCount;
+	private int indexPlayer;
+
+	private CardDeck cardDeck;
+
 	private MediaPlayer themeSongPlayer;
 
 	public void setVariable(ArrayList<Player> playerList, int amount) {
@@ -124,24 +168,21 @@ public class GameLogic implements Initializable {
 		isRoll = false;
 		curretntDiceSelect = -1;
 		updateScoreBoard();
-
 		if (allOutOfDice()) {
+			playAudio("/Startturn_endturn.mp3", 0.5);
 			updateGameStatus("==== End Round " + getRoundCount() + " ====", Color.BLACK);
 			setRoundCount(getRoundCount() + 1);
 			this.endRound();
 			return;
 		}
-
 		Player p = playerList.get(indexPlayer);
 		currentPlayer = p;
 		updateTurnSB();
-
 		if (p.getDiceInPlayer().size() == 0) {
 			indexPlayer += 1;
 			playGame(playerList);
 			return;
 		}
-
 		updateDice(p);
 		updateGameStatus(p.getName() + "'s turn!!", Color.web("#4D34A0"));
 	}
@@ -704,7 +745,7 @@ public class GameLogic implements Initializable {
 		// TODO Auto-generated method stub
 		diceImgList = new ArrayList<ImageView>(
 				Arrays.asList(diceImg0, diceImg1, diceImg2, diceImg3, diceImg4, diceImg5, diceImg6, diceImg7));
-		// add dice Image in each location to each List
+
 		diceLocation1ImgList = new ArrayList<>(
 				Arrays.asList(diceP1L1Img, diceP2L1Img, diceP3L1Img, diceP4L1Img, diceP5L1Img));
 		diceLocation2ImgList = new ArrayList<>(
@@ -717,25 +758,31 @@ public class GameLogic implements Initializable {
 				Arrays.asList(diceP1L5Img, diceP2L5Img, diceP3L5Img, diceP4L5Img, diceP5L5Img));
 		diceLocation6ImgList = new ArrayList<>(
 				Arrays.asList(diceP1L6Img, diceP2L6Img, diceP3L6Img, diceP4L6Img, diceP5L6Img));
-		// add all diceLocationImagelist in Sumlist
+
 		diceInLocationImgList = new ArrayList<>(Arrays.asList(diceLocation1ImgList, diceLocation2ImgList,
 				diceLocation3ImgList, diceLocation4ImgList, diceLocation5ImgList, diceLocation6ImgList));
+
 		textOfAmountInLocation1List = new ArrayList<>(Arrays.asList(textP1L1, textP2L1, textP3L1, textP4L1, textP5L1));
 		textOfAmountInLocation2List = new ArrayList<>(Arrays.asList(textP1L2, textP2L2, textP3L2, textP4L2, textP5L2));
 		textOfAmountInLocation3List = new ArrayList<>(Arrays.asList(textP1L3, textP2L3, textP3L3, textP4L3, textP5L3));
 		textOfAmountInLocation4List = new ArrayList<>(Arrays.asList(textP1L4, textP2L4, textP3L4, textP4L4, textP5L4));
 		textOfAmountInLocation5List = new ArrayList<>(Arrays.asList(textP1L5, textP2L5, textP3L5, textP4L5, textP5L5));
 		textOfAmountInLocation6List = new ArrayList<>(Arrays.asList(textP1L6, textP2L6, textP3L6, textP4L6, textP5L6));
-		// add location name
+
 		diceImgScoreBoard = new ArrayList<>(Arrays.asList(diceImgP1, diceImgP2, diceImgP3, diceImgP4, diceImgP5));
+
 		locationNameList = new ArrayList<>(Arrays.asList("Gold Tower Casino", "Riverside Casino", "The Royal Casino",
 				"Lucky 7's Casino", "The Edge Casino", "Blackbird Casino"));
 		vBoxLocationList = new ArrayList<>(Arrays.asList(vBoxL1, vBoxL2, vBoxL3, vBoxL4, vBoxL5, vBoxL6));
+
 		diceImgList = new ArrayList<ImageView>(
 				Arrays.asList(diceImg0, diceImg1, diceImg2, diceImg3, diceImg4, diceImg5, diceImg6, diceImg7));
+
 		locationImgList = new ArrayList<ImageView>(
 				Arrays.asList(locationImg1, locationImg2, locationImg3, locationImg4, locationImg5, locationImg6));
+
 		endBtn.setVisible(false);
+		indexPlayer = 0;
 	}
 
 }
