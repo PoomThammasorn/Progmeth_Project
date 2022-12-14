@@ -5,8 +5,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Random;
 import java.util.ResourceBundle;
-import java.util.concurrent.CountDownLatch;
-import java.awt.DisplayMode;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -31,14 +29,10 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
-import javafx.scene.media.MediaException;
 import javafx.scene.media.MediaPlayer;
-import javafx.scene.media.MediaView;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
@@ -169,7 +163,7 @@ public class GameLogic implements Initializable {
 		curretntDiceSelect = -1;
 		updateScoreBoard();
 		if (allOutOfDice()) {
-			playAudio("/Startturn_endturn.mp3", 0.5);
+			playAudio("Startturn_endturn.mp3", 0.5);
 			updateGameStatus("==== End Round " + getRoundCount() + " ====", Color.BLACK);
 			setRoundCount(getRoundCount() + 1);
 			this.endRound();
@@ -376,7 +370,7 @@ public class GameLogic implements Initializable {
 	@FXML
 	public void openCard(MouseEvent event) {
 		if (!cardSeal) {
-			playAudio("/Draw_edit.mp3", 1);
+			playAudio("Draw_edit.mp3", 1);
 			Card card = cardDeck.giveTopCardTo();
 			String image_path = ClassLoader.getSystemResource(card.getName() + ".png").toString();
 			//File file = new File("res/" + card.getName() + ".png");
