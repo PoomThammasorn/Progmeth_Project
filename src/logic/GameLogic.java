@@ -5,8 +5,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Random;
 import java.util.ResourceBundle;
-import java.util.concurrent.CountDownLatch;
-import java.awt.DisplayMode;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -31,14 +29,10 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
-import javafx.scene.media.MediaException;
 import javafx.scene.media.MediaPlayer;
-import javafx.scene.media.MediaView;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
@@ -169,7 +163,7 @@ public class GameLogic implements Initializable {
 		curretntDiceSelect = -1;
 		updateScoreBoard();
 		if (allOutOfDice()) {
-			playAudio("/Startturn_endturn.mp3", 0.5);
+			playAudio("Startturn_endturn.mp3", 0.5);
 			updateGameStatus("==== End Round " + getRoundCount() + " ====", Color.BLACK);
 			setRoundCount(getRoundCount() + 1);
 			this.endRound();
@@ -368,7 +362,7 @@ public class GameLogic implements Initializable {
 	@FXML
 	public void openCard(MouseEvent event) {
 		if (!cardSeal) {
-			playAudio("/Draw_edit.mp3", 1);
+			playAudio("Draw_edit.mp3", 1);
 			Card card = cardDeck.giveTopCardTo();
 			File file = new File("res/" + card.getName() + ".png");
 			cardImg.setImage(new Image(file.toURI().toString()));
@@ -459,8 +453,10 @@ public class GameLogic implements Initializable {
 	public void resetDiceImgInLocation() {
 		for (int i = 0; i < diceInLocationImgList.size(); i++) {
 			for (ImageView img : diceInLocationImgList.get(i)) {
-				File file = new File("res/dice" + (i + 1) + "Seal.png");
-				img.setImage(new Image(file.toURI().toString()));
+				String image_path = ClassLoader.getSystemResource("dice" + (i + 1) + "Seal.png").toString();	
+				img.setImage(new Image(image_path));
+//				File file = new File("res/dice" + (i + 1) + "Seal.png");
+//				img.setImage(new Image(file.toURI().toString()));
 			}
 		}
 	}
@@ -491,8 +487,10 @@ public class GameLogic implements Initializable {
 			p.resetDice();
 		}
 		for (int i = 0; i < diceImgList.size(); i++) {
-			File file1 = new File("res/nullDice.png");
-			diceImgList.get(i).setImage(new Image(file1.toURI().toString()));
+			String image_path = ClassLoader.getSystemResource("nullDice.png").toString();	
+			diceImgList.get(i).setImage(new Image(image_path));
+//			File file1 = new File("res/nullDice.png");
+//			diceImgList.get(i).setImage(new Image(file1.toURI().toString()));
 		}
 	}
 
@@ -531,8 +529,10 @@ public class GameLogic implements Initializable {
 						for (int k = 0; k < player.getDiceInPlayer().size(); k++) {
 							int dicePoint = player.getDiceInPlayer().get(k).getPoint();
 							String diceColour = player.getDiceInPlayer().get(k).getColour();
-							File file = new File("res/dice" + dicePoint + diceColour + ".png");
-							diceImgList.get(k).setImage(new Image(file.toURI().toString()));
+							String image_path = ClassLoader.getSystemResource("dice" + dicePoint + diceColour + ".png").toString();
+							diceImgList.get(k).setImage(new Image(image_path));
+//							File file = new File("res/dice" + dicePoint + diceColour + ".png");
+//							diceImgList.get(k).setImage(new Image(file.toURI().toString()));
 						}
 						Thread.sleep(30);
 
@@ -585,8 +585,10 @@ public class GameLogic implements Initializable {
 		int playerIndex = playerList.indexOf(player);
 		textList.get(playerIndex).setText(amount + "");
 		textList.get(playerIndex).setFill(Color.WHEAT);
-		File file = new File("res/dice" + curretntDiceSelect + player.getPlayerColour() + ".png");
-		(diceInLocationImgList.get(numberLocation)).get(playerIndex).setImage(new Image(file.toURI().toString()));
+		String image_path = ClassLoader.getSystemResource("dice" + curretntDiceSelect + player.getPlayerColour() + ".png").toString();
+		(diceInLocationImgList.get(numberLocation)).get(playerIndex).setImage(new Image(image_path));
+//		File file = new File("res/dice" + curretntDiceSelect + player.getPlayerColour() + ".png");
+//		(diceInLocationImgList.get(numberLocation)).get(playerIndex).setImage(new Image(file.toURI().toString()));
 		updateDice(player);
 		indexPlayer += 1;
 		playGame(playerList);
@@ -623,6 +625,20 @@ public class GameLogic implements Initializable {
 			updateGameStatus("You must roll dices before selecting it.", Color.RED);
 		}
 	}
+	
+	public void editSelectDice(int dicePoint, Player player) {
+		selected = true;
+		curretntDiceSelect = dicePoint;
+		for (int i = 0; i < player.getDiceInPlayer().size(); i++) {
+			Dice dice = player.getDiceInPlayer().get(i);
+			if (dice.getPoint() != dicePoint) {		
+				String image_path = ClassLoader.getSystemResource("dice" + dice.getPoint() + "Visible" + ".png").toString();	
+				diceImgList.get(i).setImage(new Image(image_path));
+//				File file = new File("res/dice" + dice.getPoint() + "Visible" + ".png");
+//				diceImgList.get(i).setImage(new Image(file.toURI().toString()));
+			}
+		}
+	}
 
 	public Player findRichestPlayerWithOut(Player player) {
 		Player richestPlayer = null;
@@ -655,18 +671,6 @@ public class GameLogic implements Initializable {
 
 		}
 		return richestPlayerList;
-	}
-
-	public void editSelectDice(int dicePoint, Player player) {
-		selected = true;
-		curretntDiceSelect = dicePoint;
-		for (int i = 0; i < player.getDiceInPlayer().size(); i++) {
-			Dice dice = player.getDiceInPlayer().get(i);
-			if (dice.getPoint() != dicePoint) {
-				File file = new File("res/dice" + dice.getPoint() + "Visible" + ".png");
-				diceImgList.get(i).setImage(new Image(file.toURI().toString()));
-			}
-		}
 	}
 
 	public void beginThemeSong() {
