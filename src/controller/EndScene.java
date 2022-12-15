@@ -12,6 +12,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.Text;
@@ -57,11 +58,11 @@ public class EndScene {
 	}
 	
 	public void playSound(){
-		Media themeSong = new Media(new File("voice/cutfile/Congratulations(endgame).mp3").toURI().toString());
-		MediaPlayer mediaplayer = new MediaPlayer(themeSong);
-		mediaplayer.setCycleCount(1);
-		mediaplayer.setVolume(0.2);
-		mediaplayer.play();
+//		Media themeSong = new Media(new File("voice/cutfile/Congratulations(endgame).mp3").toURI().toString());
+		AudioClip sound = new AudioClip(ClassLoader.getSystemResource("voice/Congratulations(endgame).mp3").toString());
+		sound.setCycleCount(1);
+		sound.setVolume(0.2);
+		sound.play();
 	}
 
 }
