@@ -12,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -30,6 +31,8 @@ public class MainMenu {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/SelectPlayerScene.fxml"));
 		root = loader.load();
 		stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		String path = ClassLoader.getSystemResource("logo.png").toString();
+		stage.getIcons().add(new Image(path));
 		scene = new Scene(root);
 		stage.setTitle("Casino Royal Dice");
 		stage.setScene(scene);

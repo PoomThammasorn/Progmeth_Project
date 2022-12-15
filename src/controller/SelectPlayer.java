@@ -17,6 +17,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -73,6 +74,8 @@ public class SelectPlayer implements Initializable {
 			controller.setVariable(playerList, amount);
 			Scene scene = new Scene(root);
 			Stage stage = new Stage();
+			String path = ClassLoader.getSystemResource("logo.png").toString();
+			stage.getIcons().add(new Image(path));
 			stage.setTitle("Casino Royal Dice");
 			stage.setScene(scene);
 			stage.show();

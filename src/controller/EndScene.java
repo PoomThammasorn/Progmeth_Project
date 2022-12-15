@@ -1,6 +1,5 @@
 package controller;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -11,10 +10,9 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.media.AudioClip;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import player.Player;
@@ -45,6 +43,8 @@ public class EndScene {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/MainPane.fxml"));
 		Parent root = loader.load();
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		String path = ClassLoader.getSystemResource("logo.png").toString();
+		stage.getIcons().add(new Image(path));
 		Scene scene = new Scene(root);
 		stage.setTitle("Casino Royal Dice");
 		stage.setScene(scene);
@@ -58,7 +58,6 @@ public class EndScene {
 	}
 	
 	public void playSound(){
-//		Media themeSong = new Media(new File("voice/cutfile/Congratulations(endgame).mp3").toURI().toString());
 		AudioClip sound = new AudioClip(ClassLoader.getSystemResource("voice/Congratulations(endgame).mp3").toString());
 		sound.setCycleCount(1);
 		sound.setVolume(0.2);
