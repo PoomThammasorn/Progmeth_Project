@@ -7,7 +7,6 @@ import java.util.Random;
 import java.util.ResourceBundle;
 import java.io.File;
 import java.io.IOException;
-import java.net.URISyntaxException;
 import java.net.URL;
 
 import base.Banknote;
@@ -23,6 +22,7 @@ import controller.EndScene;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -30,14 +30,18 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.StrokeType;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 import player.Player;
@@ -55,56 +59,36 @@ public class GameLogic implements Initializable {
 	private VBox vBoxL1, vBoxL2, vBoxL3, vBoxL4, vBoxL5, vBoxL6;
 	@FXML
 	private VBox vBoxGameStatus;
+	@FXML
+	private GridPane gridDicePaneL0, gridDicePaneL1, gridDicePaneL2, gridDicePaneL3, gridDicePaneL4, gridDicePaneL5;
+	
+	@FXML
+	private GridPane gridDice;
 
 	@FXML
 	private ImageView cardImg;
 	@FXML
 	private ImageView diceImgP1, diceImgP2, diceImgP3, diceImgP4, diceImgP5;
-	@FXML
-	private ImageView diceImg0, diceImg1, diceImg2, diceImg3, diceImg4, diceImg5, diceImg6, diceImg7;
-	@FXML
-	private ImageView diceP1L1Img, diceP1L2Img, diceP1L3Img, diceP1L4Img, diceP1L5Img, diceP1L6Img;
-	@FXML
-	private ImageView diceP2L1Img, diceP2L2Img, diceP2L3Img, diceP2L4Img, diceP2L5Img, diceP2L6Img;
-	@FXML
-	private ImageView diceP3L1Img, diceP3L2Img, diceP3L3Img, diceP3L4Img, diceP3L5Img, diceP3L6Img;
-	@FXML
-	private ImageView diceP4L1Img, diceP4L2Img, diceP4L3Img, diceP4L4Img, diceP4L5Img, diceP4L6Img;
-	@FXML
-	private ImageView diceP5L1Img, diceP5L2Img, diceP5L3Img, diceP5L4Img, diceP5L5Img, diceP5L6Img;
 
 	@FXML
 	private ImageView locationImg1, locationImg2, locationImg3, locationImg4, locationImg5, locationImg6;
 
 	@FXML
 	private Text roundText;
-	@FXML
-	private Text textP1L1, textP2L1, textP3L1, textP4L1, textP5L1;
-	@FXML
-	private Text textP1L2, textP2L2, textP3L2, textP4L2, textP5L2;
-	@FXML
-	private Text textP1L3, textP2L3, textP3L3, textP4L3, textP5L3;
-	@FXML
-	private Text textP1L4, textP2L4, textP3L4, textP4L4, textP5L4;
-	@FXML
-	private Text textP1L5, textP2L5, textP3L5, textP4L5, textP5L5;
-	@FXML
-	private Text textP1L6, textP2L6, textP3L6, textP4L6, textP5L6;
 
 	@FXML
 	private Button rollButton, nextRoundBtn, startBtn, endBtn;
+	
+	private ArrayList<GridPane> gridDicePaneList;
 
 	private ArrayList<VBox> vBoxLocationList;
 	private ArrayList<StackPane> playerScoreBoard, balanceScoreBoard, diceScoreBoard;
 
 	private ArrayList<ImageView> diceImgList, locationImgList, diceImgScoreBoard;
-	private ArrayList<ImageView> diceLocation1ImgList, diceLocation2ImgList, diceLocation3ImgList, diceLocation4ImgList,
-			diceLocation5ImgList, diceLocation6ImgList;
 
 	private ArrayList<ArrayList<ImageView>> diceInLocationImgList;
 
-	private ArrayList<Text> textOfAmountInLocation1List, textOfAmountInLocation2List, textOfAmountInLocation3List,
-			textOfAmountInLocation4List, textOfAmountInLocation5List, textOfAmountInLocation6List;
+	private ArrayList<ArrayList<Text>> textOfAmountInLocationList;
 
 	private ArrayList<Location> locationList = new ArrayList<>();
 
@@ -373,6 +357,7 @@ public class GameLogic implements Initializable {
 			cardImg.setImage(new Image(image_path));
 			updateGameStatus(card.description(), Color.BLUE);
 			cardEffect(card);
+			cardSeal = true;
 		} else {
 			updateGameStatus("You can't open card at this time.", Color.RED);
 		}
@@ -466,22 +451,22 @@ public class GameLogic implements Initializable {
 	}
 
 	public void resetAmountOfDiceInLocation() {
-		for (Text text : textOfAmountInLocation1List) {
+		for (Text text : textOfAmountInLocationList.get(0)) {
 			text.setFill(Color.web("#3a161a"));
 		}
-		for (Text text : textOfAmountInLocation2List) {
+		for (Text text : textOfAmountInLocationList.get(1)) {
 			text.setFill(Color.web("#2d102e"));
 		}
-		for (Text text : textOfAmountInLocation3List) {
+		for (Text text : textOfAmountInLocationList.get(2)) {
 			text.setFill(Color.web("#956803"));
 		}
-		for (Text text : textOfAmountInLocation4List) {
+		for (Text text : textOfAmountInLocationList.get(3)) {
 			text.setFill(Color.web("#158474"));
 		}
-		for (Text text : textOfAmountInLocation5List) {
+		for (Text text : textOfAmountInLocationList.get(4)) {
 			text.setFill(Color.web("#33c1c2"));
 		}
-		for (Text text : textOfAmountInLocation6List) {
+		for (Text text : textOfAmountInLocationList.get(5)) {
 			text.setFill(Color.BLACK);
 		}
 	}
@@ -551,27 +536,22 @@ public class GameLogic implements Initializable {
 
 	@FXML
 	public void selectLocation(MouseEvent event) {
-		ImageView locaitonImg = (ImageView) event.getSource();
-		if (waiting) {
-			;
-		} else if (selected) {
-			if (locaitonImg.equals(locationImg1) && curretntDiceSelect == 1) {
-				dropDiceInLocation(0, currentPlayer, textOfAmountInLocation1List);
-			} else if (locaitonImg.equals(locationImg2) && curretntDiceSelect == 2) {
-				dropDiceInLocation(1, currentPlayer, textOfAmountInLocation2List);
-			} else if (locaitonImg.equals(locationImg3) && curretntDiceSelect == 3) {
-				dropDiceInLocation(2, currentPlayer, textOfAmountInLocation3List);
-			} else if (locaitonImg.equals(locationImg4) && curretntDiceSelect == 4) {
-				dropDiceInLocation(3, currentPlayer, textOfAmountInLocation4List);
-			} else if (locaitonImg.equals(locationImg5) && curretntDiceSelect == 5) {
-				dropDiceInLocation(4, currentPlayer, textOfAmountInLocation5List);
-			} else if (locaitonImg.equals(locationImg6) && curretntDiceSelect == 6) {
-				dropDiceInLocation(5, currentPlayer, textOfAmountInLocation6List);
-			}
-		} else {
-			updateGameStatus("You must choose a dice first!!", Color.RED);
-		}
+	    ImageView locationImg = (ImageView) event.getSource();
+	    if (waiting) {
+	    // Exit the method early if waiting
+	    } else if (selected) {
+	        for (int i = 0; i < locationImgList.size(); i++) {
+	            if (locationImg.equals(locationImgList.get(i)) && curretntDiceSelect == i + 1) {
+	                dropDiceInLocation(i, currentPlayer, textOfAmountInLocationList.get(i));
+		            break;
+	            }
+	        }
+	        updateGameStatus("Invalid selection.", Color.RED);
+	    } else {
+	        updateGameStatus("You must choose a dice first!!", Color.RED);
+	    }
 	}
+
 
 	public void dropDiceInLocation(int numberLocation, Player player, ArrayList<Text> textList) {
 		int amount = player.dropDice(curretntDiceSelect);
@@ -597,32 +577,25 @@ public class GameLogic implements Initializable {
 	@FXML
 	public void selectDice(MouseEvent event) {
 		ImageView sourceImg = (ImageView) event.getSource();
+
 		if (waiting) {
-			;
+		    // Do nothing
 		} else if (isRoll) {
-			updateDice(currentPlayer);
-			int size = currentPlayer.getDiceInPlayer().size();
-			if (sourceImg.equals(diceImg0) && size > 0) {
-				editSelectDice(currentPlayer.getDiceInPlayer().get(0).getPoint(), currentPlayer);
-			} else if (sourceImg.equals(diceImg1) && size > 1) {
-				editSelectDice(currentPlayer.getDiceInPlayer().get(1).getPoint(), currentPlayer);
-			} else if (sourceImg.equals(diceImg2) && size > 2) {
-				editSelectDice(currentPlayer.getDiceInPlayer().get(2).getPoint(), currentPlayer);
-			} else if (sourceImg.equals(diceImg3) && size > 3) {
-				editSelectDice(currentPlayer.getDiceInPlayer().get(3).getPoint(), currentPlayer);
-			} else if (sourceImg.equals(diceImg4) && size > 4) {
-				editSelectDice(currentPlayer.getDiceInPlayer().get(4).getPoint(), currentPlayer);
-			} else if (sourceImg.equals(diceImg5) && size > 5) {
-				editSelectDice(currentPlayer.getDiceInPlayer().get(5).getPoint(), currentPlayer);
-			} else if (sourceImg.equals(diceImg6) && size > 6) {
-				editSelectDice(currentPlayer.getDiceInPlayer().get(6).getPoint(), currentPlayer);
-			} else if (sourceImg.equals(diceImg7) && size > 7) {
-				editSelectDice(currentPlayer.getDiceInPlayer().get(7).getPoint(), currentPlayer);
-			} else {
-				updateGameStatus("Please select the correct dice.", Color.RED);
-			}
+		    updateDice(currentPlayer);
+		    int size = currentPlayer.getDiceInPlayer().size();
+		    boolean found = false;
+		    for (int i = 0; i < diceImgList.size(); i++) {
+		        if (sourceImg.equals(diceImgList.get(i)) && size > i) {
+		            editSelectDice(currentPlayer.getDiceInPlayer().get(i).getPoint(), currentPlayer);
+		            found = true;
+		            break;
+		        }
+		    }
+		    if (!found) {
+		        updateGameStatus("Please select the correct dice.", Color.RED);
+		    }
 		} else {
-			updateGameStatus("You must roll dices before selecting it.", Color.RED);
+		    updateGameStatus("You must roll dices before selecting it.", Color.RED);
 		}
 	}
 
@@ -741,43 +714,54 @@ public class GameLogic implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
-		diceImgList = new ArrayList<ImageView>(
-				Arrays.asList(diceImg0, diceImg1, diceImg2, diceImg3, diceImg4, diceImg5, diceImg6, diceImg7));
-
-		diceLocation1ImgList = new ArrayList<>(
-				Arrays.asList(diceP1L1Img, diceP2L1Img, diceP3L1Img, diceP4L1Img, diceP5L1Img));
-		diceLocation2ImgList = new ArrayList<>(
-				Arrays.asList(diceP1L2Img, diceP2L2Img, diceP3L2Img, diceP4L2Img, diceP5L2Img));
-		diceLocation3ImgList = new ArrayList<>(
-				Arrays.asList(diceP1L3Img, diceP2L3Img, diceP3L3Img, diceP4L3Img, diceP5L3Img));
-		diceLocation4ImgList = new ArrayList<>(
-				Arrays.asList(diceP1L4Img, diceP2L4Img, diceP3L4Img, diceP4L4Img, diceP5L4Img));
-		diceLocation5ImgList = new ArrayList<>(
-				Arrays.asList(diceP1L5Img, diceP2L5Img, diceP3L5Img, diceP4L5Img, diceP5L5Img));
-		diceLocation6ImgList = new ArrayList<>(
-				Arrays.asList(diceP1L6Img, diceP2L6Img, diceP3L6Img, diceP4L6Img, diceP5L6Img));
-		diceInLocationImgList = new ArrayList<>(Arrays.asList(diceLocation1ImgList, diceLocation2ImgList,
-				diceLocation3ImgList, diceLocation4ImgList, diceLocation5ImgList, diceLocation6ImgList));
-
-		textOfAmountInLocation1List = new ArrayList<>(Arrays.asList(textP1L1, textP2L1, textP3L1, textP4L1, textP5L1));
-		textOfAmountInLocation2List = new ArrayList<>(Arrays.asList(textP1L2, textP2L2, textP3L2, textP4L2, textP5L2));
-		textOfAmountInLocation3List = new ArrayList<>(Arrays.asList(textP1L3, textP2L3, textP3L3, textP4L3, textP5L3));
-		textOfAmountInLocation4List = new ArrayList<>(Arrays.asList(textP1L4, textP2L4, textP3L4, textP4L4, textP5L4));
-		textOfAmountInLocation5List = new ArrayList<>(Arrays.asList(textP1L5, textP2L5, textP3L5, textP4L5, textP5L5));
-		textOfAmountInLocation6List = new ArrayList<>(Arrays.asList(textP1L6, textP2L6, textP3L6, textP4L6, textP5L6));
-
+		gridDicePaneList = new ArrayList<GridPane>(
+				Arrays.asList(gridDicePaneL0, gridDicePaneL1, gridDicePaneL2, gridDicePaneL3, gridDicePaneL4, gridDicePaneL5));
+		diceInLocationImgList = new ArrayList<ArrayList<ImageView>>();
+		for (int i = 0; i < 6; i++) {
+			ArrayList<ImageView> imgList = new ArrayList<ImageView>();
+			for (int j = 0; j < 5; j++) {
+			    ImageView img = new ImageView();
+			    img.setFitWidth(45.0);
+			    img.setFitHeight(45.0);
+			    imgList.add(img);
+			    gridDicePaneList.get(i).add(img, 0, j);
+			}
+			diceInLocationImgList.add(imgList);
+		}
+		
+		textOfAmountInLocationList = new ArrayList<ArrayList<Text>>();
+		for (int i = 0; i < 6; i++) {
+			ArrayList<Text> textList = new ArrayList<Text>();
+			for (int j = 0; j < 5; j++) {
+			    Text text = new Text();
+			    text.setStrokeType(StrokeType.OUTSIDE);
+			    text.setStrokeWidth(0.0);
+			    text.setTextAlignment(TextAlignment.CENTER);
+			    Font font = Font.font("Bell MT Bold", FontWeight.NORMAL, 37.0);
+			    text.setFont(font);
+			    textList.add(text);
+			    gridDicePaneList.get(i).add(text, 1, j);
+			}
+			textOfAmountInLocationList.add(textList);
+		}
 		diceImgScoreBoard = new ArrayList<>(Arrays.asList(diceImgP1, diceImgP2, diceImgP3, diceImgP4, diceImgP5));
-
 		locationNameList = new ArrayList<>(Arrays.asList("Gold Tower Casino", "Riverside Casino", "The Royal Casino",
 				"Lucky 7's Casino", "The Edge Casino", "Blackbird Casino"));
 		vBoxLocationList = new ArrayList<>(Arrays.asList(vBoxL1, vBoxL2, vBoxL3, vBoxL4, vBoxL5, vBoxL6));
-
-		diceImgList = new ArrayList<ImageView>(
-				Arrays.asList(diceImg0, diceImg1, diceImg2, diceImg3, diceImg4, diceImg5, diceImg6, diceImg7));
-
+		diceImgList = new ArrayList<ImageView>();
+		for (int i = 0; i < 8; i++) {
+			ImageView img = new ImageView();
+			img.setFitWidth(66.0);
+			img.setFitHeight(66.0);
+			img.setOnMouseClicked(this::selectDice);
+			img.setOnMouseEntered(event -> {
+				img.setCursor(Cursor.HAND);
+			});
+			gridDice.add(img,i,0);
+			diceImgList.add(img);
+		}
 		locationImgList = new ArrayList<ImageView>(
 				Arrays.asList(locationImg1, locationImg2, locationImg3, locationImg4, locationImg5, locationImg6));
-
 		endBtn.setVisible(false);
 	}
 
